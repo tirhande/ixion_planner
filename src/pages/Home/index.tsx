@@ -1,38 +1,50 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 
 import Footer from 'components/blocks/Footer';
 import SVGStage from 'components/blocks/SVGStage';
-import { StyledMain } from './styles';
+import { constructState } from 'core/states';
 
 const HomePage = () => {
-  // const onMouseDown = (e:MouseEvent<HTMLElement>) => {
-  //   console.log(e);
-  // }
-  // const onMouseMove = (e:MouseEvent<HTMLElement>) => {
-  //   console.log(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
-  //   // e.target.
-  // }
+  const [{ degree }, setConstruct] = useRecoilState(constructState);
+
+  const onRotate = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if(e.key.toLowerCase() === 'r') {
+      const deg = degree === 270 ? 0 : degree+90;
+      setConstruct(prev => ({ ...prev, degree: deg }));
+    }
+  }
+
   return (
-    <>
-      {/* <StyledMain onMouseDown={onMouseDown}> */}
+    <StyledHome onKeyDown={onRotate} tabIndex={0}>
       <StyledMain>
-        {/* <div style={{width: "1400px", height:"750px"}} onMouseMove={onMouseMove}> */}
-        <div>
           <SVGStage />
-          {/* <svg width={CANVAS_WIDTH} height={CANVAS_HEIGHT}>
-            <image href="https://stardew.info/planner/img/layouts/full_background.jpg"/>
-            <rect x="0" y="0" width="1400" height="25" fill="none" stroke="#000000" style={{pointerEvents: "none", strokeWidth: "0.5", opacity: 1}}></rect>
-            <rect x="0" y="25" width="1400" height="25" fill="none" stroke="#000000" style={{pointerEvents: "none", strokeWidth: "0.5", opacity: 1}}></rect>
-            <rect x="0" y="0" width="25" height="750" fill="none" stroke="#000000" style={{pointerEvents: "none", strokeWidth: "0.5", opacity: 1}}></rect>
-            <rect x="25" y="0" width="25" height="750" fill="none" stroke="#000000" style={{pointerEvents: "none", strokeWidth: "0.5", opacity: 1}}></rect>
-            <rect x="32" y="368" width="16" height="16" fill="none" style={{pointerEvents: "none", strokeWidth: "0.5", opacity: 0.4, strokeDasharray: "5, 5"}} stroke="none"></rect>
-          </svg> */}
-        </div>
-        {/* <CanvasStage /> */}
       </StyledMain>
       <Footer />
-    </>
+    </StyledHome>
   );
 };
 
 export default HomePage;
+
+const StyledHome = styled.div`
+  outline: none;
+  padding-top: 30px;
+`;
+const StyledMain = styled.main`
+  display: flex;
+
+  width: 1120px;
+  height: 600px;
+  justify-content: center;
+  margin: 0 auto;
+
+  div {
+    /* background-color: #cae9ff; */
+    background-color: #4e4e43;
+  }
+  use.denied {
+    fill: #ff0000 !important;
+  }
+`;

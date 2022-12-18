@@ -1,27 +1,28 @@
 import { atom } from 'recoil';
 
-// export interface IQueries {
-//   page?: number;
-//   limit?: number;
-//   broker?: string;
-//   active?: string;
-//   status?: string;
-//   q?: string;
-// }
+export interface IConstructState {
+  isConstruct: boolean;
+  construct_id: string;
+  width: number;
+  height: number;
+  isWall: boolean;
+  degree: number;
+}
 
-// export const queriesState = atom<IQueries>({
-//   key: 'queriesState',
-//   default: {
-//     page: 1,
-//     limit: 10,
-//     broker: '',
-//     active: '',
-//     status: '',
-//     q: '',
-//   },
-// });
+export const constructState = atom<IConstructState>({
+  key: 'constructState',
+  default: {
+    isConstruct: false,
+    construct_id: "",
+    width: 0,
+    height: 0,
+    isWall: false,
+    degree: 0,
+  },
+});
 
-export const dragState = atom<boolean>({
-  key: 'dragState',
-  default: false,
+
+export const roadState = atom<boolean>({
+  key: 'roadState',
+  default: false
 });

@@ -21,7 +21,6 @@ const StyledFooter = styled.footer`
 `;
 
 const Footer = () => {
-
   return (
     <StyledFooter>
       <Menus />
