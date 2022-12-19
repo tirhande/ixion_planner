@@ -6,8 +6,13 @@ import { SPACE_BUILD } from "./SpaceEnum";
 import { STABILITY_BUILD } from "./StabilityEnum";
 
 export const GRID_SIZE = {
-  grid_width: 20,
-  grid_height: 20
+  GRID_WIDTH: 20,
+  GRID_HEIGHT: 20
+};
+
+export const CANVAS_SIZE = {
+  CANVAS_WIDTH: GRID_SIZE.GRID_WIDTH * 56,
+  CANVAS_HEIGHT: GRID_SIZE.GRID_HEIGHT * 30
 };
 
 export const BUILDING_INFO = {

@@ -4,7 +4,7 @@ export const FOOD_BUILD = {
   MessHall: {
     width: 4,
     height: 6,
-    location: [0, 0, 6, 0],
+    location: [0, 0, 4, 0],
     isWall: false,
   },
   InsectFarm: {
@@ -34,7 +34,7 @@ export const FOOD_BUILD = {
   AlgaeFarmField: {
     width: 6,
     height: 4,
-    location: [0, 0, 6, 0],
+    location: [0, 0, 0, 0],
     isWall: false,
   },
   MushroomWall: {

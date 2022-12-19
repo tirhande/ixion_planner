@@ -21,7 +21,6 @@ export const constructState = atom<IConstructState>({
   },
 });
 
-
 export const roadState = atom<boolean>({
   key: 'roadState',
   default: false

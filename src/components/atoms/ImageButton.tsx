@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 interface IStyle {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  name?: string;
   width?: string;
   height?: string;
 }
@@ -24,8 +25,8 @@ const StyledButton = styled.button<IStyle>`
   }
 `;
 
-export const ImageButton = ({ onClick, width, height, children }: React.ButtonHTMLAttributes<HTMLButtonElement> & IStyle) => (
-  <StyledButton onClick={onClick} width={width} height={height}>
+export const ImageButton = ({ onClick, name, width, height, children }: React.ButtonHTMLAttributes<HTMLButtonElement> & IStyle) => (
+  <StyledButton onClick={onClick} name={name} width={width} height={height}>
     {children}
   </StyledButton>
 );

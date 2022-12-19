@@ -53,7 +53,9 @@ const SubMenus = () => {
       contents: <StabilityMenu onMenuClick={onMenuClick} />,
     },
   ];
+
   const [index, setIndex] = useState(0);
+  
   return (
     <SubMenusSection>
       <SubMenusUl>
@@ -64,7 +66,6 @@ const SubMenus = () => {
         ))}
       </SubMenusUl>
       {data.filter(item => index === item.id)[0].contents}
-      {/* {data.filter(item => index === item.id).map(({contents}) => contents)} */}
     </SubMenusSection>
   );
 };
@@ -72,13 +73,14 @@ const SubMenus = () => {
 export default SubMenus;
 
 const SubMenusSection = styled.section`
-  height: 153px;
   color: #fff;
+  background: #00000070;
+  padding: 5px 10px;
+  border-radius: 5px;
 
   > div {
     border: 1px solid #fff;
     border-radius: 5px;
-    padding: 1.25px 15px;
 
     > button {
       margin: 0 0.4em;

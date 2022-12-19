@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Building } from 'components/atoms/Building';
+import PreBuilding from 'components/atoms/PreBuilding';
 import { BUILDING_INFO } from 'utils/GridEnum';
 
 const MaintenanceDefsSvg = () => (
@@ -8,7 +8,7 @@ const MaintenanceDefsSvg = () => (
     {Object.keys(BUILDING_INFO.Maintenance).map(v => {
       const { width, height, location } = BUILDING_INFO.Maintenance[v as keyof typeof BUILDING_INFO.Maintenance];
       return (
-        <Building
+        <PreBuilding
           key={v}
           construct_id={v}
           width={width}

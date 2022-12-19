@@ -15,36 +15,55 @@ interface IConstructBuilding {
 }
 
 const ConstructBuilding = ({ id, pos: {x, y}, width, height, isWall, degree }: IConstructBuilding) => {
-  const { grid_width, grid_height } = GRID_SIZE;
-  const isWrap = isOverlap(
-    { x: x, y: y + grid_height * height },
-    { x: x + grid_width * width, y: y },
-    { x: 480, y: 20 },
-    { x: 640, y: 0 }
-  );
+  const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
   
-  return (
-    <>
-      {isWall && <rect x="480" y="0" width="160" height="20" fill="#ff0000" />}
-      {isWall && isWrap ? (
-        <rect
-          x={x}
-          y={y}
-          width={grid_width * width}
-          height={grid_height * height}
-          fill="#ff0000"
-          transform={`rotate(${degree}, ${x + (grid_width * 3) / 2}, ${y + (grid_height * 3) / 2})`}
-        />
-      ) : (
+  if(isWall) {
+    const isWrap = isOverlap(
+      { x: x, y: GRID_HEIGHT * height + y },
+      { x: GRID_WIDTH * width + x, y: y },
+      { x: GRID_WIDTH * 24, y: GRID_HEIGHT },
+      { x: GRID_WIDTH * 32, y: 0 }
+    );
+
+    if(isWrap) {
+      return (
+        <>
+          <rect x={GRID_WIDTH * 24} y="0" width={GRID_WIDTH * 8} height={GRID_HEIGHT} fill="#ff0000" />
+          <rect
+            x={x}
+            y={y}
+            width={GRID_WIDTH * width}
+            height={GRID_HEIGHT * height}
+            fill="#ff0000"
+          />
+        </>
+      )
+    }
+
+    return (
+      <>
+        <rect x={GRID_WIDTH * 24} y="0" width={GRID_WIDTH * 8} height={GRID_HEIGHT} fill="#ff0000" />
         <use
           xlinkHref={`#pre-${id}`}
           x={x}
           y={y}
           opacity={0.7}
-          transform={`rotate(${degree}, ${x + (grid_width * 3) / 2}, ${y + (grid_height * 3) / 2})`}
+          transform={`${(y !== 0) ? `rotate(180, ${x + (GRID_WIDTH * width) / 2}, ${y + (GRID_HEIGHT * height) / 2})`: ``}`}
         />
-      )}
-    </>
+      </>
+    )
+  }
+  const centralX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : -GRID_WIDTH / 2);
+  const centralY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT/2);
+
+  return (
+    <use
+      xlinkHref={`#pre-${id}`}
+      x={centralX}
+      y={centralY}
+      opacity={0.7}
+      transform={`rotate(${degree}, ${x + (GRID_WIDTH * width) / 2}, ${y + (GRID_HEIGHT * height) / 2})`}
+    />
   );
 };
 

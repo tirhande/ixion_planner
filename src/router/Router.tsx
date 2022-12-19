@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes, To } from 'react-router-dom';
-import HomePage from 'pages/Home';
+import SectorPage from 'pages/Sector';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<SectorPage />} />
         <Route path="/*" element={<Redirect to="/" />} />
       </Routes>
     </BrowserRouter>
