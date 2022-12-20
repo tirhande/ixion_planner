@@ -22,7 +22,7 @@ const SectorPage = () => {
   const [sectionNumber, setSectionNumber] = useRecoilState(sectionState);
 
   const onRotate = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if(e.key.toLowerCase() === 'r') {
+    if(e.key.toLowerCase() === 'r' || e.key.toLowerCase() === 'ㄱ') {
       const deg = degree === 270 ? 0 : degree + 90;
       setConstruct(prev => ({ ...prev, degree: deg }));
     }
@@ -46,13 +46,11 @@ const SectorPage = () => {
       </StyledHeader>
       <StyledMain>
         <Button className="prev" text="Previous" onClick={onSectionPrev} />
-        {/* <button className='slick-prev'>Previous</button> */}
         <StyeldSVG width={CANVAS_WIDTH} height={CANVAS_HEIGHT}>
           <SVGStage />
           <SVGContainer />
         </StyeldSVG>
         <Button text="Next" className="next" onClick={onSectionNext} />
-        {/* <button className='slick-next'>Next</button> */}
       </StyledMain>
       <Footer />
     </StyledHome>
