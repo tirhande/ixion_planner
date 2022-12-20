@@ -1,7 +1,9 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist'
 
 import { IConstructState, ISectionBuilding, ISectionRoad } from 'types/Ixion';
 
+const { persistAtom } = recoilPersist();
 export const constructState = atom<IConstructState>({
   key: 'constructState',
   default: {
@@ -28,7 +30,8 @@ export const buildingState = atom<ISectionBuilding>({
     4: [],
     5: [],
     6: [],
-  }
+  },
+  effects_UNSTABLE: [persistAtom],
 });
 export const roadState = atom<ISectionRoad>({
   key: 'roadState',
@@ -39,7 +42,8 @@ export const roadState = atom<ISectionRoad>({
     4: [],
     5: [],
     6: [],
-  }
+  },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const sectionState = atom<number>({
