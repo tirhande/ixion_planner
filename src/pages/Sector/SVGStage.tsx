@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import ConstructsGrid from 'components/blocks/ConstructsGrid';
 import { CANVAS_SIZE, GRID_SIZE } from 'utils/GridEnum';
@@ -41,4 +41,4 @@ const SVGStage = () => {
   );
 };
 
-export default SVGStage;
+export default memo(SVGStage);

@@ -27,6 +27,24 @@ declare module 'types/Ixion' {
     isWall: boolean;
     degree: number;
   }
+  interface ISectionBuilding {
+    [key: number]: IBuilding[];
+    1: IBuilding[];
+    2: IBuilding[];
+    3: IBuilding[];
+    4: IBuilding[];
+    5: IBuilding[];
+    6: IBuilding[];
+  }
+  interface ISectionRoad {
+    [key: number]: IPoint[];
+    1: IPoint[];
+    2: IPoint[];
+    3: IPoint[];
+    4: IPoint[];
+    5: IPoint[];
+    6: IPoint[];
+  }
   interface IBuilding extends IPoint, IDimension {
     id: string;
     degree: number;

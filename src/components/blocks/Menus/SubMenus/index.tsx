@@ -9,16 +9,14 @@ import FactoriesMenu from './Factories';
 import PopulationMenu from './Population';
 import FoodMenu from './Food';
 import StabilityMenu from './Stability';
-import { constructState, roadState } from 'core/states';
+import { constructState } from 'core/states';
 import { IWrapProps } from 'types/atoms';
 
 const SubMenus = () => {
   const setConstruct = useSetRecoilState(constructState);
-  const setRoadCounstruct = useSetRecoilState(roadState);
 
   const onMenuClick = ({ id, width, height, isWall }: IWrapProps) => {
     setConstruct({ isConstruct: true, construct_id: id, width: width, height: height,isWall: isWall, degree: 0 });
-    setRoadCounstruct(false);
   };
 
   const data = [

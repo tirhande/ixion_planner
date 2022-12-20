@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-import { IBuilding, IConstructState } from 'types/Ixion';
+import { IConstructState, ISectionBuilding, ISectionRoad } from 'types/Ixion';
 
 export const constructState = atom<IConstructState>({
   key: 'constructState',
@@ -14,17 +14,35 @@ export const constructState = atom<IConstructState>({
   },
 });
 
-export const roadState = atom<boolean>({
-  key: 'roadState',
-  default: false
-});
-
 export const menuState = atom<string>({
   key: 'menuState',
   default: ''
 });
 
-export const buildingState = atom<IBuilding[]>({
+export const buildingState = atom<ISectionBuilding>({
   key: 'buildingState',
-  default: []
+  default: {
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  }
 });
+export const roadState = atom<ISectionRoad>({
+  key: 'roadState',
+  default: {
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+  }
+});
+
+export const sectionState = atom<number>({
+  key: 'sectionState',
+  default: 1
+})

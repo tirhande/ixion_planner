@@ -1,31 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const Button = ({
+const Button = ({
   text,
-  type,
   ...props
-}: { text: string, type: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <StyledButton type={type} {...props}>
+}: { text: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <StyledButton {...props}>
     {text}
   </StyledButton>
 );
 
+export default Button;
+
 const StyledButton = styled.button`
+  width: 160px;
+  height: 160px;
+  background-color: #fff;
   border: none;
-  border-radius: 6px;
-  box-sizing: border-box;
-  width: 180px;
-  height: 50px;
-  font-size: 1em;
+  font-size: 0px;
+  position: relative;
   cursor: pointer;
-  box-shadow: none;
-  color: #fff;
-  background: #0075be;
-  margin-top: 4rem;
-  margin-left: 0.5rem;
-  &:hover {
-    background-color: #0075bec4;
-    transition: all 0.2s linear;
+
+  &:after {
+    width: 60px;
+    height: 60px;
+    content: '';
+    display: block;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    z-index: 1;
+    border: 1px solid #aaaaaa;
+    border-width: 0 8px 8px 0;
+    margin-left: -2px;
+    padding: 10px;
+  }
+  &.prev::after {
+    left: 60%;
+    -webkit-transform: translate(-50%, -50%) rotate(135deg);
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+  &.next::after {
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 `;

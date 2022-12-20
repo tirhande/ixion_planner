@@ -13,7 +13,6 @@ import SubMenus from './SubMenus';
 import { constructState, menuState } from 'core/states';
 
 const Menus = () => {
-  // const [isRoadConstruct, setRoadConstruct] = useRecoilState(roadState);
   const [clickMenu, setClickMenu] = useRecoilState(menuState);
   const resetConstruct = useResetRecoilState(constructState);
 
@@ -57,7 +56,7 @@ const MenusSection = styled.section`
   align-items: start;
 
   width: 100%;
-  padding: 10px 38%;
+  padding: 5px 38%;
   margin:0 auto;
   background: #00000070;
 `;
