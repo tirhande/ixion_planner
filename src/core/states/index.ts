@@ -48,5 +48,10 @@ export const roadState = atom<ISectionRoad>({
 
 export const sectionState = atom<number>({
   key: 'sectionState',
-  default: 1
-})
+  default: 1,
+});
+
+export const visibleState = atom<boolean>({
+  key: 'visibleState',
+  default: false,
+});
