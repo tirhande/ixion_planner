@@ -1,19 +1,8 @@
-import { Road } from "components/atoms/Road";
 import React from "react";
-import { GRID_SIZE } from "utils/GridEnum";
 
-interface IConstructRoad {
-  pos: {
-    x: number;
-    y: number;
-  },
-  roadPos: {
-    start: boolean;
-    direction: string;
-    x: number;
-    y: number;
-  }
-}
+import Road from "components/atoms/Road";
+import { GRID_SIZE } from "utils/GridEnum";
+import { IConstructRoad } from "types/Ixion";
 
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
 

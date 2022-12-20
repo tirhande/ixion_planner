@@ -6,8 +6,10 @@ import { ReactComponent as EVAAirlock } from 'assets/Menus/Space/EVAAirlock.svg'
 import { ReactComponent as ProbeLauncher } from 'assets/Menus/Space/ProbeLauncher.svg';
 import { ReactComponent as ColonyTrainingCenter } from 'assets/Menus/Space/ColonyTrainingCenter.svg';
 
-import { IMenuClick, wrapButton } from "components/atoms/WrapMenuButton";
+import wrapButton from "components/atoms/WrapMenuButton";
 import { BUILDING_INFO } from "utils/GridEnum";
+import { IMenuClick } from "types/atoms";
+
 
 const SubMenus = [
   { id: 'DockingBay', child: <DockingBay /> },

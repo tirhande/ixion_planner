@@ -5,15 +5,19 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import Footer from 'components/blocks/Footer';
-import SVGStage from 'components/blocks/SVGStage';
 import { constructState } from 'core/states';
 import { CANVAS_SIZE } from 'utils/GridEnum';
+import SVGStage from './SVGStage';
+import SVGContainer from './SVGContainer';
+import { IDimension } from 'types/Ixion';
+
 
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 
 const SectorPage = () => {
   // const params = useParams();
   // console.log(params);
+
   const [{ degree }, setConstruct] = useRecoilState(constructState);
 
   const onRotate = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -27,6 +31,7 @@ const SectorPage = () => {
     <StyledHome onKeyDown={onRotate} tabIndex={0}>
       <StyledMain width={CANVAS_WIDTH} height={CANVAS_HEIGHT}>
         <SVGStage />
+        <SVGContainer />
       </StyledMain>
       <Footer />
     </StyledHome>
@@ -35,14 +40,10 @@ const SectorPage = () => {
 
 export default SectorPage;
 
-interface IMain {
-  width: number;
-  height: number;
-}
 const StyledHome = styled.div`
   outline: none;
 `;
-const StyledMain = styled.main<IMain>`
+const StyledMain = styled.main<IDimension>`
   display: flex;
 
   width: ${({ width }) => (width ? `${width}px` : '1400px')};

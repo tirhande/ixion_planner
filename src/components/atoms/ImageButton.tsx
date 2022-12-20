@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IStyle } from 'types/atoms';
 
-
-interface IStyle {
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  name?: string;
-  width?: string;
-  height?: string;
-}
+export const ImageButton = ({ onClick, name, width, height, children }: React.ButtonHTMLAttributes<HTMLButtonElement> & IStyle) => (
+  <StyledButton onClick={onClick} name={name} width={width} height={height}>
+    {children}
+  </StyledButton>
+);
 
 const StyledButton = styled.button<IStyle>`
   border: none;
@@ -24,9 +23,3 @@ const StyledButton = styled.button<IStyle>`
     fill: #dccaa4;
   }
 `;
-
-export const ImageButton = ({ onClick, name, width, height, children }: React.ButtonHTMLAttributes<HTMLButtonElement> & IStyle) => (
-  <StyledButton onClick={onClick} name={name} width={width} height={height}>
-    {children}
-  </StyledButton>
-);

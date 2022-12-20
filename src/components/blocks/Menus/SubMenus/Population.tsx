@@ -9,8 +9,10 @@ import { ReactComponent as CellHousing } from 'assets/Menus/Population/CellHousi
 import { ReactComponent as CryonicCenter } from 'assets/Menus/Population/CryonicCenter.svg';
 import { ReactComponent as Infirmary } from 'assets/Menus/Population/Infirmary.svg';
 import { ReactComponent as HealthCenter } from 'assets/Menus/Population/HealthCenter.svg';
-import { IMenuClick, wrapButton } from "components/atoms/WrapMenuButton";
+
+import wrapButton from "components/atoms/WrapMenuButton";
 import { BUILDING_INFO } from "utils/GridEnum";
+import { IMenuClick } from "types/atoms";
 
 const SubMenus = [
   { id: 'BaseQuarter', child: <BaseQuarter /> },

@@ -10,7 +10,7 @@ import PopulationMenu from './Population';
 import FoodMenu from './Food';
 import StabilityMenu from './Stability';
 import { constructState, roadState } from 'core/states';
-import { IWrapProps } from 'components/atoms/WrapMenuButton';
+import { IWrapProps } from 'types/atoms';
 
 const SubMenus = () => {
   const setConstruct = useSetRecoilState(constructState);

@@ -1,19 +1,11 @@
 import React, { useCallback } from 'react';
-// import styled from 'styled-components';
+
 import { GRID_SIZE } from 'utils/GridEnum';
-
-
-interface IBuilding {
-  construct_id: string;
-  width: number;
-  height: number;
-  location: readonly number[];
-  fillColor: string;
-}
+import { IPreBuilding } from 'types/Ixion';
 
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
 
-const PreBuilding = ({ construct_id, width, height, location, fillColor }: IBuilding) => {
+const PreBuilding = ({ construct_id, width, height, location, fillColor }: IPreBuilding) => {
   const [top, right, bottom, left] = location;
 
   const topDirection = useCallback(() => {

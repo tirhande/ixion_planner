@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useResetRecoilState, useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -10,39 +10,36 @@ import { ReactComponent as ConstructIcon } from 'assets/Menus/Default/Construct.
 import { ReactComponent as ResearchIcon } from 'assets/Menus/Default/Research.svg';
 
 import SubMenus from './SubMenus';
-import { constructState, roadState } from 'core/states';
+import { constructState, menuState } from 'core/states';
 
 const Menus = () => {
-  const [isRoadConstruct, setRoadConstruct] = useRecoilState(roadState);
+  // const [isRoadConstruct, setRoadConstruct] = useRecoilState(roadState);
+  const [clickMenu, setClickMenu] = useRecoilState(menuState);
   const resetConstruct = useResetRecoilState(constructState);
 
-  const [isConstruct, setIsConstruct] = useState(false);
-
-  // delBuilding
-  // delRoad
-  // Road
-  // Building
-  
   const onMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // console.log(e.currentTarget);
-    console.log(e.currentTarget.name);
+    resetConstruct();
+    const menuName = e.currentTarget.name;
+    setClickMenu(clickMenu === menuName ? '' : menuName);
   }
 
   return (
     <>
-      {isConstruct && <SubMenus />}
+      {clickMenu === 'consBuilding' && <SubMenus />}
       <MenusSection>
         <ImageButton name="delBuilding" width="61px" height="62px" onClick={onMenuClick}>
-          <DemolishBuildingIcon />
+          <DemolishBuildingIcon fill={clickMenu === 'delBuilding' ? '#dccaa4' : 'black'}/>
         </ImageButton>
         <ImageButton name="delRoad" width="61px" height="62px" onClick={onMenuClick}>
-          <DemolishRoadIcon />
+          <DemolishRoadIcon fill={clickMenu === 'delRoad' ? '#dccaa4' : 'black'}/>
         </ImageButton>
-        <ImageButton name="consRoad" width="86px" height="85px" onClick={() => {setRoadConstruct(prev => !prev); resetConstruct();}}>
-          <RoadIcon fill={isRoadConstruct ? '#dccaa4' : 'black'}/>
+        {/* <ImageButton name="consRoad" width="86px" height="85px" onClick={() => {setRoadConstruct(prev => !prev); resetConstruct();}}> */}
+        <ImageButton name="consRoad" width="86px" height="85px" onClick={onMenuClick}>
+          <RoadIcon fill={clickMenu === 'consRoad' ? '#dccaa4' : 'black'}/>
         </ImageButton>
-        <ImageButton name="consBuilding" width="109px" height="109px" onClick={() => setIsConstruct(prev => !prev)}>
-          <ConstructIcon fill={isConstruct ? '#dccaa4' : 'black'}/>
+        {/* <ImageButton name="consBuilding" width="109px" height="109px" onClick={() => setIsConstruct(prev => !prev)}> */}
+        <ImageButton name="consBuilding" width="109px" height="109px" onClick={onMenuClick}>
+          <ConstructIcon fill={clickMenu === 'consBuilding' ? '#dccaa4' : 'black'}/>
         </ImageButton>
         <ImageButton width="86px" height="85px">
           <ResearchIcon />

@@ -1,6 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+export const Button = ({
+  text,
+  type,
+  ...props
+}: { text: string, type: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <StyledButton type={type} {...props}>
+    {text}
+  </StyledButton>
+);
+
 const StyledButton = styled.button`
   border: none;
   border-radius: 6px;
@@ -19,13 +29,3 @@ const StyledButton = styled.button`
     transition: all 0.2s linear;
   }
 `;
-
-export const Button = ({
-  text,
-  type,
-  ...props
-}: { text: string, type: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <StyledButton type={type} {...props}>
-    {text}
-  </StyledButton>
-);

@@ -11,8 +11,10 @@ import { ReactComponent as LawEnforcement } from 'assets/Menus/Stability/LawEnfo
 import { ReactComponent as HullTemple } from 'assets/Menus/Stability/HullTemple.svg';
 import { ReactComponent as Observatory } from 'assets/Menus/Stability/Observatory.svg';
 import { ReactComponent as ExoFightingDome } from 'assets/Menus/Stability/ExoFightingDome.svg';
-import { IMenuClick, wrapButton } from "components/atoms/WrapMenuButton";
+
+import wrapButton from "components/atoms/WrapMenuButton";
 import { BUILDING_INFO } from "utils/GridEnum";
+import { IMenuClick } from "types/atoms";
 
 const SubMenus = [
   { id: 'DataListeningCenter', child: <DataListeningCenter /> },
@@ -26,7 +28,7 @@ const SubMenus = [
   { id: 'ExoFightingDome', child: <ExoFightingDome /> },
 ];
 
-const StabilityMenu = ({ onMenuClick }: IMenuClick ) => {
+const StabilityMenu = ({ onMenuClick }: IMenuClick) => {
   return (
     <MenusDiv>
       {SubMenus.map(({ id, child }) => {

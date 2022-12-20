@@ -10,8 +10,10 @@ import { ReactComponent as FusionStation } from 'assets/Menus/Factories/FusionSt
 import { ReactComponent as WaterTreatment } from 'assets/Menus/Factories/WaterTreatment.svg';
 import { ReactComponent as WasteTreatment } from 'assets/Menus/Factories/WasteTreatment.svg';
 import { ReactComponent as NuclearPowerPlant } from 'assets/Menus/Factories/NuclearPowerPlant.svg';
-import { IMenuClick, wrapButton } from "components/atoms/WrapMenuButton";
+
+import wrapButton from "components/atoms/WrapMenuButton";
 import { BUILDING_INFO } from "utils/GridEnum";
+import { IMenuClick } from "types/atoms";
 
 const SubMenus = [
   { id: 'TechLab', child: <TechLab /> },

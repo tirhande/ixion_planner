@@ -1,13 +1,6 @@
 import { atom } from 'recoil';
 
-export interface IConstructState {
-  isConstruct: boolean;
-  construct_id: string;
-  width: number;
-  height: number;
-  isWall: boolean;
-  degree: number;
-}
+import { IBuilding, IConstructState } from 'types/Ixion';
 
 export const constructState = atom<IConstructState>({
   key: 'constructState',
@@ -24,4 +17,14 @@ export const constructState = atom<IConstructState>({
 export const roadState = atom<boolean>({
   key: 'roadState',
   default: false
+});
+
+export const menuState = atom<string>({
+  key: 'menuState',
+  default: ''
+});
+
+export const buildingState = atom<IBuilding[]>({
+  key: 'buildingState',
+  default: []
 });

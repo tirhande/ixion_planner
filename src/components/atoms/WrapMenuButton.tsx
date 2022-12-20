@@ -1,23 +1,12 @@
 import React from "react";
 
 import { ImageButton } from "./ImageButton";
+import { IWrapButton } from "types/atoms";
 
-export interface IMenuClick {
-  onMenuClick: ({ id, width, height, isWall }: IWrapProps) => void;
-}
-
-export interface IWrapProps {
-  id: string;
-  width: number;
-  height: number;
-  isWall: boolean;
-}
-interface IWrapButton extends IWrapProps {
-  child: JSX.Element;
-}
-
-export const wrapButton = ({ id, width, height, isWall, child, onMenuClick }: IWrapButton & IMenuClick) => (
+const wrapButton = ({ id, width, height, isWall, child, onMenuClick }: IWrapButton) => (
   <ImageButton key={id} onClick={() => onMenuClick({ id, width, height, isWall })}>
     {child}
   </ImageButton>
 );
+
+export default wrapButton;

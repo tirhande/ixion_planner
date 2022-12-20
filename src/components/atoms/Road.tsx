@@ -1,19 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-import { IPoint } from 'components/blocks/SVGStage';
+import { IRoad } from 'types/Ixion';
 
-
-interface IRoad extends IPoint {
-  opacity: number;
-}
-
-
-export const Road = ({ x, y, opacity }: IRoad) => {
-  const onTest = (e: React.MouseEvent<SVGUseElement>) => {
-    console.log(e.currentTarget.x);
-    console.log(e.target);
-  }
+const Road = ({ x, y, opacity }: IRoad) => {
   return (
-    <use xlinkHref="#pre-Road" x={x} y={y} style={{ opacity: opacity }} onClick={onTest}/>
+    <use xlinkHref="#pre-Road" x={x} y={y} style={{ opacity: opacity }}/>
   )
 }
+
+export default memo(Road);

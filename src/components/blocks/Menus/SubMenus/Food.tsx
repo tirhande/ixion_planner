@@ -9,8 +9,10 @@ import { ReactComponent as CropsFarmField } from 'assets/Menus/Food/CropsFarmFie
 import { ReactComponent as AlgaeFarm } from 'assets/Menus/Food/AlgaeFarm.svg';
 import { ReactComponent as AlgaeFarmField } from 'assets/Menus/Food/AlgaeFarmField.svg';
 import { ReactComponent as MushroomWall } from 'assets/Menus/Food/MushroomWall.svg';
-import { IMenuClick, wrapButton } from "components/atoms/WrapMenuButton";
+
+import wrapButton from "components/atoms/WrapMenuButton";
 import { BUILDING_INFO } from "utils/GridEnum";
+import { IMenuClick } from "types/atoms";
 
 const SubMenus = [
   { id: 'MessHall', child: <MessHall /> },
