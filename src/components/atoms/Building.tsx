@@ -6,7 +6,6 @@ import { IBuilding } from 'types/Ixion';
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
 
 const Building = ({ id, degree, x, y, width, height }: IBuilding) => {
-
   const [transX, transY] = [x + (GRID_WIDTH * width) / 2, y + (GRID_HEIGHT * height) / 2];
 
   return (

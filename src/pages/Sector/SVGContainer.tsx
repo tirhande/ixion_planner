@@ -195,7 +195,7 @@ const SVGContainer = () => {
         </g>
         <g>
           {roads[sectionNumber].map((v, i) => {
-            return <Road key={i} x={v.x} y={v.y} opacity={1} />;
+            return <Road key={i} x={v.x} y={v.y} opacity={0.6} />;
           })}
         </g>
         {isConstruct && (

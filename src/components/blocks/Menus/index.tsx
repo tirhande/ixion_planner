@@ -1,5 +1,5 @@
 import React from 'react';
-import { useResetRecoilState, useRecoilState } from 'recoil';
+import { useResetRecoilState, useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import { ImageButton } from 'components/atoms/ImageButton';
@@ -7,19 +7,36 @@ import { ReactComponent as DemolishBuildingIcon } from 'assets/Menus/Default/Dem
 import { ReactComponent as DemolishRoadIcon } from 'assets/Menus/Default/DemolishRoad.svg';
 import { ReactComponent as RoadIcon } from 'assets/Menus/Default/Road.svg';
 import { ReactComponent as ConstructIcon } from 'assets/Menus/Default/Construct.svg';
-import { ReactComponent as ResearchIcon } from 'assets/Menus/Default/Research.svg';
+// import { ReactComponent as ResearchIcon } from 'assets/Menus/Default/Research.svg';
+import { ReactComponent as ShowHideIcon } from 'assets/Menus/Default/ShowHide.svg';
+import { ReactComponent as ResetLayoutIcon } from 'assets/Menus/Default/ResetLayout.svg';
 
 import SubMenus from './SubMenus';
-import { constructState, menuState } from 'core/states';
+import { buildingState, constructState, menuState, roadState, sectionState, visibleState } from 'core/states';
 
 const Menus = () => {
   const [clickMenu, setClickMenu] = useRecoilState(menuState);
+  const sectionNumber = useRecoilValue(sectionState);
+
+  const setIsVisible = useSetRecoilState(visibleState);
+  const setRoads = useSetRecoilState(roadState);
+  const setBuildings = useSetRecoilState(buildingState);
+
   const resetConstruct = useResetRecoilState(constructState);
 
   const onMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     resetConstruct();
     const menuName = e.currentTarget.name;
     setClickMenu(clickMenu === menuName ? '' : menuName);
+  }
+  const onShowHide = () => {
+    setIsVisible(prev => !prev);
+  }
+  const onResetLayout = () => {
+    if(confirm("이 섹션의 레이아웃을 초기화합니다.\nReset the layout of this section")) {
+      setBuildings(prev => ({...prev, [sectionNumber]: []}));
+      setRoads(prev => ({...prev, [sectionNumber]: []}));
+    }
   }
 
   return (
@@ -32,16 +49,20 @@ const Menus = () => {
         <ImageButton name="delRoad" width="61px" height="62px" onClick={onMenuClick}>
           <DemolishRoadIcon fill={clickMenu === 'delRoad' ? '#dccaa4' : 'black'}/>
         </ImageButton>
-        {/* <ImageButton name="consRoad" width="86px" height="85px" onClick={() => {setRoadConstruct(prev => !prev); resetConstruct();}}> */}
         <ImageButton name="consRoad" width="86px" height="85px" onClick={onMenuClick}>
           <RoadIcon fill={clickMenu === 'consRoad' ? '#dccaa4' : 'black'}/>
         </ImageButton>
-        {/* <ImageButton name="consBuilding" width="109px" height="109px" onClick={() => setIsConstruct(prev => !prev)}> */}
         <ImageButton name="consBuilding" width="109px" height="109px" onClick={onMenuClick}>
           <ConstructIcon fill={clickMenu === 'consBuilding' ? '#dccaa4' : 'black'}/>
         </ImageButton>
-        <ImageButton width="86px" height="85px">
+        {/* <ImageButton width="86px" height="85px">
           <ResearchIcon />
+        </ImageButton> */}
+        <ImageButton width="86px" height="85px" onClick={onShowHide}>
+          <ShowHideIcon fill='black' />
+        </ImageButton>
+        <ImageButton width="86px" height="85px" onClick={onResetLayout}>
+          <ResetLayoutIcon fill='black' />
         </ImageButton>
       </MenusSection>
     </>
@@ -56,7 +77,7 @@ const MenusSection = styled.section`
   align-items: start;
 
   width: 100%;
-  padding: 5px 38%;
+  padding: 5px 43em;
   margin:0 auto;
   background: #00000070;
 `;

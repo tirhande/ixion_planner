@@ -1,11 +1,15 @@
 import React, { useCallback } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import { GRID_SIZE } from 'utils/GridEnum';
 import { IPreBuilding } from 'types/Ixion';
 
+import { visibleState } from 'core/states';
+
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
 
 const PreBuilding = ({ construct_id, width, height, location, fillColor }: IPreBuilding) => {
+  const isVisible = useRecoilValue(visibleState);
   const [top, right, bottom, left] = location;
 
   const topDirection = useCallback(() => {
@@ -76,7 +80,7 @@ const PreBuilding = ({ construct_id, width, height, location, fillColor }: IPreB
   return (
     <g>
       <g id={`pre-${construct_id}`} fill={fillColor}>
-        <rect x="0" y="0" width={GRID_WIDTH * width} height={GRID_HEIGHT * height} fill="inherit" stroke='black' />
+        <rect x="0" y="0" width={GRID_WIDTH * width} height={GRID_HEIGHT * height} fill="inherit" stroke="black" />
         <g>
           {top > 0 && topDirection()}
           {right > 0 && rightDirection()}
@@ -104,8 +108,18 @@ const PreBuilding = ({ construct_id, width, height, location, fillColor }: IPreB
           })}
         </text>
       </g>
-      <svg id={`construct-${construct_id}`} fill={fillColor}>
-        <rect x="0" y="0" width={GRID_WIDTH * width} height={GRID_HEIGHT * height} fill="inherit" stroke='black'/>
+      <g id={`construct-${construct_id}`} fill={fillColor}>
+        <rect x="0" y="0" width={GRID_WIDTH * width} height={GRID_HEIGHT * height} fill="inherit" stroke="black" />
+        {isVisible ? (
+          <g>
+            {top > 0 && topDirection()}
+            {right > 0 && rightDirection()}
+            {bottom > 0 && bottomDirection()}
+            {left > 0 && leftDirection()}
+          </g>
+        ) : (
+          <></>
+        )}
         <text
           x={(GRID_WIDTH * width) / 2}
           y={(GRID_HEIGHT * height) / 2}
@@ -126,9 +140,9 @@ const PreBuilding = ({ construct_id, width, height, location, fillColor }: IPreB
             );
           })}
         </text>
-      </svg>
+      </g>
     </g>
-  )
+  );
 }
 
 export default PreBuilding;
