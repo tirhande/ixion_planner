@@ -45,14 +45,14 @@ const ConstructBuilding = ({ id, pos: {x, y}, width, height, isWall, degree }: I
   }
   const centralX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : -GRID_WIDTH / 2);
   const centralY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT/2);
-
+  const [transX, transY] = [centralX + (GRID_WIDTH * width) / 2, centralY + (GRID_HEIGHT * height) / 2];
   return (
     <use
       xlinkHref={`#pre-${id}`}
       x={centralX}
       y={centralY}
       opacity={0.7}
-      transform={`rotate(${degree}, ${centralX + (GRID_WIDTH * width) / 2}, ${centralY + (GRID_HEIGHT * height) / 2})`}
+      transform={`rotate(${degree}, ${(transX % GRID_WIDTH === 0) ? transX : transX + (GRID_WIDTH/2)}, ${(transY % GRID_HEIGHT === 0) ? transY : transY + (GRID_HEIGHT/2)})`}
     />
   );
 };
