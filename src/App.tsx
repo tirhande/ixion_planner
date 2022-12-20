@@ -1,12 +1,12 @@
 import React from 'react';
-import Router from './router/Router';
+import SectorPage from 'pages/Sector';
 import { GlobalStyles } from './styles/global';
 
 const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Router />
+      <SectorPage />
     </>
   );
 };

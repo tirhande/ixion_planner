@@ -52,7 +52,7 @@ const ConstructBuilding = ({ id, pos: {x, y}, width, height, isWall, degree }: I
       x={centralX}
       y={centralY}
       opacity={0.7}
-      transform={`rotate(${degree}, ${x + (GRID_WIDTH * width) / 2}, ${y + (GRID_HEIGHT * height) / 2})`}
+      transform={`rotate(${degree}, ${centralX + (GRID_WIDTH * width) / 2}, ${centralY + (GRID_HEIGHT * height) / 2})`}
     />
   );
 };
