@@ -111,7 +111,7 @@ const PreBuilding = ({ construct_id, width, height, location, fillColor }: IPreB
       <g id={`construct-${construct_id}`} fill={fillColor}>
         <rect x="0" y="0" width={GRID_WIDTH * width} height={GRID_HEIGHT * height} fill="inherit" stroke="black" />
         {isVisible ? (
-          <g>
+          <g opacity={0.4}>
             {top > 0 && topDirection()}
             {right > 0 && rightDirection()}
             {bottom > 0 && bottomDirection()}
