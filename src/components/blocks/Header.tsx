@@ -13,9 +13,6 @@ const Header = () => {
         <div>SECTOR</div>
         <div className="sector-num">{sectionNumber}</div>
       </StyledTitle>
-      <div>
-        <button>Reset Layout</button>
-      </div>
     </StyledHeader>
   )
 }
