@@ -8,8 +8,9 @@ import Building from 'components/atoms/Building';
 import Road from 'components/atoms/Road';
 
 import { CANVAS_SIZE, GRID_SIZE } from 'utils/GridEnum';
-import { isInsidePoint, isOverlap } from 'utils/utilFuncs';
+import { isBannerOverlap, isInsidePoint } from 'utils/utilFuncs';
 import { IPoint } from 'types/Ixion';
+import { isBuildingOverlap } from '../../utils/utilFuncs';
 
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
@@ -42,26 +43,56 @@ const SVGContainer = () => {
     );
   };
   const demolishRoad = ({ x, y }: IPoint) => {
-    setRoads(prev =>
-      ({...prev, [sectionNumber]: prev[sectionNumber].filter(road => x !== road.x || y !== road.y)})
-    );
+    if (roadPos.start) {
+      const tmpX = (x - roadPos.x) / GRID_WIDTH;
+      const tmpY = (y - roadPos.y) / GRID_HEIGHT;
+
+      const roadArray = Array.from(
+        { length: roadPos.direction === 'h' ? Math.abs(tmpX) + 1 : Math.abs(tmpY) + 1 },
+        (_, i) => i
+      );
+      const tmpRoads = roadArray.map(v =>
+        roadPos.direction === 'v'
+          ? { x: roadPos.x, y: tmpY > 0 ? roadPos.y + (v + 1) * GRID_HEIGHT : roadPos.y - (v + 1) * GRID_HEIGHT }
+          : { x: tmpX > 0 ? roadPos.x + (v + 1) * GRID_WIDTH : roadPos.x - (v + 1) * GRID_WIDTH, y: roadPos.y }
+      );
+      setRoads(prev =>
+        ({...prev, [sectionNumber]: prev[sectionNumber].filter((road) => !tmpRoads.some((tmp) => tmp.x === road.x && tmp.y === road.y))})
+      );
+      setRoadPos({
+        start: false,
+        direction: '',
+        x: 0,
+        y: 0,
+      });
+    } else {
+      setRoadPos({
+        ...roadPos,
+        start: true,
+        x: x,
+        y: y,
+      });
+    }
   }
   
   const constructRoad = ({x, y}: IPoint) => {
     if (roadPos.start) {
+      const tmpX = (x - roadPos.x) / GRID_WIDTH;
+      const tmpY = (y - roadPos.y) / GRID_HEIGHT;
+
       const roadArray = Array.from(
-        { length: Math.max((x - roadPos.x) / GRID_WIDTH + 1, (y - roadPos.y) / GRID_HEIGHT + 1) },
+        { length: roadPos.direction === 'h' ? Math.abs(tmpX) + 1 : Math.abs(tmpY) + 1 },
         (_, i) => i
       );
       
       const tmpRoads = roadArray
         .map(v =>
-          roadPos.x === x
-            ? { x: roadPos.x, y: roadPos.y + v * GRID_HEIGHT }
-            : { x: roadPos.x + v * GRID_WIDTH, y: roadPos.y }
+          roadPos.direction === 'v'
+          ? { x: roadPos.x, y: tmpY > 0 ? roadPos.y + v * GRID_HEIGHT : roadPos.y - v * GRID_HEIGHT }
+          : { x: tmpX > 0 ? roadPos.x + v * GRID_WIDTH : roadPos.x - v * GRID_WIDTH, y: roadPos.y }
         )
         .filter(v => !roads[sectionNumber].some(val => val.x === v.x && val.y === v.y));
-
+      
       setRoads(prev =>
         ({...prev, [sectionNumber]: [...prev[sectionNumber], ...tmpRoads]})
       );
@@ -85,25 +116,28 @@ const SVGContainer = () => {
     const centralX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : -GRID_WIDTH / 2);
     const centralY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT / 2);
 
+    const isBuildingWrap = buildings[sectionNumber].some(v =>
+      isBuildingOverlap({
+        origin: { x: isWall ? x : centralX, y: isWall ? y : centralY, width: width, height: height },
+        diff: { x: v.x, y: v.y, width: v.width, height: v.height },
+      })
+    );
     if (isWall) {
-      const stickY = CANVAS_HEIGHT / 2 > y ? 0 : CANVAS_HEIGHT - height * GRID_HEIGHT;
-      const isWrap = isOverlap({
-        l1: { x: x, y: GRID_HEIGHT * height + stickY },
-        r1: { x: GRID_WIDTH * width + x, y: stickY },
-        l2: { x: GRID_WIDTH * 24, y: GRID_HEIGHT },
-        r2: { x: GRID_WIDTH * 32, y: 0 }
-      });
+      const stickY = CANVAS_HEIGHT / 2 > y ? 0 : CANVAS_HEIGHT - (height + 1) * GRID_HEIGHT;
 
+      const isBannerWrap = isBannerOverlap({ x, y: stickY, width, height });
       // 벽이고 안겹칠때
-      if (!isWrap) {
+      if (!isBannerWrap && !isBuildingWrap) {
         setBuildings(prev =>
-          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: x, y: stickY, degree: degree, width: width, height: height }]]})
+          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: x, y: stickY, degree: stickY === 0 ? 0 : 180, width: width, height: height }]]})
         );
       }
     } else {
-      setBuildings(prev =>
-        ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: centralX, y: centralY, degree: degree, width: width, height: height }]]})
-      );
+      if(!isBuildingWrap) {
+        setBuildings(prev =>
+          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: centralX, y: centralY, degree: degree, width: width, height: height }]]})
+        );
+      }
     }
   };
 
@@ -146,38 +180,37 @@ const SVGContainer = () => {
       Math.floor(e.nativeEvent.offsetY / GRID_HEIGHT) * GRID_HEIGHT,
     ];
 
-    if (isConstruct || clickMenu === 'consRoad') {
-      if (
-        clickMenu === 'consRoad' &&
-        roadPos.start &&
-        (e.nativeEvent.offsetX % GRID_WIDTH === 0 || e.nativeEvent.offsetY % GRID_HEIGHT === 0)
-      ) {
+    if (clickMenu === 'consRoad' || clickMenu === 'delRoad') {
+      if(posX !== pos.x || posY !== pos.y) {
+        setPos({
+          x: posX,
+          y: posY,
+        });
+      }
+
+      if (roadPos.start && (e.nativeEvent.offsetX % GRID_WIDTH === 0 || e.nativeEvent.offsetY % GRID_HEIGHT === 0)) {
         const direct = Math.abs(roadPos.x - posX) >= Math.abs(roadPos.y - posY) ? 'h' : 'v';
         setRoadPos({
           ...roadPos,
           direction: direct,
         });
-        
       }
+    }
 
-      if(isConstruct) {
-        if(isWall) {
-          const stickWall = CANVAS_HEIGHT / 2 > posY ? 0 : CANVAS_HEIGHT - height * GRID_HEIGHT;
-          setPos({
-            x: posX,
-            y: stickWall,
-          });
-        } else {
+    if(isConstruct) {
+      if(isWall) {
+        const stickWall = CANVAS_HEIGHT / 2 > posY ? 0 : CANVAS_HEIGHT - height * GRID_HEIGHT;
+        setPos({
+          x: posX,
+          y: stickWall,
+        });
+      } else {
+        if(posX !== pos.x || posY !== pos.y) {
           setPos({
             x: posX,
             y: posY,
           });
         }
-      } else {
-        setPos({
-          x: posX,
-          y: posY,
-        });
       }
     }
   };
@@ -188,15 +221,15 @@ const SVGContainer = () => {
         <rect width="100%" height="100%" fill="url(#grid)" />
         <use xlinkHref="#passage" />
         <g>
+          {roads[sectionNumber].map((v, i) => {
+            return <Road key={i} x={v.x} y={v.y} opacity={0.6} fill='white'/>;
+          })}
+        </g>
+        <g>
           {buildings[sectionNumber].map((v, i) => {
             return (
               <Building key={v.id + i} id={v.id} x={v.x} y={v.y} degree={v.degree} width={v.width} height={v.height} />
           )})}
-        </g>
-        <g>
-          {roads[sectionNumber].map((v, i) => {
-            return <Road key={i} x={v.x} y={v.y} opacity={0.6} />;
-          })}
         </g>
         {isConstruct && (
           <ConstructBuilding
@@ -208,7 +241,8 @@ const SVGContainer = () => {
             degree={degree}
           />
         )}
-        {clickMenu === 'consRoad' && <ConstructRoad pos={pos} roadPos={roadPos} />}
+        {clickMenu === 'consRoad' && <ConstructRoad pos={pos} roadPos={roadPos} fill='white'/>}
+        {clickMenu === 'delRoad' && <ConstructRoad pos={pos} roadPos={roadPos} fill='red' />}
       </svg>
     </div>
   );

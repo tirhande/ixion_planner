@@ -18,7 +18,7 @@ const Menus = () => {
   const [clickMenu, setClickMenu] = useRecoilState(menuState);
   const sectionNumber = useRecoilValue(sectionState);
 
-  const setIsVisible = useSetRecoilState(visibleState);
+  const [isVisible, setIsVisible] = useRecoilState(visibleState);
   const setRoads = useSetRecoilState(roadState);
   const setBuildings = useSetRecoilState(buildingState);
 
@@ -59,7 +59,7 @@ const Menus = () => {
           <ResearchIcon />
         </ImageButton> */}
         <ImageButton width="86px" height="85px" onClick={onShowHide}>
-          <ShowHideIcon fill='black' />
+          <ShowHideIcon fill={isVisible ? '#dccaa4' :'black'} />
         </ImageButton>
         <ImageButton width="86px" height="85px" onClick={onResetLayout}>
           <ResetLayoutIcon fill='black' />

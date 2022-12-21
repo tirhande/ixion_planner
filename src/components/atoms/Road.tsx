@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 
 import { IRoad } from 'types/Ixion';
 
-const Road = ({ x, y, opacity }: IRoad) => {
+const Road = ({ x, y, opacity, fill }: IRoad) => {
   return (
-    <use xlinkHref="#pre-Road" x={x} y={y} style={{ opacity: opacity }}/>
+    <use xlinkHref="#construct-Road" x={x} y={y} style={{ opacity: opacity }} fill={fill}/>
   )
 }
 

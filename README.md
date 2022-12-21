@@ -9,14 +9,27 @@ Web-Based IXION Planner
 ### [https://ixion.info](https://ixion.info/)
 
 ## **Shortcut**
-> when under construction
+> When under construction
 
 - Press 'R' or 'r' to rotate building
-
 - Mouse Right Click to cancel build
 
 ## **Patch Note**
-- 
+- v0.3
+  - To demolish several roads
+  - Building edge(connect to road) above the road
+  - Buildings can't be stacked
+- v0.2
+  - Building edge(connect to road) Show/Hide Button
+  - Sector layout Reset Button
+- v0.1
+  - Ope
+
+
+### TBU
+- Building Specialization
+- translate option En - Ko
+
 
 ## **Example**
 
@@ -33,13 +46,13 @@ Web-Based IXION Planner
 git clone -b main --single-branch https://github.com/tirhande/ixion_planner.git
 ```
 ```sh
-ixion_building_planner % npm install
+ixion_planner % npm install
 ```
 ## Usage
 ```sh
 # Local Dev Server
-ixion_building_planner % npm run start
+ixion_planner % npm run start
 
 # Production Build
-ixion_building_planner % npm run build
+ixion_planner % npm run build
 ```
