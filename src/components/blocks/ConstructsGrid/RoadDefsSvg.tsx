@@ -7,10 +7,10 @@ const RoadDefsSvg = () => {
   return (
     <g>
       <g id={`pre-Road`}>
-        <rect x="0" y="0" width={GRID_WIDTH} height={GRID_HEIGHT} fill="white" stroke="black" />
+        <rect x="0" y="0" width={GRID_WIDTH} height={GRID_HEIGHT} stroke="black" />
       </g>
-      <svg id={`construct-Road`} width={GRID_WIDTH} height={GRID_HEIGHT}>
-        <rect x="0" y="0" width={GRID_WIDTH} height={GRID_HEIGHT} fill="white" stroke="black" />
+      <svg id={`construct-Road`} width={GRID_WIDTH} height={GRID_HEIGHT} fill="white">
+        <rect x="0" y="0" width={GRID_WIDTH} height={GRID_HEIGHT} stroke="black" />
       </svg>
     </g>
   );

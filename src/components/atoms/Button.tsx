@@ -13,8 +13,8 @@ const Button = ({
 export default Button;
 
 const StyledButton = styled.button`
-  width: 160px;
-  height: 160px;
+  width: 120px;
+  height: 120px;
   background-color: #fff;
   border: none;
   font-size: 0px;

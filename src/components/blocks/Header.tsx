@@ -4,15 +4,25 @@ import styled from 'styled-components';
 
 import { sectionState } from 'core/states';
 
+import { ReactComponent as GithubLogoIcon } from 'assets/GithubLogo.svg';
+
 const Header = () => {
   const sectionNumber = useRecoilValue(sectionState);
 
   return (
     <StyledHeader>
+      <div className='title'>
+        IXION Planner v0.3
+      </div>
       <StyledTitle section={sectionNumber}>
         <div>SECTOR</div>
         <div className="sector-num">{sectionNumber}</div>
       </StyledTitle>
+      <div className='github'>
+        <a href="https://github.com/tirhande/ixion_planner" target={"_blank"} rel="noopener noreferrer">
+          <GithubLogoIcon width={30} height={30} />
+        </a>
+      </div>
     </StyledHeader>
   )
 }
@@ -24,6 +34,22 @@ const StyledHeader = styled.header`
 
   display: flex;
   align-items: center;
+  div.title {
+    display: flex;
+    justify-content: space-between;
+
+    position: fixed;
+    padding: 0 0.5em;
+    left: 0;
+
+    font-size: 28px;
+    font-weight: bold;
+  }
+  div.github {
+    position: fixed;
+    padding: 0 0.5em;
+    right: 0;
+  }
 `;
 
 const StyledTitle = styled.title<{section: number}>`

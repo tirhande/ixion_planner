@@ -20,6 +20,7 @@ declare module 'types/Ixion' {
       start: boolean;
       direction: string;
     } & IPoint
+    fill: string;
   }
   interface IConstructState extends IDimension {
     isConstruct: boolean;
@@ -56,16 +57,25 @@ declare module 'types/Ixion' {
   }
   interface IRoad extends IPoint {
     opacity: number;
+    fill: string;
   }
 
-  // used util/funcs
-  interface IRectangle {
-    l1: IPoint;
-    r1: IPoint;
-    l2: IPoint;
-    r2: IPoint;
+  interface IBounds extends IPoint, IDimension {
   }
-  
+  interface IRectangle {
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+  }
+  interface IDiffBounds {
+    origin: IBounds;
+    diff: IBounds;
+  }
+  interface IDiffRectangle {
+    cur: IRectangle;
+    diff: IRectangle;
+  }
   interface IFindBuilding extends IPoint, IDimension {
     bx: number;
     by: number;
