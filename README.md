@@ -23,8 +23,8 @@ Web-Based IXION Planner
   - Building edge(connect to road) Show/Hide Button
   - Sector layout Reset Button
 - v0.1
-  - Ope
-
+  - Open
+  
 
 ### TBU
 - Building Specialization
