@@ -53,8 +53,8 @@ const SVGContainer = () => {
       );
       const tmpRoads = roadArray.map(v =>
         roadPos.direction === 'v'
-          ? { x: roadPos.x, y: tmpY > 0 ? roadPos.y + (v + 1) * GRID_HEIGHT : roadPos.y - (v + 1) * GRID_HEIGHT }
-          : { x: tmpX > 0 ? roadPos.x + (v + 1) * GRID_WIDTH : roadPos.x - (v + 1) * GRID_WIDTH, y: roadPos.y }
+          ? { x: roadPos.x, y: tmpY > 0 ? roadPos.y + v * GRID_HEIGHT : roadPos.y - v * GRID_HEIGHT }
+          : { x: tmpX > 0 ? roadPos.x + v * GRID_WIDTH : roadPos.x - v * GRID_WIDTH, y: roadPos.y }
       );
       setRoads(prev =>
         ({...prev, [sectionNumber]: prev[sectionNumber].filter((road) => !tmpRoads.some((tmp) => tmp.x === road.x && tmp.y === road.y))})
