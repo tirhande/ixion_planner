@@ -133,11 +133,11 @@ const SVGContainer = () => {
         );
       }
     } else {
-      if(!isBuildingWrap) {
+      // if(!isBuildingWrap) {
         setBuildings(prev =>
           ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: centralX, y: centralY, degree: degree, width: width, height: height }]]})
         );
-      }
+      // }
     }
   };
 
