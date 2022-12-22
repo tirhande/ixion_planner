@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useRecoilValue, useResetRecoilState, useRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useRecoilState, useSetRecoilState } from 'recoil';
 
-import { buildingState, constructState, menuState, roadState, sectionState } from 'core/states';
+import { buildingState, constructState, menuState, roadState, sectionState, visibleState } from 'core/states';
 import ConstructBuilding from 'components/blocks/ConstructBuilding';
 import ConstructRoad from 'components/blocks/ConstructRoad';
 import Building from 'components/atoms/Building';
@@ -24,6 +24,7 @@ const SVGContainer = () => {
 
   const [buildings, setBuildings] = useRecoilState(buildingState);
   const [roads, setRoads] = useRecoilState(roadState);
+  const setIsVisible = useSetRecoilState(visibleState);
   
   const [pos, setPos] = useState({
     x: 0,
@@ -101,6 +102,7 @@ const SVGContainer = () => {
         x: 0,
         y: 0,
       });
+      setIsVisible(false);
     } else {
       setRoadPos({
         ...roadPos,
@@ -108,6 +110,7 @@ const SVGContainer = () => {
         x: x,
         y: y,
       });
+      setIsVisible(true);
     }
   };
 

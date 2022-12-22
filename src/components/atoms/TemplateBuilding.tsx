@@ -59,7 +59,7 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor, te
 
 
   const leftDirection = useCallback(() => {
-    const tmpArray = Array.from({ length: right }, (_, i) => i);
+    const tmpArray = Array.from({ length: left }, (_, i) => i);
     return (
       <g transform={`translate(${-GRID_WIDTH}, 0)`}>
         <rect x="0" y="0" width={GRID_WIDTH} height={GRID_HEIGHT * height} fill="#886a39" />
