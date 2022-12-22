@@ -25,6 +25,7 @@ This site IXION (Building) Planner
   - Added Language option
   - Added BioengineeringCenter
   - Wall Building Bug fixes
+  - When building roads, building connections appear.
 
 ### v0.35 (Bug Fixed) - 2022-12-22
   - **It can be slightly modified from the existing saved layout.**

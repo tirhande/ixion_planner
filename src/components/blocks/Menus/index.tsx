@@ -30,6 +30,8 @@ const Menus = () => {
     resetConstruct();
     const menuName = e.currentTarget.name;
     setClickMenu(clickMenu === menuName ? '' : menuName);
+
+    if(menuName === 'consRoad') setIsVisible(true);
   }
   const onShowHide = () => {
     setIsVisible(prev => !prev);
