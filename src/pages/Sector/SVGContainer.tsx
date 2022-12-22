@@ -115,17 +115,16 @@ const SVGContainer = () => {
     const topLeftX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : -GRID_WIDTH / 2);
     const topLeftY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT / 2);
 
-    const isBuildingWrap = buildings[sectionNumber].some(v =>
-      isBuildingOverlap({
-        origin: { x: isWall ? x : topLeftX, y: isWall ? y : topLeftY, width: width, height: height, degree: degree },
-        diff: { x: v.x, y: v.y, width: v.width, height: v.height, degree: v.degree },
-      })
-    );
-
     if (isWall) {
       const stickY = CANVAS_HEIGHT / 2 > y ? 0 : CANVAS_HEIGHT - height * GRID_HEIGHT;
       const isBannerWrap = isBannerOverlap({ x, y: stickY, width, height });
 
+      const isBuildingWrap = buildings[sectionNumber].some(v =>
+        isBuildingOverlap({
+          origin: { x: x, y: stickY, width: width, height: height, degree: degree },
+          diff: { x: v.x, y: v.y, width: v.width, height: v.height, degree: v.degree },
+        })
+      );
       // 벽이고 안겹칠때
       if (!isBannerWrap && !isBuildingWrap) {
         setBuildings(prev =>
@@ -133,6 +132,12 @@ const SVGContainer = () => {
         );
       }
     } else {
+      const isBuildingWrap = buildings[sectionNumber].some(v =>
+        isBuildingOverlap({
+          origin: { x: topLeftX, y: topLeftY, width: width, height: height, degree: degree },
+          diff: { x: v.x, y: v.y, width: v.width, height: v.height, degree: v.degree },
+        })
+      );
       if(!isBuildingWrap) {
         setBuildings(prev =>
           ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: topLeftX, y: topLeftY, degree: degree, width: width, height: height }]]})

@@ -24,5 +24,11 @@ export const SPACE_BUILD = {
     location: [0, 0, 9, 0],
     isWall: false,
   },
+  BioengineeringCenter: {
+    width: 14,
+    height: 14,
+    location: [0, 0, 0, 14],
+    isWall: false,
+  },
 } as const;
 type SPACE_BUILD = typeof SPACE_BUILD[keyof typeof SPACE_BUILD];

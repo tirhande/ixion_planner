@@ -61,6 +61,7 @@ declare module 'types/Ixion' {
     construct_id: string;
     location: readonly number[];
     fillColor: string;
+    text: string;
   }
   interface IRoad extends IPoint {
     opacity: number;

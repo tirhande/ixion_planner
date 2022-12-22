@@ -1,6 +1,7 @@
 import React from 'react';
 import { useResetRecoilState, useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { useTranslation } from "react-i18next";
 
 import { ImageButton } from 'components/atoms/ImageButton';
 import { ReactComponent as DemolishBuildingIcon } from 'assets/Menus/Default/DemolishBuilding.svg';
@@ -15,6 +16,7 @@ import SubMenus from './SubMenus';
 import { buildingState, constructState, menuState, roadState, sectionState, visibleState } from 'core/states';
 
 const Menus = () => {
+  const { t } = useTranslation();
   const [clickMenu, setClickMenu] = useRecoilState(menuState);
   const sectionNumber = useRecoilValue(sectionState);
 
@@ -33,7 +35,8 @@ const Menus = () => {
     setIsVisible(prev => !prev);
   }
   const onResetLayout = () => {
-    if(confirm("이 섹션의 레이아웃을 초기화합니다.\nReset the layout of this section")) {
+    const confirmText = t("resetLayout");
+    if(confirm(confirmText)) {
       setBuildings(prev => ({...prev, [sectionNumber]: []}));
       setRoads(prev => ({...prev, [sectionNumber]: []}));
     }

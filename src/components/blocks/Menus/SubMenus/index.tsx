@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-
 import styled from 'styled-components';
+import { useTranslation } from "react-i18next";
 
 import MaintenanceMenu from './Maintenance';
 import SpaceMenu from './Space';
@@ -13,6 +13,7 @@ import { constructState } from 'core/states';
 import { IWrapProps } from 'types/atoms';
 
 const SubMenus = () => {
+  const { t } = useTranslation();
   const setConstruct = useSetRecoilState(constructState);
 
   const onMenuClick = ({ id, width, height, isWall }: IWrapProps) => {
@@ -22,32 +23,32 @@ const SubMenus = () => {
   const data = [
     {
       id: 0,
-      title: '정비',
+      title: t('maintenance'),
       contents: <MaintenanceMenu onMenuClick={onMenuClick} />,
     },
     {
       id: 1,
-      title: '우주',
+      title: t('space'),
       contents: <SpaceMenu onMenuClick={onMenuClick} />,
     },
     {
       id: 2,
-      title: '공장',
+      title: t('factories'),
       contents: <FactoriesMenu onMenuClick={onMenuClick} />,
     },
     {
       id: 3,
-      title: '인구',
+      title: t('population'),
       contents: <PopulationMenu onMenuClick={onMenuClick} />,
     },
     {
       id: 4,
-      title: '식량',
+      title: t('food'),
       contents: <FoodMenu onMenuClick={onMenuClick} />,
     },
     {
       id: 5,
-      title: '안정성',
+      title: t('stability'),
       contents: <StabilityMenu onMenuClick={onMenuClick} />,
     },
   ];
