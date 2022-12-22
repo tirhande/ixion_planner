@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 
+import i18next from 'i18next';
 import { GRID_SIZE } from 'utils/GridEnum';
 import { ITemplateBuilding } from 'types/Ixion';
-
 import { visibleState } from 'core/states';
 
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
 
-const TemplateBuilding = ({ construct_id, width, height, location, fillColor }: ITemplateBuilding) => {
+const TemplateBuilding = ({ construct_id, width, height, location, fillColor, text }: ITemplateBuilding) => {
   const isVisible = useRecoilValue(visibleState);
   const [top, right, bottom, left] = location;
 
@@ -76,7 +76,8 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor }: 
       </g>)
   }, [left]);
 
-  const title = construct_id.match(/[A-Z]+(?![a-z])\d|[A-Z]?[a-z]+/g) || [];
+  const label = text.length > width * (i18next.language === 'ko' ? 1 : 1.5) ? text.split(' ') : [text];
+
   return (
     <g>
       <g id={`pre-${construct_id}`} fill={fillColor}>
@@ -91,18 +92,19 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor }: 
           x={(GRID_WIDTH * width) / 2}
           y={(GRID_HEIGHT * height) / 2}
           fontSize="1em"
-          fill="blue"
+          fill="#fff"
           textAnchor="middle"
           dominantBaseline="middle"
+          fontSizeAdjust={1}
         >
-          {title?.map((text, i) => {
+          {label.map((text, i) => {
             return (
               <tspan
                 key={text}
                 x={(GRID_WIDTH * width) / 2}
-                dy={i === 0 ? (title.length > 1 ? (title.length === 2 ? '-0.65em' : '-1.3em') : '0') : '1.3em'}
+                dy={i === 0 ? (label.length > 1 ? (label.length === 2 ? '-0.65em' : '-1.3em') : '0') : '1.3em'}
               >
-                {text}
+                {text.replace(/\|/gi, " ")}
               </tspan>
             );
           })}
@@ -124,18 +126,18 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor }: 
           x={(GRID_WIDTH * width) / 2}
           y={(GRID_HEIGHT * height) / 2}
           fontSize="1em"
-          fill="blue"
+          fill="#fff"
           textAnchor="middle"
-          dominantBaseline="central"
+          dominantBaseline="middle"
         >
-          {title?.map((text, i) => {
+          {label?.map((text, i) => {
             return (
               <tspan
                 key={text}
                 x={(GRID_WIDTH * width) / 2}
-                dy={i === 0 ? (title.length > 1 ? (title.length === 2 ? '-0.65em' : '-1.3em') : '0') : '1.3em'}
+                dy={i === 0 ? (label.length > 1 ? (label.length === 2 ? '-0.65em' : '-1.3em') : '0') : '1.3em'}
               >
-                {text}
+                {text.replace(/\|/gi, " ")}
               </tspan>
             );
           })}

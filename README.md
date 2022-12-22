@@ -15,11 +15,17 @@ This site IXION (Building) Planner
 ## **Shortcut**
 > When under construction
 
-- Press 'R' or 'r' to rotate building
-- **(New) Mouse Middle-Click to rotate**
+- Press 'R' to rotate building
+- Mouse Middle-Click to rotate
 - Mouse Right-Click to cancel build
+- Press 'C' to Construction
 
 ## **Patch Note**
+### v0.4 - 2022-12-22
+  - Added Language option
+  - Added BioengineeringCenter
+  - Wall Building Bug fixes
+
 ### v0.35 (Bug Fixed) - 2022-12-22
   - **It can be slightly modified from the existing saved layout.**
   - **Mouse Middle-Click to rotate**

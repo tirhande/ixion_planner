@@ -49,9 +49,16 @@ export const roadState = atom<ISectionRoad>({
 export const sectionState = atom<number>({
   key: 'sectionState',
   default: 1,
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const visibleState = atom<boolean>({
   key: 'visibleState',
   default: false,
+});
+
+export const languageState = atom<string>({
+  key: 'languageState',
+  default: 'ko',
+  effects_UNSTABLE: [persistAtom],
 });
