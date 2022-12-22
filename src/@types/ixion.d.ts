@@ -50,7 +50,14 @@ declare module 'types/Ixion' {
     id: string;
     degree: number;
   }
-  interface IPreBuilding extends IDimension {
+  interface IPreBuilding extends IPoint {
+    id: string;
+    transform: string;
+  }
+  interface IBlockBuilding extends IPoint, IDimension {
+    transform?: string;
+  }
+  interface ITemplateBuilding extends IDimension {
     construct_id: string;
     location: readonly number[];
     fillColor: string;
@@ -61,6 +68,8 @@ declare module 'types/Ixion' {
   }
 
   interface IBounds extends IPoint, IDimension {
+    transform?: string;
+    degree?: number;
   }
   interface IRectangle {
     x1: number;

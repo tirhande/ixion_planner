@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React from 'react';
 
-import { IBounds } from 'types/Ixion';
+import { IBlockBuilding } from 'types/Ixion';
 
-const BlockBuilding = ({ x, y, width, height }: IBounds) => {
+const BlockBuilding = ({ x, y, width, height, transform }: IBlockBuilding) => {
   return (
     <rect
       x={x}
@@ -11,8 +11,9 @@ const BlockBuilding = ({ x, y, width, height }: IBounds) => {
       height={height}
       opacity={0.7}
       fill="#ff0000"
+      transform={transform}
     />
   )
 }
 
-export default memo(BlockBuilding);
+export default BlockBuilding;

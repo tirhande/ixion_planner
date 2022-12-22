@@ -8,9 +8,8 @@ import Building from 'components/atoms/Building';
 import Road from 'components/atoms/Road';
 
 import { CANVAS_SIZE, GRID_SIZE } from 'utils/GridEnum';
-import { isBannerOverlap, isInsidePoint } from 'utils/utilFuncs';
+import { isBannerOverlap, isBuildingOverlap, isInsidePoint } from 'utils/utilFuncs';
 import { IPoint } from 'types/Ixion';
-import { isBuildingOverlap } from '../../utils/utilFuncs';
 
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
@@ -113,19 +112,20 @@ const SVGContainer = () => {
   };
 
   const constructBuilding = ({ x, y }: IPoint) => {
-    const centralX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : -GRID_WIDTH / 2);
-    const centralY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT / 2);
+    const topLeftX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : -GRID_WIDTH / 2);
+    const topLeftY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT / 2);
 
     const isBuildingWrap = buildings[sectionNumber].some(v =>
       isBuildingOverlap({
-        origin: { x: isWall ? x : centralX, y: isWall ? y : centralY, width: width, height: height },
-        diff: { x: v.x, y: v.y, width: v.width, height: v.height },
+        origin: { x: isWall ? x : topLeftX, y: isWall ? y : topLeftY, width: width, height: height, degree: degree },
+        diff: { x: v.x, y: v.y, width: v.width, height: v.height, degree: v.degree },
       })
     );
-    if (isWall) {
-      const stickY = CANVAS_HEIGHT / 2 > y ? 0 : CANVAS_HEIGHT - (height + 1) * GRID_HEIGHT;
 
+    if (isWall) {
+      const stickY = CANVAS_HEIGHT / 2 > y ? 0 : CANVAS_HEIGHT - height * GRID_HEIGHT;
       const isBannerWrap = isBannerOverlap({ x, y: stickY, width, height });
+
       // 벽이고 안겹칠때
       if (!isBannerWrap && !isBuildingWrap) {
         setBuildings(prev =>
@@ -133,11 +133,11 @@ const SVGContainer = () => {
         );
       }
     } else {
-      // if(!isBuildingWrap) {
+      if(!isBuildingWrap) {
         setBuildings(prev =>
-          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: centralX, y: centralY, degree: degree, width: width, height: height }]]})
+          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: topLeftX, y: topLeftY, degree: degree, width: width, height: height }]]})
         );
-      // }
+      }
     }
   };
 
@@ -162,16 +162,18 @@ const SVGContainer = () => {
       return;
     }
 
-    const [x, y] = [
-      Math.floor(e.nativeEvent.offsetX / GRID_WIDTH) * GRID_WIDTH,
-      Math.floor(e.nativeEvent.offsetY / GRID_HEIGHT) * GRID_HEIGHT,
-    ];
-    // resetConstruct();
+    if(e.buttons !== 4) {
+      const [x, y] = [
+        Math.floor(e.nativeEvent.offsetX / GRID_WIDTH) * GRID_WIDTH,
+        Math.floor(e.nativeEvent.offsetY / GRID_HEIGHT) * GRID_HEIGHT,
+      ];
+      // resetConstruct();
 
-    if(clickMenu === 'delBuilding') demolishBuilding({x, y});
-    else if(clickMenu === 'delRoad') demolishRoad({x, y});
-    else if(clickMenu === 'consRoad') constructRoad({x, y});
-    else if(clickMenu === 'consBuilding') isConstruct && constructBuilding({x, y});
+      if(clickMenu === 'delBuilding') demolishBuilding({x, y});
+      else if(clickMenu === 'delRoad') demolishRoad({x, y});
+      else if(clickMenu === 'consRoad') constructRoad({x, y});
+      else if(clickMenu === 'consBuilding') isConstruct && constructBuilding({x, y});
+    }
   };
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
