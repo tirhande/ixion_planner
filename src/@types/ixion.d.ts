@@ -111,3 +111,9 @@ declare module 'types/atoms' {
     child: JSX.Element;
   }
 }
+
+declare namespace NodeJS {
+  export interface ProcessEnv {
+    REACT_APP_GOOGLE_ANALYTICS_TRAKING_ID: string;
+  }
+}
