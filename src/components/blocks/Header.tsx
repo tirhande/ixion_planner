@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <div className='title'>
-        IXION Planner v0.3
+        IXION Planner v0.35
       </div>
       <StyledTitle section={sectionNumber}>
         <div>SECTOR</div>
