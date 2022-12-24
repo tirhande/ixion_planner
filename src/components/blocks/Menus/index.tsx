@@ -79,10 +79,12 @@ export default Menus;
 const MenusSection = styled.section`
   display: flex;
   justify-content: space-evenly;
-  align-items: start;
+  align-items: flex-start;
 
-  width: 100%;
-  padding: 5px 43em;
+  width: 28%;
   margin:0 auto;
-  background: #00000070;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;

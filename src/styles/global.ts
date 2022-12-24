@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Nanum Gothic' !important;
   }
   html, body, div#root {
+    width: 100%;
     height: 100%;
   }
   body {

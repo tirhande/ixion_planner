@@ -9,9 +9,9 @@
 <img src="https://user-images.githubusercontent.com/74575497/209123253-fe496d6d-efae-4c07-a6e4-97f07383c3f0.png" width=400>
 </a>
 
-This site IXION (Building) Planner
+## IXION (Building) Planner
 ## [https://ixion.info](https://ixion.info/)
-
+#
 ## **Shortcut**
 > When under construction
 
@@ -19,8 +19,10 @@ This site IXION (Building) Planner
 - Mouse Middle-Click to rotate
 - Mouse Right-Click to cancel build
 - Press 'C' to Construction
-
+#
 ## **Patch Note**
+### v0.5 - 2022-12-25
+  - Can only be construction inside a grid
 ### v0.4 - 2022-12-22
   - Added Language option
   - Added BioengineeringCenter
@@ -46,16 +48,16 @@ This site IXION (Building) Planner
   
 
 ### TBU
-- Can only be construction inside a grid
+- ~~Can only be construction inside a grid~~
 - Building Specialization
-- translate option En - Ko
+- ~~translate option En - Ko~~
 
 ### Maybe TBU?
 - People Count?
 - Power?
 - Research?
 
-
+#
 ## **Example**
 
 <img width="1362" alt="screenshot1" src="https://user-images.githubusercontent.com/74575497/208804762-9e15b42e-b2ef-4386-a260-a808fb836838.png">
@@ -63,7 +65,6 @@ This site IXION (Building) Planner
 ![building](https://user-images.githubusercontent.com/74575497/208804775-55a65439-e798-43b4-87b3-e6e5db7df577.gif)
 
 ![feature2 0](https://user-images.githubusercontent.com/74575497/208804769-3dba1fec-4540-495e-b98a-3d5127f97076.gif)
-
 
 # Getting Started
 ## Installation

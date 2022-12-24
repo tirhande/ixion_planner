@@ -24,4 +24,5 @@ const StyledFooter = styled.footer`
 
   position: fixed;
   bottom: 0;
+  background: #00000070;
 `;

@@ -8,7 +8,7 @@ const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
 
 const SVGStage = () => {
   return (
-    <svg>
+    <svg width={0} height={0}>
       <defs>
         <pattern id="grid" width={GRID_WIDTH} height={GRID_HEIGHT} patternUnits="userSpaceOnUse">
           <path
