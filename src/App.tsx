@@ -4,10 +4,11 @@ import ReactGA from "react-ga4";
 
 import SectorPage from 'pages/Sector';
 import { GlobalStyles } from './styles/global';
-import { constructState, menuState } from 'core/states';
+import { constructState, menuState, sectionState } from 'core/states';
 
 const App = () => {
   const setClickMenu = useSetRecoilState(menuState);
+  const setSectionNumber = useSetRecoilState(sectionState);
   const [{ degree }, setConstruct] = useRecoilState(constructState);
 
   const onRotate = useCallback((ev: (KeyboardEvent | MouseEvent)) => {
@@ -16,9 +17,9 @@ const App = () => {
         const deg = degree === 270 ? 0 : degree + 90;
         setConstruct(prev => ({ ...prev, degree: deg }));
       }
-      if(ev.key.toLowerCase() === 'c' || ev.key.toLowerCase() === 'ㅊ') {
-        setClickMenu(prev => prev === 'consBuilding' ? '' : 'consBuilding');
-      }
+      if(ev.key.toLowerCase() === 'c' || ev.key.toLowerCase() === 'ㅊ') setClickMenu(prev => prev === 'consBuilding' ? '' : 'consBuilding');
+      else if(ev.key.toLowerCase() === 'q' || ev.key.toLowerCase() === 'ㅂ') setSectionNumber(prev => (prev === 1) ? 6 : prev - 1);
+      else if(ev.key.toLowerCase() === 'e' || ev.key.toLowerCase() === 'ㄷ') setSectionNumber(prev => (prev === 6) ? 1 : prev + 1);
     } else {
       if(ev.buttons === 4) {
         const deg = degree === 270 ? 0 : degree + 90;

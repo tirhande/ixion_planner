@@ -19,9 +19,13 @@
 - Mouse Middle-Click to rotate
 - Mouse Right-Click to cancel build
 - Press 'C' to Construction
+- Press 'Q' go to prev sector
+- Press 'E' go to next sector
+
 #
 ## **Patch Note**
 ### v0.5 - 2022-12-25
+  - Keyboard shortcut add (Move sector "Q", "E")
   - Can only be construction inside a grid
 ### v0.4 - 2022-12-22
   - Added Language option
