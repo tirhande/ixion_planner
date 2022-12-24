@@ -42,12 +42,16 @@ const SectorPage = () => {
     <StyledHome onKeyDown={onRotate} tabIndex={0}>
       <Header />
       <StyledMain>
+        <div>
         <Button className="prev" text="Previous" onClick={onSectionPrev} />
+        </div>
         <StyeldSVG width={CANVAS_WIDTH} height={CANVAS_HEIGHT}>
           <SVGStage />
           <SVGContainer />
         </StyeldSVG>
+        <div>
         <Button text="Next" className="next" onClick={onSectionNext} />
+        </div>
       </StyledMain>
       <Footer />
     </StyledHome>
@@ -57,45 +61,58 @@ const SectorPage = () => {
 export default SectorPage;
 
 const StyledHome = styled.div`
+  width: 100%;
+  height: 100%;
   outline: none;
+  
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledMain = styled.main`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  height: 80.1%;
 
-  > button {
-    width: 160px;
-    height: 160px;
-    background-color: #fff;
-    border: none;
-    font-size: 0px;
-    position: relative;
-    cursor: pointer;
-  }
-  > button:after {
-    width: 60px;
-    height: 60px;
-    content: '';
-    display: block;
-    position: absolute;
-    left: 40%;
-    top: 50%;
-    z-index: 1;
-    border: 1px solid #aaaaaa;
-    border-width: 0 8px 8px 0;
-    margin-left: -2px;
-    padding: 10px;
-  }
-  .slick-prev::after {
-    left: 60%;
-    -webkit-transform: translate(-50%, -50%) rotate(135deg);
-    transform: translate(-50%, -50%) rotate(135deg);
-  }
-  .slick-next::after {
-    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
-    transform: translate(-50%, -50%) rotate(-45deg);
+  > div {
+    display: flex;
+    align-items: center;
+
+    height: 600px;
+
+    > button {
+      width: 160px;
+      height: 160px;
+      background-color: #fff;
+      border: none;
+      font-size: 0px;
+      position: relative;
+      cursor: pointer;
+    }
+    > button:after {
+      width: 60px;
+      height: 60px;
+      content: '';
+      display: block;
+      position: absolute;
+      left: 40%;
+      top: 50%;
+      z-index: 1;
+      border: 1px solid #aaaaaa;
+      border-width: 0 8px 8px 0;
+      margin-left: -2px;
+      padding: 10px;
+    }
+    .slick-prev::after {
+      left: 60%;
+      -webkit-transform: translate(-50%, -50%) rotate(135deg);
+      transform: translate(-50%, -50%) rotate(135deg);
+    }
+    .slick-next::after {
+      -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
   }
 `;
 const StyeldSVG = styled.section<IDimension>`
