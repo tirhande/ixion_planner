@@ -19,7 +19,6 @@ const SVGContainer = () => {
   const clickMenu = useRecoilValue(menuState);
   const { isConstruct, construct_id, width, height, isWall, degree } = useRecoilValue(constructState);
 
-  const resetMenu = useResetRecoilState(menuState);
   const resetConstruct = useResetRecoilState(constructState);
   const sectionNumber = useRecoilValue(sectionState);
 
@@ -164,7 +163,7 @@ const SVGContainer = () => {
 
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if(e.button === 2) {
-      resetMenu();
+      // resetMenu();
       resetConstruct();
       setRoadPos({
         start: false,

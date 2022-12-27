@@ -18,8 +18,6 @@ import Button from 'components/atoms/Button';
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 
 const SectorPage = () => {
-  // const params = useParams();
-  // console.log(params);
   const [{ degree }, setConstruct] = useRecoilState(constructState);
   const setSectionNumber = useSetRecoilState(sectionState);
 
@@ -30,13 +28,9 @@ const SectorPage = () => {
     }
   }
 
-  const onSectionPrev = () => {
-    setSectionNumber(prev => (prev === 1) ? 6 : prev - 1);
-  }
+  const onSectionPrev = () => setSectionNumber(prev => (prev === 1) ? 6 : prev - 1);
 
-  const onSectionNext = () => {
-    setSectionNumber(prev => (prev === 6) ? 1 : prev + 1);
-  }
+  const onSectionNext = () => setSectionNumber(prev => (prev === 6) ? 1 : prev + 1);
 
   return (
     <StyledHome onKeyDown={onRotate} tabIndex={0}>
