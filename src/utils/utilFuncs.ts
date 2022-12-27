@@ -159,8 +159,10 @@ const getNinety = ({ width, height }: IDimension) => {
       }
     } else {
       if (height % 2 === 0) {
-        maxPos.x -= GRID_WIDTH * 2;
-        maxPos.y -= GRID_HEIGHT * 2;
+        if(width !== 3 && height !==6) {
+          maxPos.x -= GRID_WIDTH * 2;
+          maxPos.y -= GRID_HEIGHT * 2;
+        }
       } else {
         minPos.x += GRID_HEIGHT;
         maxPos.y -= GRID_HEIGHT;
