@@ -235,6 +235,11 @@ const getHundredEighty  = ({ width, height }: IDimension) => {
     centerY: CANVAS_HEIGHT - centerY,
     angle: 180,
   });
+
+  if(width === 3 && height === 6) {
+    minPos.x -= GRID_WIDTH;
+    maxPos.x -= GRID_WIDTH;
+  }
   return {
     minX: minPos.x,
     minY: minPos.y,
