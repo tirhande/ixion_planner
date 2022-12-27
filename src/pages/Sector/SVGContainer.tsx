@@ -136,7 +136,7 @@ const SVGContainer = () => {
         );
       }
     } else {
-      const topLeftX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : -GRID_WIDTH / 2);
+      const topLeftX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : (width === 3 && height === 6 && degree === 180) ? GRID_WIDTH / 2 : -GRID_WIDTH / 2);
       const topLeftY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT / 2);
 
       const borderPoint = getMinMaxPoint({ width, height, degree });
