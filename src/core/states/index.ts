@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { recoilPersist } from 'recoil-persist'
+import { recoilPersist } from 'recoil-persist';
 
 import { IConstructState, ISectionBuilding, ISectionRoad } from 'types/Ixion';
 
@@ -8,7 +8,7 @@ export const constructState = atom<IConstructState>({
   key: 'constructState',
   default: {
     isConstruct: false,
-    construct_id: "",
+    construct_id: '',
     width: 0,
     height: 0,
     isWall: false,
@@ -18,7 +18,7 @@ export const constructState = atom<IConstructState>({
 
 export const menuState = atom<string>({
   key: 'menuState',
-  default: ''
+  default: '',
 });
 
 export const buildingState = atom<ISectionBuilding>({
@@ -59,6 +59,6 @@ export const visibleState = atom<boolean>({
 
 export const languageState = atom<string>({
   key: 'languageState',
-  default: 'ko',
+  default: 'ko_KR',
   effects_UNSTABLE: [persistAtom],
 });

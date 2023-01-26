@@ -1,26 +1,29 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-import langEn from "./lang.en.json";
-import langKo from "./lang.ko.json";
+import langKo_KR from './lang.ko.json';
+import langEn_US from './lang.en.json';
+import langZh_CN from './lang.zh_CN.json';
 
 const resource = {
-  en: {
-    translations: langEn,
+  ko_KR: {
+    translations: langKo_KR,
   },
-  ko: {
-    translations: langKo,
+  en_US: {
+    translations: langEn_US,
+  },
+  zh_CN: {
+    translations: langZh_CN,
   },
 };
 
 i18n.use(initReactI18next).init({
   resources: resource,
-  lng: "ko",
-  //초기값
-  fallbackLng: "ko",
+  lng: 'ko_KR',
+  fallbackLng: 'ko_KR',
   debug: false,
-  defaultNS: "translations",
-  ns: "translations",
+  defaultNS: 'translations',
+  ns: 'translations',
   keySeparator: false,
   interpolation: {
     escapeValue: false,
