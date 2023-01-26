@@ -21,16 +21,6 @@ const SelectMenu = ({
     label: string;
   }>;
 }) => {
-  // const test = (
-  //   newValue: SingleValue<{
-  //     value: string;
-  //     label: string;
-  //   }>
-  // ) => {
-  //   console.log(newValue);
-  // };
-
-  // return <Select defaultValue={defaultValue} options={options} onChange={onChange} isSearchable={false} />;
   return <Select defaultValue={defaultValue} options={options} onChange={onChange} isSearchable={false} />;
 };
 
