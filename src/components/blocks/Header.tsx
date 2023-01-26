@@ -1,25 +1,34 @@
 import React, { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-// import { useTranslation } from "react-i18next";
 import styled from 'styled-components';
 
-import i18next from "lang/i18n";
+import i18next from 'lang/i18n';
 import { languageState, sectionState } from 'core/states';
 import { ReactComponent as DolosLogoIcon } from 'assets/DolosLogo.svg';
 import { ReactComponent as GithubLogoIcon } from 'assets/GithubLogo.svg';
+import SelectMenu from 'components/atoms/SelectMenu';
+import { LANGUAGES } from 'utils/LanguageEnum';
+import { SingleValue } from 'react-select';
 
 const Header = () => {
   const sectionNumber = useRecoilValue(sectionState);
   const [language, setLanguage] = useRecoilState(languageState);
 
-  const langChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const lang = e.target.checked ? "en" : "ko";
-    setLanguage(lang);
-  };
-
   useEffect(() => {
     setTimeout(() => i18next.changeLanguage(language), 10);
   }, [language]);
+
+  const options = Object.keys(LANGUAGES).map(key => LANGUAGES[key as keyof typeof LANGUAGES]);
+  const defaultValue = LANGUAGES[language.toUpperCase() as keyof typeof LANGUAGES];
+
+  const onLanguageChange = (
+    newValue: SingleValue<{
+      value: string;
+      label: string;
+    }>
+  ) => {
+    setLanguage(newValue?.value || 'ko_KR');
+  };
 
   return (
     <StyledHeader>
@@ -27,7 +36,7 @@ const Header = () => {
         <div>
           <DolosLogoIcon width={30} height={30} />
         </div>
-        <div className="title">IXION Planner v0.5</div>
+        <div className="title">IXION Planner v0.55</div>
       </StyledHeaderLeft>
       <StyledHeaderCenter>
         <StyledTitle section={sectionNumber}>
@@ -36,18 +45,7 @@ const Header = () => {
         </StyledTitle>
       </StyledHeaderCenter>
       <StyledHeaderRight>
-        <div className="switch">
-          <input
-            id="language-toggle"
-            className="check-toggle check-toggle-round-flat"
-            type="checkbox"
-            onChange={langChange}
-            checked={language === 'en' ? true : false}
-          />
-          <label htmlFor="language-toggle" />
-          <span className="on">KO</span>
-          <span className="off">EN</span>
-        </div>
+        <SelectMenu defaultValue={defaultValue} options={options} onChange={onLanguageChange} />
         <div>
           <a href="https://github.com/tirhande/ixion_planner" target={'_blank'} rel="noopener noreferrer">
             <GithubLogoIcon width={30} height={30} />
@@ -56,7 +54,7 @@ const Header = () => {
       </StyledHeaderRight>
     </StyledHeader>
   );
-}
+};
 
 export default Header;
 
@@ -96,7 +94,7 @@ const StyledHeaderCenter = styled.div`
     padding: 0;
   }
 `;
-const StyledTitle = styled.title<{section: number}>`
+const StyledTitle = styled.title<{ section: number }>`
   width: 40%;
   height: 80%;
   margin: 0 auto;
@@ -108,13 +106,13 @@ const StyledTitle = styled.title<{section: number}>`
     width: 80%;
   }
   font-size: 36px;
-  background: ${({section}) => {
-    if(section === 1) return '#dfc663'
-    else if(section === 2) return '#e18089'
-    else if(section === 3) return '#988be1'
-    else if(section === 4) return '#59ced0'
-    else if(section === 5) return '#b7d668'
-    else if(section === 6) return '#cdcbc7'
+  background: ${({ section }) => {
+    if (section === 1) return '#dfc663';
+    else if (section === 2) return '#e18089';
+    else if (section === 3) return '#988be1';
+    else if (section === 4) return '#59ced0';
+    else if (section === 5) return '#b7d668';
+    else if (section === 6) return '#cdcbc7';
   }};
   border-radius: 10px;
 
@@ -147,13 +145,13 @@ const StyledHeaderRight = styled.div`
     font-weight: bold;
     font-size: 12px;
     text-transform: uppercase;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
     width: 50%;
     text-align: center;
   }
 
   input.check-toggle-round-flat:checked ~ .off {
-    color: #F36F25;
+    color: #f36f25;
   }
 
   input.check-toggle-round-flat:checked ~ .on {
@@ -163,7 +161,7 @@ const StyledHeaderRight = styled.div`
   .switch > span.on {
     left: 0;
     padding-left: 4px;
-    color: #F36F25;
+    color: #f36f25;
   }
 
   .switch > span.off {
@@ -192,17 +190,18 @@ const StyledHeaderRight = styled.div`
     padding: 2px;
     width: 97px;
     height: 35px;
-    background-color: #F36F25;
+    background-color: #f36f25;
     -webkit-border-radius: 60px;
     -moz-border-radius: 60px;
     -ms-border-radius: 60px;
     -o-border-radius: 60px;
     border-radius: 60px;
   }
-  input.check-toggle-round-flat + label:before, input.check-toggle-round-flat + label:after {
+  input.check-toggle-round-flat + label:before,
+  input.check-toggle-round-flat + label:after {
     display: block;
     position: absolute;
-    content: "";
+    content: '';
   }
 
   input.check-toggle-round-flat + label:before {
@@ -210,7 +209,7 @@ const StyledHeaderRight = styled.div`
     left: 2px;
     bottom: 2px;
     right: 2px;
-    background-color: #F36F25;
+    background-color: #f36f25;
     -webkit--moz-border-radius: 60px;
     -ms-border-radius: 60px;
     -o-border-radius: 60px;
