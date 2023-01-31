@@ -18,6 +18,7 @@ const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
 const SVGContainer = () => {
   const clickMenu = useRecoilValue(menuState);
   const { isConstruct, construct_id, width, height, isWall, degree } = useRecoilValue(constructState);
+  const setConstruct = useSetRecoilState(constructState);
 
   const resetConstruct = useResetRecoilState(constructState);
   const sectionNumber = useRecoilValue(sectionState);
@@ -41,6 +42,14 @@ const SVGContainer = () => {
     setBuildings(prev =>
       ({...prev, [sectionNumber]: prev[sectionNumber].filter(({ x: bx, y: by, width, height }) => !isInsidePoint({ x, y, bx, by, width, height }))})
     );
+  };
+  const moveBuilding = ({ x, y }: IPoint) => {
+   const target = buildings[sectionNumber].find(({ x: bx, y: by, width, height }) => isInsidePoint({ x, y, bx, by, width, height }));
+    if (target === undefined) return;
+    console.log(target.id);
+    demolishBuilding({ x, y });
+    setConstruct({ isConstruct: true, construct_id: target.id, width: target.width, height: target.height, isWall: target.isWall, degree: target.degree });
+    setPos({x: x, y: y});
   };
   const demolishRoad = ({ x, y }: IPoint) => {
     if (roadPos.start) {
@@ -132,7 +141,7 @@ const SVGContainer = () => {
       // 벽이고 안겹칠때
       if (!isBannerWrap && !isBuildingWrap) {
         setBuildings(prev =>
-          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: posX, y: stickY, degree: stickY === 0 ? 0 : 180, width: width, height: height }]]})
+          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: posX, y: stickY, degree: stickY === 0 ? 0 : 180, width: width, height: height, isWall: isWall }]]})
         );
       }
     } else {
@@ -151,7 +160,7 @@ const SVGContainer = () => {
       );
       if(!isBuildingWrap) {
         setBuildings(prev =>
-          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: posX, y: posY, degree: degree, width: width, height: height }]]})
+          ({...prev, [sectionNumber]: [...prev[sectionNumber], ...[{ id: construct_id, x: posX, y: posY, degree: degree, width: width, height: height, isWall: isWall }]]})
         );
       }
     }
@@ -188,7 +197,11 @@ const SVGContainer = () => {
       if(clickMenu === 'delBuilding') demolishBuilding({x, y});
       else if(clickMenu === 'delRoad') demolishRoad({x, y});
       else if(clickMenu === 'consRoad') constructRoad({x, y});
-      else if(clickMenu === 'consBuilding') isConstruct && constructBuilding({x, y});
+      else if(clickMenu === 'consBuilding')
+      {
+        if (isConstruct) constructBuilding({x, y});
+        else moveBuilding({x, y});
+      }
     }
   };
 
@@ -246,7 +259,7 @@ const SVGContainer = () => {
         <g>
           {buildings[sectionNumber].map((v, i) => {
             return (
-              <Building key={v.id + i} id={v.id} x={v.x} y={v.y} degree={v.degree} width={v.width} height={v.height} />
+              <Building key={v.id + i} id={v.id} x={v.x} y={v.y} degree={v.degree} width={v.width} height={v.height} isWall={v.isWall} />
           )})}
         </g>
         {isConstruct && (
