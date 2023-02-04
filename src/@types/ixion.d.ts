@@ -49,6 +49,7 @@ declare module 'types/Ixion' {
   interface IBuilding extends IPoint, IDimension {
     id: string;
     degree: number;
+    isWall: boolean;
   }
   interface IPreBuilding extends IPoint {
     id: string;
