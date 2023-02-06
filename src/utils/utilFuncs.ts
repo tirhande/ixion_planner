@@ -1,4 +1,4 @@
-import { IBounds, IDiffBounds, IDiffRectangle, IDimension, IFindBuilding } from 'types/Ixion';
+import { IBounds, IDiffBounds, IDiffRectangle, IDimension, IFindBuilding, IMinMaxAngle } from 'types/Ixion';
 import { GRID_SIZE, CANVAS_SIZE } from 'utils/GridEnum';
 
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
@@ -121,11 +121,13 @@ const getDefaultZero = ({ width, height }: IDimension) => {
     maxX: CANVAS_WIDTH - width * GRID_WIDTH,
     maxY: CANVAS_HEIGHT - height * GRID_HEIGHT,
   };
-}
+};
+
 const getNinety = ({ width, height }: IDimension) => {
   const [centerX, centerY] = [(height * GRID_WIDTH) / 2, (width * GRID_HEIGHT) / 2];
   const rotateX = isRotateCorrect({ width, height }) || centerX % GRID_WIDTH === 0 ? centerX : centerX - GRID_WIDTH / 2;
-  const rotateY = isRotateCorrect({ width, height }) || centerY % GRID_HEIGHT === 0 ? centerY : centerY - GRID_HEIGHT / 2;
+  const rotateY =
+    isRotateCorrect({ width, height }) || centerY % GRID_HEIGHT === 0 ? centerY : centerY - GRID_HEIGHT / 2;
 
   const minPos = rotatePoint({
     pointX: GRID_WIDTH * height + (height % 2 === 0 ? 0 : GRID_WIDTH / 2),
@@ -141,15 +143,13 @@ const getNinety = ({ width, height }: IDimension) => {
     centerY: CANVAS_HEIGHT - (height % 2 === 0 ? centerY : rotateY),
     angle: -90,
   });
+  
   if (width % 2 !== 0) {
     if (width === height) {
       minPos.x += GRID_WIDTH;
       maxPos.x += GRID_WIDTH;
     } else if (width > height) {
-      if (width === 15) {
-        maxPos.x += GRID_WIDTH * 4;
-        maxPos.y += GRID_HEIGHT * 4;
-      } else {
+      if (width !== 15) {
         if (width === 7) {
           minPos.x += GRID_WIDTH;
           maxPos.x += GRID_WIDTH;
@@ -159,13 +159,19 @@ const getNinety = ({ width, height }: IDimension) => {
       }
     } else {
       if (height % 2 === 0) {
-        if(width !== 3 && height !==6) {
+        if (width !== 3 && height !== 6) {
           maxPos.x -= GRID_WIDTH * 2;
           maxPos.y -= GRID_HEIGHT * 2;
         }
       } else {
-        minPos.x += GRID_HEIGHT;
-        maxPos.y -= GRID_HEIGHT;
+        minPos.x += GRID_WIDTH;
+        
+        if(width === 5 && height === 7) {
+          // DLS Center
+          maxPos.x += GRID_WIDTH;
+        } else {
+          maxPos.y -= GRID_HEIGHT;
+        }
       }
     }
   }
@@ -176,17 +182,18 @@ const getNinety = ({ width, height }: IDimension) => {
     maxY: maxPos.y,
   };
 };
+
 const getTwoHundredSeventy = ({ width, height }: IDimension) => {
-  // get -270 === 90
   const [centerX, centerY] = [(height * GRID_WIDTH) / 2, (width * GRID_HEIGHT) / 2];
   const rotateX = isRotateCorrect({ width, height }) || centerX % GRID_WIDTH === 0 ? centerX : centerX - GRID_WIDTH / 2;
-  const rotateY = isRotateCorrect({ width, height }) || centerY % GRID_HEIGHT === 0 ? centerY : centerY - GRID_HEIGHT / 2;
+  const rotateY =
+    isRotateCorrect({ width, height }) || centerY % GRID_HEIGHT === 0 ? centerY : centerY - GRID_HEIGHT / 2;
   const minPos = rotatePoint({
     pointX: height % 2 === 0 ? 0 : -GRID_WIDTH / 2,
     pointY: GRID_WIDTH * width - (width % 2 === 0 ? 0 : GRID_HEIGHT / 2),
     centerX: width % 2 === 0 ? centerX : rotateX,
     centerY: height % 2 === 0 ? centerY : rotateY,
-    angle: 90,  
+    angle: 90,
   });
   const maxPos = rotatePoint({
     pointX: CANVAS_WIDTH - height * GRID_HEIGHT - (height % 2 === 0 ? 0 : GRID_WIDTH / 2),
@@ -200,7 +207,7 @@ const getTwoHundredSeventy = ({ width, height }: IDimension) => {
       minPos.x -= GRID_WIDTH;
     } else if (width > height) {
       minPos.x -= GRID_WIDTH;
-      if(width !== 7) {
+      if (width !== 7) {
         minPos.y -= GRID_HEIGHT;
         maxPos.y -= GRID_HEIGHT;
       }
@@ -220,8 +227,9 @@ const getTwoHundredSeventy = ({ width, height }: IDimension) => {
     maxX: maxPos.x,
     maxY: maxPos.y,
   };
-}
-const getHundredEighty  = ({ width, height }: IDimension) => {
+};
+
+const getHundredEighty = ({ width, height }: IDimension) => {
   const [centerX, centerY] = [(width * GRID_WIDTH) / 2, (height * GRID_HEIGHT) / 2];
   const minPos = rotatePoint({
     pointX: width * GRID_WIDTH,
@@ -238,20 +246,21 @@ const getHundredEighty  = ({ width, height }: IDimension) => {
     angle: 180,
   });
 
-  if(width === 3 && height === 6) {
-    minPos.x -= GRID_WIDTH;
-    maxPos.x -= GRID_WIDTH;
-  }
   return {
     minX: minPos.x,
     minY: minPos.y,
     maxX: maxPos.x,
     maxY: maxPos.y,
   };
-}
+};
+
+const getMinMaxByAngle: IMinMaxAngle = {
+  0: ({ width, height }: IDimension) => getDefaultZero({ width, height }),
+  90: ({ width, height }: IDimension) => getNinety({ width, height }),
+  180: ({ width, height }: IDimension) => getHundredEighty({ width, height }),
+  270: ({ width, height }: IDimension) => getTwoHundredSeventy({ width, height }),
+};
+
 export const getMinMaxPoint = ({ width, height, degree }: { degree: number } & IDimension) => {
-  if(degree === 0) return getDefaultZero({ width, height });
-  else if(degree === 90) return getNinety({ width, height });
-  else if(degree === 270) return getTwoHundredSeventy({ width, height });
-  else return getHundredEighty({ width, height });
+  return getMinMaxByAngle[degree]({ width, height });
 };

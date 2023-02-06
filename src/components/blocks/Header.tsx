@@ -36,7 +36,7 @@ const Header = () => {
         <div>
           <DolosLogoIcon width={30} height={30} />
         </div>
-        <div className="title">IXION Planner v0.55</div>
+        <div className="title">IXION Planner v0.6</div>
       </StyledHeaderLeft>
       <StyledHeaderCenter>
         <StyledTitle section={sectionNumber}>
@@ -46,11 +46,14 @@ const Header = () => {
       </StyledHeaderCenter>
       <StyledHeaderRight>
         <SelectMenu defaultValue={defaultValue} options={options} onChange={onLanguageChange} />
-        <div>
+        <StyledLinkDiv>
           <a href="https://github.com/tirhande/ixion_planner" target={'_blank'} rel="noopener noreferrer">
             <GithubLogoIcon width={30} height={30} />
           </a>
-        </div>
+          <a href="https://github.com/tirhande/ixion_planner#patch-note" target={'_blank'} rel="noopener noreferrer">
+            Patch Notes
+          </a>
+        </StyledLinkDiv>
       </StyledHeaderRight>
     </StyledHeader>
   );
@@ -131,8 +134,13 @@ const StyledHeaderRight = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
 
-  > div:last-child {
-    margin-left: 1em;
-  }
+const StyledLinkDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  margin-left: 1em;
 `;

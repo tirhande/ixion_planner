@@ -63,10 +63,10 @@ const Menus = () => {
         {/* <ImageButton width="86px" height="85px">
           <ResearchIcon />
         </ImageButton> */}
-        <ImageButton width="86px" height="85px" onClick={onShowHide}>
+        <ImageButton name="showHideRoad" width="86px" height="85px" onClick={onShowHide}>
           <ShowHideIcon fill={isVisible ? '#dccaa4' :'black'} />
         </ImageButton>
-        <ImageButton width="86px" height="85px" onClick={onResetLayout}>
+        <ImageButton name="resetLayout" width="86px" height="85px" onClick={onResetLayout}>
           <ResetLayoutIcon fill='black' />
         </ImageButton>
       </MenusSection>

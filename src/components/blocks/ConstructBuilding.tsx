@@ -46,9 +46,9 @@ const ConstructBuilding = ({ id, pos: {x, y}, width, height, isWall, degree }: I
       </>
     )
   }
-
-  const topLeftX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : -GRID_WIDTH / 2);
-  const topLeftY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT/2);
+  
+  const topLeftX = x - (GRID_WIDTH * width) / 2 + GRID_WIDTH + (width % 2 === 0 ? 0 : (width === 3 && height === 6 && degree === 180) ? GRID_WIDTH / 2 : -GRID_WIDTH / 2);
+  const topLeftY = y - (GRID_HEIGHT * height) / 2 + (height % 2 === 0 ? 0 : GRID_HEIGHT / 2);
 
   const borderPoint = getMinMaxPoint({ width, height, degree });
   const posX = (topLeftX < borderPoint.minX ? borderPoint.minX : (topLeftX > borderPoint.maxX ? borderPoint.maxX : topLeftX));
@@ -57,7 +57,6 @@ const ConstructBuilding = ({ id, pos: {x, y}, width, height, isWall, degree }: I
   const [centerX, centerY] = [posX + (GRID_WIDTH * width) / 2, posY + (GRID_HEIGHT * height) / 2];
   const rotateX = isRotateCorrect({ width, height }) || (centerX % GRID_WIDTH === 0) ? centerX : centerX + (GRID_WIDTH / 2);
   const rotateY = isRotateCorrect({ width, height }) || (centerY % GRID_HEIGHT === 0) ? centerY : centerY + (GRID_HEIGHT / 2);
-
   const isBuildingWrap = buildings[sectionNumber].some(v =>
     isBuildingOverlap({
       origin: { x: posX, y: posY, width: width, height: height, degree: degree },
@@ -72,12 +71,13 @@ const ConstructBuilding = ({ id, pos: {x, y}, width, height, isWall, degree }: I
         y={posY}
         width={GRID_WIDTH * width}
         height={GRID_HEIGHT * height}
-        transform={`rotate(${degree}, ${width % 2 === 0 ? centerX : rotateX}, ${height % 2 === 0 ? centerY : rotateY})`}
+        transform={`rotate(${degree}, ${degree % 180 === 0 || width % 2 === 0 ? centerX : rotateX}, ${degree % 180 === 0 || height % 2 === 0 ? centerY : rotateY})`}
       />
     );
   }
+  
   return (
-    <PreBuilding id={id} x={posX} y={posY} transform={`rotate(${degree}, ${width % 2 === 0 ? centerX : rotateX}, ${height % 2 === 0 ? centerY : rotateY})`} />
+    <PreBuilding id={id} x={posX} y={posY} transform={`rotate(${degree}, ${degree % 180 === 0 || width % 2 === 0 ? centerX : rotateX}, ${degree % 180 === 0 || height % 2 === 0 ? centerY : rotateY})`} />
   )
 };
 

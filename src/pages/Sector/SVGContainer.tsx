@@ -46,7 +46,6 @@ const SVGContainer = () => {
   const moveBuilding = ({ x, y }: IPoint) => {
    const target = buildings[sectionNumber].find(({ x: bx, y: by, width, height }) => isInsidePoint({ x, y, bx, by, width, height }));
     if (target === undefined) return;
-    console.log(target.id);
     demolishBuilding({ x, y });
     setConstruct({ isConstruct: true, construct_id: target.id, width: target.width, height: target.height, isWall: target.isWall, degree: target.degree });
     setPos({x: x, y: y});
@@ -151,7 +150,6 @@ const SVGContainer = () => {
       const borderPoint = getMinMaxPoint({ width, height, degree });
       const posX = (topLeftX < borderPoint.minX ? borderPoint.minX : (topLeftX > borderPoint.maxX ? borderPoint.maxX : topLeftX));
       const posY = (topLeftY < borderPoint.minY ? borderPoint.minY : (topLeftY > borderPoint.maxY ? borderPoint.maxY : topLeftY));
-      
       const isBuildingWrap = buildings[sectionNumber].some(v =>
         isBuildingOverlap({
           origin: { x: posX, y: posY, width: width, height: height, degree: degree },
@@ -172,7 +170,6 @@ const SVGContainer = () => {
 
   const onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     if(e.button === 2) {
-      // resetMenu();
       resetConstruct();
       setRoadPos({
         start: false,
