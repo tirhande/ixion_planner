@@ -1,5 +1,4 @@
 import React from 'react';
-// import {useParams} from 'react-router-dom';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -29,7 +28,6 @@ const SectorPage = () => {
   }
 
   const onSectionPrev = () => setSectionNumber(prev => (prev === 1) ? 6 : prev - 1);
-
   const onSectionNext = () => setSectionNumber(prev => (prev === 6) ? 1 : prev + 1);
 
   return (

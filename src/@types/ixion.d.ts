@@ -7,7 +7,6 @@ declare module 'types/Ixion' {
     width: number;
     height: number;
   }
-  
   interface IConstructBuilding extends IDimension {
     id: string;
     pos: IPoint;
@@ -19,7 +18,7 @@ declare module 'types/Ixion' {
     roadPos: {
       start: boolean;
       direction: string;
-    } & IPoint
+    } & IPoint;
     fill: string;
   }
   interface IConstructState extends IDimension {
@@ -49,6 +48,7 @@ declare module 'types/Ixion' {
   interface IBuilding extends IPoint, IDimension {
     id: string;
     degree: number;
+    isWall: boolean;
   }
   interface IPreBuilding extends IPoint {
     id: string;
@@ -90,6 +90,14 @@ declare module 'types/Ixion' {
     bx: number;
     by: number;
   }
+  interface IMinMaxAngle {
+    [key: number]: ({ width, height }: IDimension) => {
+      minX: number;
+      minY: number;
+      maxX: number;
+      maxY: number;
+    };
+  }
 }
 
 declare module 'types/atoms' {
@@ -98,6 +106,7 @@ declare module 'types/atoms' {
     name?: string;
     width?: string;
     height?: string;
+    title?: string;
   }
   interface IMenuClick {
     onMenuClick: ({ id, width, height, isWall }: IWrapProps) => void;

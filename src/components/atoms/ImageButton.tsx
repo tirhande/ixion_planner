@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { IStyle } from 'types/atoms';
 
-export const ImageButton = ({ onClick, name, width, height, children }: React.ButtonHTMLAttributes<HTMLButtonElement> & IStyle) => (
-  <StyledButton onClick={onClick} name={name} width={width} height={height}>
+export const ImageButton = ({ onClick, name, title, width, height, children }: React.ButtonHTMLAttributes<HTMLButtonElement> & IStyle) => {
+  return (
+  <StyledButton onClick={onClick} name={name} width={width} height={height} title={title}>
     {children}
   </StyledButton>
-);
+)};
 
 const StyledButton = styled.button<IStyle>`
   border: none;

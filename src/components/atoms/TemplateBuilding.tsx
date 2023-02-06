@@ -14,22 +14,24 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor, te
 
   const topDirection = useCallback(() => {
     const tmpArray = Array.from({ length: top }, (_, i) => i);
-    return (<g transform={`translate(0, ${-GRID_HEIGHT})`}>
-      <rect x="0" y="0" width={GRID_WIDTH * width} height={GRID_HEIGHT} fill="#886a39" />
-      {tmpArray.map((v, i) => {
-        const tmp = (top < width) ? (v + ((width - top) / 2)): v;
-        const x = tmp * GRID_WIDTH;
-        return (
-          <polygon
-            key={i}
-            points={`${x} ${GRID_HEIGHT}, ${(tmp + 1) * GRID_WIDTH} ${GRID_HEIGHT}, ${x + GRID_WIDTH / 2} ${
-              GRID_HEIGHT - 7
-            }`}
-            fill="#d6b138"
-          />
-        );
-      })}
-    </g>)
+    return (
+      <g transform={`translate(0, ${-GRID_HEIGHT})`}>
+        <rect x="0" y="0" width={GRID_WIDTH * width} height={GRID_HEIGHT} fill="#886a39" />
+        {tmpArray.map((v, i) => {
+          const tmp = top < width ? v + (width - top) / 2 : v;
+          const x = tmp * GRID_WIDTH;
+          return (
+            <polygon
+              key={i}
+              points={`${x} ${GRID_HEIGHT}, ${(tmp + 1) * GRID_WIDTH} ${GRID_HEIGHT}, ${x + GRID_WIDTH / 2} ${
+                GRID_HEIGHT - 7
+              }`}
+              fill="#d6b138"
+            />
+          );
+        })}
+      </g>
+    );
   }, [top]);
 
   const rightDirection = useCallback(() => {
@@ -41,22 +43,25 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor, te
           const y = v * GRID_HEIGHT;
           return <polygon key={i} points={`0 ${y}, 0 ${y + GRID_HEIGHT}, 7 ${y + GRID_HEIGHT / 2}`} fill="#d6b138" />;
         })}
-      </g>)
+      </g>
+    );
   }, [right]);
-  
+
   const bottomDirection = useCallback(() => {
     const tmpArray = Array.from({ length: bottom }, (_, i) => i);
     return (
       <g transform={`translate(0, ${GRID_HEIGHT * height})`}>
         <rect x="0" y="0" width={GRID_WIDTH * width} height={GRID_HEIGHT} fill="#886a39" />
         {tmpArray.map((v, i) => {
-          const tmp = (bottom < width) ? (v + ((width - bottom) / 2)): v;
+          const tmp = bottom < width ? v + (width - bottom) / 2 : v;
           const x = tmp * GRID_WIDTH;
-          return <polygon key={i} points={`${x} 0, ${(tmp + 1) * GRID_WIDTH} 0, ${x + GRID_WIDTH / 2} 7`} fill="#d6b138" />;
+          return (
+            <polygon key={i} points={`${x} 0, ${(tmp + 1) * GRID_WIDTH} 0, ${x + GRID_WIDTH / 2} 7`} fill="#d6b138" />
+          );
         })}
-      </g>)
+      </g>
+    );
   }, [bottom]);
-
 
   const leftDirection = useCallback(() => {
     const tmpArray = Array.from({ length: left }, (_, i) => i);
@@ -73,11 +78,11 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor, te
             />
           );
         })}
-      </g>)
+      </g>
+    );
   }, [left]);
 
-  const label = text.length > width * (i18next.language === 'ko' ? 1 : 1.5) ? text.split(' ') : [text];
-
+  const label = text.length > width * (i18next.language === 'ko_KR' ? 1 : 1.5) ? text.split(' ') : [text];
   return (
     <g>
       <g id={`pre-${construct_id}`} fill={fillColor}>
@@ -97,17 +102,15 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor, te
           dominantBaseline="middle"
           fontSizeAdjust={1}
         >
-          {label.map((text, i) => {
-            return (
-              <tspan
-                key={text}
-                x={(GRID_WIDTH * width) / 2}
-                dy={i === 0 ? (label.length > 1 ? (label.length === 2 ? '-0.65em' : '-1.3em') : '0') : '1.3em'}
-              >
-                {text.replace(/\|/gi, " ")}
-              </tspan>
-            );
-          })}
+          {label.map((text, i) => (
+            <tspan
+              key={i}
+              x={(GRID_WIDTH * width) / 2}
+              dy={i === 0 ? (label.length > 1 ? (label.length === 2 ? '-0.65em' : '-1.3em') : '0') : '1.3em'}
+            >
+              {text.replace(/\|/gi, ' ')}
+            </tspan>
+          ))}
         </text>
       </g>
       <g id={`construct-${construct_id}`} fill={fillColor}>
@@ -130,21 +133,19 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor, te
           textAnchor="middle"
           dominantBaseline="middle"
         >
-          {label?.map((text, i) => {
-            return (
-              <tspan
-                key={text}
-                x={(GRID_WIDTH * width) / 2}
-                dy={i === 0 ? (label.length > 1 ? (label.length === 2 ? '-0.65em' : '-1.3em') : '0') : '1.3em'}
-              >
-                {text.replace(/\|/gi, " ")}
-              </tspan>
-            );
-          })}
+          {label?.map((text, i) => (
+            <tspan
+              key={text + i}
+              x={(GRID_WIDTH * width) / 2}
+              dy={i === 0 ? (label.length > 1 ? (label.length === 2 ? '-0.65em' : '-1.3em') : '0') : '1.3em'}
+            >
+              {text.replace(/\|/gi, ' ')}
+            </tspan>
+          ))}
         </text>
       </g>
     </g>
   );
-}
+};
 
 export default TemplateBuilding;
