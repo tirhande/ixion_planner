@@ -57,7 +57,7 @@ const Menus = () => {
         <ImageButton name="consRoad" width="86px" height="85px" onClick={onMenuClick}>
           <RoadIcon fill={clickMenu === 'consRoad' ? '#dccaa4' : 'black'}/>
         </ImageButton>
-        <ImageButton name="consBuilding" width="109px" height="109px" onClick={onMenuClick}>
+        <ImageButton name="consBuilding" width="100px" height="100px" onClick={onMenuClick}>
           <ConstructIcon fill={clickMenu === 'consBuilding' ? '#dccaa4' : 'black'}/>
         </ImageButton>
         {/* <ImageButton width="86px" height="85px">

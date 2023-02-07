@@ -78,7 +78,7 @@ const SubMenusSection = styled.section`
   border-radius: 5px;
 
   position: fixed;
-  bottom: 12%;
+  bottom: 10.5%;
   > div {
     border: 1px solid #fff;
     border-radius: 5px;
