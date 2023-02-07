@@ -175,6 +175,24 @@ const getNinety = ({ width, height }: IDimension) => {
       }
     }
   }
+  if(width === 9 && height === 12) {
+    // SteelMill
+    maxPos.x += GRID_WIDTH * 2;
+    maxPos.y += GRID_HEIGHT * 2;
+  }
+
+  if(width === 9 && height === 6) {
+    // PolymerRefinery
+    maxPos.x -= GRID_WIDTH;
+    maxPos.y -= GRID_HEIGHT;
+  }
+
+  if(width === 7 && height === 5) {
+    // CryonicCenter
+    maxPos.x -= GRID_WIDTH;
+    maxPos.y -= GRID_HEIGHT;
+  }
+
   return {
     minX: minPos.x,
     minY: minPos.y,
