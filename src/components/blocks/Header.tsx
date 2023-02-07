@@ -36,7 +36,7 @@ const Header = () => {
         <div>
           <DolosLogoIcon width={30} height={30} />
         </div>
-        <div className="title">IXION Planner v0.6</div>
+        <div className="title">IXION Planner v0.65</div>
       </StyledHeaderLeft>
       <StyledHeaderCenter>
         <StyledTitle section={sectionNumber}>
