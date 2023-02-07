@@ -34,6 +34,11 @@
 
 ## **Patch Note**
 
+### v0.65 - 2023-02-07
+- Rotate bug fix (90 degree)
+  - SteelMill
+  - PolymerRefinery
+  - CryonicCenter
 ### v0.6 - 2023-02-06
 - Rotate Bug fix
 - Add Building Tooltip
