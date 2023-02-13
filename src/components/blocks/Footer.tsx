@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Menus from 'components/blocks/Menus';
+import Calculator from './Calculator';
 
 
 const Footer = () => {
   return (
     <StyledFooter>
+      <Calculator/>
       <Menus />
     </StyledFooter>
   )
