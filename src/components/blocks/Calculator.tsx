@@ -41,9 +41,11 @@ const Calculator = () => {
   }, [buildings, sector]);
   return (
     <CalculationBox>
-      <Workers>Workers: {workers}</Workers>
-      <Power>Power: {power}</Power>
-      <Housing>Housing: {housing}</Housing>
+      <InnerBox>
+        <Workers>Workers: {workers}</Workers>
+        <Power>Power: {power}</Power>
+        <Housing>Housing: {housing}</Housing>
+      </InnerBox>
     </CalculationBox>
   );
 };
@@ -57,7 +59,18 @@ const CalculationBox = styled.div`
   margin: 5px;
   width: 190px;
   height: 90px;
-  border: solid;
+  border: 2px solid #959685;
+  border-radius: 3px;
+  background-color: #000000;
+  color: white;
+`;
+const InnerBox = styled.div`
+  margin: 2px;
+  width: auto;
+  height: 95%;
+  border: 1px solid #35392f;
+  border-radius: 3px;
+  padding: 5px;
 `;
 
 const Workers = styled.div`
