@@ -21,8 +21,8 @@ export const SPACE_BUILD = {
     height: 9,
     location: [0, 0, 8, 0],
     isWall: true,
-    power: 2,
-    workers: 4,
+    power: 6,
+    workers: 9,
   },
   ColonyTrainingCenter: {
     width: 9,
