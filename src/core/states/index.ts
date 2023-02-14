@@ -63,8 +63,8 @@ export const languageState = atom<string>({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const perspectiveState = atom<boolean>({
-  key: 'perspectiveState',
+export const isDimensionalState = atom<boolean>({
+  key: 'isDimensionalState',
   default: false,
   effects_UNSTABLE: [persistAtom],
 });
