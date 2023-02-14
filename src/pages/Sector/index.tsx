@@ -64,6 +64,7 @@ const StyledMain = styled.main`
   justify-content: center;
   align-items: flex-start;
   height: 80.1%;
+  z-index: 1;
 
   > div {
     display: flex;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useResetRecoilState, useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 import { ImageButton } from 'components/atoms/ImageButton';
 import { ReactComponent as DemolishBuildingIcon } from 'assets/Menus/Default/DemolishBuilding.svg';
@@ -31,43 +31,43 @@ const Menus = () => {
     const menuName = e.currentTarget.name;
     setClickMenu(clickMenu === menuName ? '' : menuName);
 
-    if(menuName === 'consRoad') setIsVisible(true);
-  }
+    if (menuName === 'consRoad') setIsVisible(true);
+  };
   const onShowHide = () => {
     setIsVisible(prev => !prev);
-  }
+  };
   const onResetLayout = () => {
-    const confirmText = t("resetLayout");
-    if(confirm(confirmText)) {
-      setBuildings(prev => ({...prev, [sectionNumber]: []}));
-      setRoads(prev => ({...prev, [sectionNumber]: []}));
+    const confirmText = t('resetLayout');
+    if (confirm(confirmText)) {
+      setBuildings(prev => ({ ...prev, [sectionNumber]: [] }));
+      setRoads(prev => ({ ...prev, [sectionNumber]: [] }));
     }
-  }
+  };
 
   return (
     <>
       {clickMenu === 'consBuilding' && <SubMenus />}
       <MenusSection>
         <ImageButton name="delBuilding" width="61px" height="62px" onClick={onMenuClick}>
-          <DemolishBuildingIcon fill={clickMenu === 'delBuilding' ? '#dccaa4' : 'black'}/>
+          <DemolishBuildingIcon fill={clickMenu === 'delBuilding' ? '#dccaa4' : 'black'} />
         </ImageButton>
         <ImageButton name="delRoad" width="61px" height="62px" onClick={onMenuClick}>
-          <DemolishRoadIcon fill={clickMenu === 'delRoad' ? '#dccaa4' : 'black'}/>
+          <DemolishRoadIcon fill={clickMenu === 'delRoad' ? '#dccaa4' : 'black'} />
         </ImageButton>
         <ImageButton name="consRoad" width="86px" height="85px" onClick={onMenuClick}>
-          <RoadIcon fill={clickMenu === 'consRoad' ? '#dccaa4' : 'black'}/>
+          <RoadIcon fill={clickMenu === 'consRoad' ? '#dccaa4' : 'black'} />
         </ImageButton>
         <ImageButton name="consBuilding" width="100px" height="100px" onClick={onMenuClick}>
-          <ConstructIcon fill={clickMenu === 'consBuilding' ? '#dccaa4' : 'black'}/>
+          <ConstructIcon fill={clickMenu === 'consBuilding' ? '#dccaa4' : 'black'} />
         </ImageButton>
         {/* <ImageButton width="86px" height="85px">
           <ResearchIcon />
         </ImageButton> */}
         <ImageButton name="showHideRoad" width="86px" height="85px" onClick={onShowHide}>
-          <ShowHideIcon fill={isVisible ? '#dccaa4' :'black'} />
+          <ShowHideIcon fill={isVisible ? '#dccaa4' : 'black'} />
         </ImageButton>
         <ImageButton name="resetLayout" width="86px" height="85px" onClick={onResetLayout}>
-          <ResetLayoutIcon fill='black' />
+          <ResetLayoutIcon fill="black" />
         </ImageButton>
       </MenusSection>
     </>
@@ -80,9 +80,9 @@ const MenusSection = styled.section`
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
-
+  z-index: 3;
   width: 28%;
-  margin:0 auto;
+  margin: 0 auto;
 
   @media (max-width: 800px) {
     width: 100%;
