@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { useRecoilValue } from 'recoil';
 import { buildingState, sectionState } from 'core/states';
 import { FACTORIES_BUILD } from 'utils/FactoriesEnum';
@@ -10,6 +11,7 @@ import { SPACE_BUILD } from 'utils/SpaceEnum';
 import { STABILITY_BUILD } from 'utils/StabilityEnum';
 
 const Calculator = () => {
+  const { t } = useTranslation();
   const buildings = useRecoilValue(buildingState);
   const sector = useRecoilValue(sectionState);
   const [workers, setWorkers] = useState(0);
@@ -42,9 +44,15 @@ const Calculator = () => {
   return (
     <CalculationBox>
       <InnerBox>
-        <Workers>Workers: {workers}</Workers>
-        <Power>Power: {power}</Power>
-        <Housing>Housing: {housing}</Housing>
+        <Workers>
+          {t('workers')}: {workers}
+        </Workers>
+        <Power>
+          {t('power')}: {power}
+        </Power>
+        <Housing>
+          {t('housing')}: {housing}
+        </Housing>
       </InnerBox>
     </CalculationBox>
   );
