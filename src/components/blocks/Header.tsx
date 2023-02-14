@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import i18next from 'lang/i18n';
-import { languageState, sectionState, isDimensionalState } from 'core/states';
+import { languageState, sectionState, perspectiveState } from 'core/states';
 import { ReactComponent as DolosLogoIcon } from 'assets/DolosLogo.svg';
 import { ReactComponent as GithubLogoIcon } from 'assets/GithubLogo.svg';
 import SelectMenu from 'components/atoms/SelectMenu';
@@ -12,7 +12,7 @@ import { SingleValue } from 'react-select';
 
 const Header = () => {
   const sectionNumber = useRecoilValue(sectionState);
-  const [isDimensional, setIsDimensional] = useRecoilState(isDimensionalState);
+  const [isPerspective, setIsPerspective] = useRecoilState(perspectiveState);
   const [language, setLanguage] = useRecoilState(languageState);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Header = () => {
         <div>
           <DolosLogoIcon width={30} height={30} />
         </div>
-        <div className="title">IXION Planner v0.65</div>
+        <div className="title">IXION Planner v0.7</div>
       </StyledHeaderLeft>
       <StyledHeaderCenter>
         <StyledTitle section={sectionNumber}>
@@ -51,12 +51,12 @@ const Header = () => {
             id="language-toggle"
             className="check-toggle check-toggle-round-flat"
             type="checkbox"
-            onChange={() => setIsDimensional(prev => !prev)}
-            checked={isDimensional}
+            onChange={() => setIsPerspective(!isPerspective)}
+            checked={isPerspective}
           />
           <label htmlFor="language-toggle" />
-          <span className="on">2D</span>
-          <span className="off">2.5D</span>
+          <span className="on">🙂</span>
+          <span className="off">😎</span>
         </StyledSwitchDiv>
         <SelectMenu defaultValue={defaultValue} options={options} onChange={onLanguageChange} />
         <StyledLinkDiv>
@@ -165,11 +165,11 @@ const StyledSwitchDiv = styled.div`
 
   > span {
     position: absolute;
-    top: 12px;
+    top: 6px;
     pointer-events: none;
     font-family: 'Helvetica', Arial, sans-serif;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 24px;
     text-transform: uppercase;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
     width: 50%;
@@ -183,12 +183,12 @@ const StyledSwitchDiv = styled.div`
   }
   > span.on {
     left: 0;
-    padding-left: 4px;
+    padding-left: 6px;
     color: #f36f25;
   }
   > span.off {
     right: 0;
-    padding-right: 4px;
+    padding-right: 6px;
     color: #fff;
   }
   .check-toggle {

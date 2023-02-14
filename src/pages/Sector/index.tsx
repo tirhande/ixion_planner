@@ -3,7 +3,7 @@ import React from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { constructState, sectionState, isDimensionalState } from 'core/states';
+import { constructState, sectionState, perspectiveState } from 'core/states';
 import { CANVAS_SIZE } from 'utils/GridEnum';
 import { IDimension } from 'types/Ixion';
 
@@ -18,7 +18,7 @@ const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 const SectorPage = () => {
   const [{ degree }, setConstruct] = useRecoilState(constructState);
   const setSectionNumber = useSetRecoilState(sectionState);
-  const isDimensional = useRecoilValue(isDimensionalState);
+  const isPerspective = useRecoilValue(perspectiveState);
 
   const onRotate = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key.toLowerCase() === 'r' || e.key.toLowerCase() === 'ㄱ') {
@@ -37,7 +37,7 @@ const SectorPage = () => {
         <StyledSectorMoveButton>
           <Button className="prev" text="Previous" onClick={onSectionPrev} />
         </StyledSectorMoveButton>
-        <StyledSVG width={CANVAS_WIDTH} height={CANVAS_HEIGHT} isDimensional={isDimensional}>
+        <StyledSVG width={CANVAS_WIDTH} height={CANVAS_HEIGHT} isPerspective={isPerspective}>
           <SVGStage />
           <SVGContainer />
         </StyledSVG>
@@ -110,14 +110,14 @@ const StyledSectorMoveButton = styled.div`
 `;
 const StyledSVG = styled.section<IDimension>`
   display: flex;
-  perspective: ${({ isDimensional }) => (isDimensional ? '1000px' : 'none')};
+  perspective: ${({ isPerspective }) => (isPerspective ? '1000px' : 'none')};
   width: ${({ width }) => (width ? `${width}px` : '1400px')};
   height: ${({ height }) => (height ? `${height}px` : '750px')};
   justify-content: center;
   z-index: 2;
   > div {
     background-color: #4e4e43;
-    transform: ${({ isDimensional }) => (isDimensional ? 'rotateX(25deg)' : 'none')};
+    transform: ${({ isPerspective }) => (isPerspective ? 'rotateX(25deg)' : 'none')};
   }
 
   text {
