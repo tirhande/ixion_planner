@@ -6,7 +6,7 @@ declare module 'types/Ixion' {
   interface IDimension {
     width: number;
     height: number;
-    isDimensional?: boolean;
+    isPerspective?: boolean;
   }
   interface IConstructBuilding extends IDimension {
     id: string;
