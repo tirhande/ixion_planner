@@ -13,7 +13,6 @@ import SVGStage from './SVGStage';
 import SVGContainer from './SVGContainer';
 import Button from 'components/atoms/Button';
 
-
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 
 const SectorPage = () => {
@@ -21,28 +20,28 @@ const SectorPage = () => {
   const setSectionNumber = useSetRecoilState(sectionState);
 
   const onRotate = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if(e.key.toLowerCase() === 'r' || e.key.toLowerCase() === 'ㄱ') {
+    if (e.key.toLowerCase() === 'r' || e.key.toLowerCase() === 'ㄱ') {
       const deg = degree === 270 ? 0 : degree + 90;
       setConstruct(prev => ({ ...prev, degree: deg }));
     }
-  }
+  };
 
-  const onSectionPrev = () => setSectionNumber(prev => (prev === 1) ? 6 : prev - 1);
-  const onSectionNext = () => setSectionNumber(prev => (prev === 6) ? 1 : prev + 1);
+  const onSectionPrev = () => setSectionNumber(prev => (prev === 1 ? 6 : prev - 1));
+  const onSectionNext = () => setSectionNumber(prev => (prev === 6 ? 1 : prev + 1));
 
   return (
     <StyledHome onKeyDown={onRotate} tabIndex={0}>
       <Header />
       <StyledMain>
         <div>
-        <Button className="prev" text="Previous" onClick={onSectionPrev} />
+          <Button className="prev" text="Previous" onClick={onSectionPrev} />
         </div>
         <StyeldSVG width={CANVAS_WIDTH} height={CANVAS_HEIGHT}>
           <SVGStage />
           <SVGContainer />
         </StyeldSVG>
         <div>
-        <Button text="Next" className="next" onClick={onSectionNext} />
+          <Button text="Next" className="next" onClick={onSectionNext} />
         </div>
       </StyledMain>
       <Footer />
@@ -56,7 +55,6 @@ const StyledHome = styled.div`
   width: 100%;
   height: 100%;
   outline: none;
-  
   display: flex;
   flex-direction: column;
 `;
@@ -70,7 +68,6 @@ const StyledMain = styled.main`
   > div {
     display: flex;
     align-items: center;
-
     height: 600px;
 
     > button {
@@ -82,6 +79,7 @@ const StyledMain = styled.main`
       position: relative;
       cursor: pointer;
     }
+
     > button:after {
       width: 60px;
       height: 60px;
@@ -96,11 +94,13 @@ const StyledMain = styled.main`
       margin-left: -2px;
       padding: 10px;
     }
+
     .slick-prev::after {
       left: 60%;
       -webkit-transform: translate(-50%, -50%) rotate(135deg);
       transform: translate(-50%, -50%) rotate(135deg);
     }
+
     .slick-next::after {
       -webkit-transform: translate(-50%, -50%) rotate(-45deg);
       transform: translate(-50%, -50%) rotate(-45deg);
@@ -109,18 +109,21 @@ const StyledMain = styled.main`
 `;
 const StyeldSVG = styled.section<IDimension>`
   display: flex;
-
+  perspective: 1000px;
   width: ${({ width }) => (width ? `${width}px` : '1400px')};
   height: ${({ height }) => (height ? `${height}px` : '750px')};
   justify-content: center;
+  z-index: 2;
 
   > div {
     /* background-color: #cae9ff; */
     background-color: #4e4e43;
   }
+
   text {
     cursor: default;
   }
+
   use.denied {
     fill: #ff0000 !important;
   }
