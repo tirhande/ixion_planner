@@ -34,29 +34,12 @@
 
 ## **Patch Note**
 
-### v0.7 - 2023-02-14
-
-- Add Perspective - [Cleanshooter](https://github.com/Cleanshooter)
-
-<p align=center>
-<img width="250" alt="스크린샷 2023-02-14 오후 11 03 45" src="https://user-images.githubusercontent.com/74575497/218760729-39b392f2-e370-4407-b900-5aeeecea5d6f.png">
-</p>
-
-- Add Workers, Power, Housing Description - [Cleanshooter](https://github.com/Cleanshooter)
-
-<p align=center>
-<img width="191" alt="스크린샷 2023-02-14 오후 11 03 51" src="https://user-images.githubusercontent.com/74575497/218760772-c4f1ff74-71eb-470a-8052-89f8bf7d9104.png">
-</p>
-
 ### v0.65 - 2023-02-07
-
 - Rotate bug fix (90 degree)
   - SteelMill
   - PolymerRefinery
   - CryonicCenter
-
 ### v0.6 - 2023-02-06
-
 - Rotate Bug fix
 - Add Building Tooltip
 - Add translation option (🇫🇷) - [bmalrat](https://github.com/bmalrat)
@@ -68,18 +51,15 @@
 #
 
 ### v0.55 - 2023-01-26
-
 - Add translation option (🇨🇳) - [wzBeholder](https://github.com/wzBeholder)
 
 #
-
 ### v0.5 - 2022-12-25
 
 - Keyboard shortcut add (Move sector "Q", "E")
 - Can only be construction inside a grid
 
 #
-
 ### v0.4 - 2022-12-22
 
 - Add translation option (🇰🇷, 🇺🇸)
@@ -88,7 +68,6 @@
 - When building roads, building connections appear.
 
 #
-
 ### v0.35 (Bug Fixed) - 2022-12-22
 
 - **It can be slightly modified from the existing saved layout.**
@@ -96,7 +75,6 @@
 - Conflict construction is not possible. (but road is ok, TBU?)
 
 #
-
 ### v0.3 - 2022-12-21
 
 - To demolish several roads
@@ -104,20 +82,17 @@
 - ~~Buildings can't be stacked~~
 
 #
-
 ### v0.2
 
 - Building edge(connect to road) Show/Hide Button
 - Sector layout Reset Button
 
 #
-
 ### v0.1
 
 - Open
 
 #
-
 ### TBU
 
 - ~~Can only be construction inside a grid~~
