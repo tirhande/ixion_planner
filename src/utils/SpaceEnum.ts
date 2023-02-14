@@ -13,7 +13,7 @@ export const SPACE_BUILD = {
     height: 9,
     location: [0, 0, 8, 0],
     isWall: true,
-    power:12,
+    power: 12,
     workers: 9,
   },
   ProbeLauncher: {
@@ -21,6 +21,8 @@ export const SPACE_BUILD = {
     height: 9,
     location: [0, 0, 8, 0],
     isWall: true,
+    power: 2,
+    workers: 4,
   },
   ColonyTrainingCenter: {
     width: 9,
@@ -30,7 +32,7 @@ export const SPACE_BUILD = {
     power: 2,
     workers: 4,
   },
-  BioengineeringCenter: { // What is this?
+  BioengineeringCenter: {
     width: 14,
     height: 14,
     location: [0, 0, 0, 14],

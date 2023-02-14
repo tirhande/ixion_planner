@@ -62,3 +62,9 @@ export const languageState = atom<string>({
   default: 'ko_KR',
   effects_UNSTABLE: [persistAtom],
 });
+
+export const isDimensionalState = atom<boolean>({
+  key: 'isDimensionalState',
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
