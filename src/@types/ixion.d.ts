@@ -3,6 +3,9 @@ declare module 'types/Ixion' {
     x: number;
     y: number;
   }
+  interface IBuildingImage {
+    isPerspective?: boolean;
+  }
   interface IDimension {
     width: number;
     height: number;

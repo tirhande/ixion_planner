@@ -3,12 +3,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useRecoilValue } from 'recoil';
 import { buildingState, sectionState } from 'core/states';
-import { FACTORIES_BUILD } from 'utils/FactoriesEnum';
-import { FOOD_BUILD } from 'utils/FoodEnum';
-import { MAINTENANCE_BUILD } from 'utils/MaintenanceEnum';
-import { POPULATION_BUILD } from 'utils/PopulationEnum';
-import { SPACE_BUILD } from 'utils/SpaceEnum';
-import { STABILITY_BUILD } from 'utils/StabilityEnum';
+import BUILDINGS from 'utils/BuildingsEnum';
 
 const Calculator = () => {
   const { t } = useTranslation();
@@ -17,14 +12,6 @@ const Calculator = () => {
   const [workers, setWorkers] = useState(0);
   const [power, setPower] = useState(0);
   const [housing, setHousing] = useState(0);
-  const BUILDINGS = Object.assign(
-    FACTORIES_BUILD,
-    FOOD_BUILD,
-    MAINTENANCE_BUILD,
-    POPULATION_BUILD,
-    SPACE_BUILD,
-    STABILITY_BUILD
-  );
 
   useEffect(() => {
     const currentWorkers: number = buildings[sector].reduce((acc, cv) => {
