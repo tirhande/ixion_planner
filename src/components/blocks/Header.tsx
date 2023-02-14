@@ -65,6 +65,7 @@ const StyledHeader = styled.header`
   height: 8%;
   display: flex;
   align-items: center;
+  z-index: 2;
 `;
 
 const StyledHeaderLeft = styled.div`

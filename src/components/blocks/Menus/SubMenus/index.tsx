@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 import MaintenanceMenu from './Maintenance';
 import SpaceMenu from './Space';
@@ -17,7 +17,7 @@ const SubMenus = () => {
   const setConstruct = useSetRecoilState(constructState);
 
   const onMenuClick = ({ id, width, height, isWall }: IWrapProps) => {
-    setConstruct({ isConstruct: true, construct_id: id, width: width, height: height,isWall: isWall, degree: 0 });
+    setConstruct({ isConstruct: true, construct_id: id, width: width, height: height, isWall: isWall, degree: 0 });
   };
 
   const data = [
@@ -54,7 +54,7 @@ const SubMenus = () => {
   ];
 
   const [index, setIndex] = useState(0);
-  
+
   return (
     <SubMenusSection>
       <SubMenusUl>
@@ -76,7 +76,6 @@ const SubMenusSection = styled.section`
   background: #00000070;
   padding: 5px 10px;
   border-radius: 5px;
-
   position: fixed;
   bottom: 10.5%;
   > div {

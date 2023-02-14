@@ -1,13 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = ({
-  text,
-  ...props
-}: { text: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <StyledButton {...props}>
-    {text}
-  </StyledButton>
+const Button = ({ text, ...props }: { text: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+  <StyledButton {...props}>{text}</StyledButton>
 );
 
 export default Button;
@@ -20,6 +15,7 @@ const StyledButton = styled.button`
   font-size: 0px;
   position: relative;
   cursor: pointer;
+  z-index: 1;
 
   &:after {
     width: 60px;
