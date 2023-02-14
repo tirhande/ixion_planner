@@ -40,13 +40,13 @@ export const STABILITY_BUILD = {
     power: 0,
     workers: 0,
   },
-  LawEnforcement: { // What is this??
+  LawEnforcement: {
     width: 6,
     height: 6,
     location: [0, 0, 6, 0],
     isWall: false,
-    power: 0,
-    workers: 0,
+    power: 6,
+    workers: 10,
   },
   HullTemple: {
     width: 4,
