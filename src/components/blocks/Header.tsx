@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 import i18next from 'lang/i18n';
-import { languageState, sectionState } from 'core/states';
+import { languageState, sectionState, isDimensionalState } from 'core/states';
 import { ReactComponent as DolosLogoIcon } from 'assets/DolosLogo.svg';
 import { ReactComponent as GithubLogoIcon } from 'assets/GithubLogo.svg';
 import SelectMenu from 'components/atoms/SelectMenu';
@@ -12,6 +12,7 @@ import { SingleValue } from 'react-select';
 
 const Header = () => {
   const sectionNumber = useRecoilValue(sectionState);
+  const [isDimensional, setIsDimensional] = useRecoilState(isDimensionalState);
   const [language, setLanguage] = useRecoilState(languageState);
 
   useEffect(() => {
@@ -45,6 +46,18 @@ const Header = () => {
         </StyledTitle>
       </StyledHeaderCenter>
       <StyledHeaderRight>
+        <StyledSwitchDiv>
+          <input
+            id="language-toggle"
+            className="check-toggle check-toggle-round-flat"
+            type="checkbox"
+            onChange={() => setIsDimensional(prev => !prev)}
+            checked={isDimensional}
+          />
+          <label htmlFor="language-toggle" />
+          <span className="on">2D</span>
+          <span className="off">2.5D</span>
+        </StyledSwitchDiv>
         <SelectMenu defaultValue={defaultValue} options={options} onChange={onLanguageChange} />
         <StyledLinkDiv>
           <a href="https://github.com/tirhande/ixion_planner" target={'_blank'} rel="noopener noreferrer">
@@ -144,4 +157,102 @@ const StyledLinkDiv = styled.div`
   flex-direction: column;
 
   margin-left: 1em;
+`;
+const StyledSwitchDiv = styled.div`
+  position: relative;
+  display: inline-block;
+  margin: 0 15px;
+
+  > span {
+    position: absolute;
+    top: 12px;
+    pointer-events: none;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    width: 50%;
+    text-align: center;
+  }
+  input.check-toggle-round-flat:checked ~ .off {
+    color: #f36f25;
+  }
+  input.check-toggle-round-flat:checked ~ .on {
+    color: #fff;
+  }
+  > span.on {
+    left: 0;
+    padding-left: 4px;
+    color: #f36f25;
+  }
+  > span.off {
+    right: 0;
+    padding-right: 4px;
+    color: #fff;
+  }
+  .check-toggle {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+  }
+  .check-toggle + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  input.check-toggle-round-flat + label {
+    padding: 2px;
+    width: 97px;
+    height: 35px;
+    background-color: #f36f25;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
+    -ms-border-radius: 60px;
+    -o-border-radius: 60px;
+    border-radius: 60px;
+  }
+  input.check-toggle-round-flat + label:before,
+  input.check-toggle-round-flat + label:after {
+    display: block;
+    position: absolute;
+    content: '';
+  }
+  input.check-toggle-round-flat + label:before {
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    background-color: #f36f25;
+    -webkit--moz-border-radius: 60px;
+    -ms-border-radius: 60px;
+    -o-border-radius: 60px;
+    border-radius: 60px;
+  }
+  input.check-toggle-round-flat + label:after {
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    width: 48px;
+    background-color: #fff;
+    -webkit-border-radius: 52px;
+    -moz-border-radius: 52px;
+    -ms-border-radius: 52px;
+    -o-border-radius: 52px;
+    border-radius: 52px;
+    -webkit-transition: margin 0.2s;
+    -moz-transition: margin 0.2s;
+    -o-transition: margin 0.2s;
+    transition: margin 0.2s;
+  }
+  input.check-toggle-round-flat:checked + label {
+  }
+  input.check-toggle-round-flat:checked + label:after {
+    margin-left: 41px;
+  }
 `;

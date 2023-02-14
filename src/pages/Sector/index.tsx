@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import { constructState, sectionState } from 'core/states';
+import { constructState, sectionState, isDimensionalState } from 'core/states';
 import { CANVAS_SIZE } from 'utils/GridEnum';
 import { IDimension } from 'types/Ixion';
 
@@ -18,6 +18,7 @@ const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 const SectorPage = () => {
   const [{ degree }, setConstruct] = useRecoilState(constructState);
   const setSectionNumber = useSetRecoilState(sectionState);
+  const isDimensional = useRecoilValue(isDimensionalState);
 
   const onRotate = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key.toLowerCase() === 'r' || e.key.toLowerCase() === 'ㄱ') {
@@ -33,16 +34,16 @@ const SectorPage = () => {
     <StyledHome onKeyDown={onRotate} tabIndex={0}>
       <Header />
       <StyledMain>
-        <div>
+        <StyledSectorMoveButton>
           <Button className="prev" text="Previous" onClick={onSectionPrev} />
-        </div>
-        <StyeldSVG width={CANVAS_WIDTH} height={CANVAS_HEIGHT}>
+        </StyledSectorMoveButton>
+        <StyledSVG width={CANVAS_WIDTH} height={CANVAS_HEIGHT} isDimensional={isDimensional}>
           <SVGStage />
           <SVGContainer />
-        </StyeldSVG>
-        <div>
+        </StyledSVG>
+        <StyledSectorMoveButton>
           <Button text="Next" className="next" onClick={onSectionNext} />
-        </div>
+        </StyledSectorMoveButton>
       </StyledMain>
       <Footer />
     </StyledHome>
@@ -70,55 +71,53 @@ const StyledMain = styled.main`
     display: flex;
     align-items: center;
     height: 600px;
-
-    > button {
-      width: 160px;
-      height: 160px;
-      background-color: #fff;
-      border: none;
-      font-size: 0px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    > button:after {
-      width: 60px;
-      height: 60px;
-      content: '';
-      display: block;
-      position: absolute;
-      left: 40%;
-      top: 50%;
-      z-index: 1;
-      border: 1px solid #aaaaaa;
-      border-width: 0 8px 8px 0;
-      margin-left: -2px;
-      padding: 10px;
-    }
-
-    .slick-prev::after {
-      left: 60%;
-      -webkit-transform: translate(-50%, -50%) rotate(135deg);
-      transform: translate(-50%, -50%) rotate(135deg);
-    }
-
-    .slick-next::after {
-      -webkit-transform: translate(-50%, -50%) rotate(-45deg);
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
   }
 `;
-const StyeldSVG = styled.section<IDimension>`
+const StyledSectorMoveButton = styled.div`
+  > button {
+    width: 160px;
+    height: 160px;
+    background-color: transparent;
+    border: none;
+    font-size: 0px;
+    position: relative;
+    cursor: pointer;
+  }
+  > button:after {
+    width: 60px;
+    height: 60px;
+    content: '';
+    display: block;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    z-index: 1;
+    border: 1px solid #aaaaaa;
+    border-width: 0 8px 8px 0;
+    margin-left: -2px;
+    padding: 10px;
+  }
+  .slick-prev::after {
+    left: 60%;
+    -webkit-transform: translate(-50%, -50%) rotate(135deg);
+    transform: translate(-50%, -50%) rotate(135deg);
+  }
+
+  .slick-next::after {
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+`;
+const StyledSVG = styled.section<IDimension>`
   display: flex;
-  perspective: 1000px;
+  perspective: ${({ isDimensional }) => (isDimensional ? '1000px' : 'none')};
   width: ${({ width }) => (width ? `${width}px` : '1400px')};
   height: ${({ height }) => (height ? `${height}px` : '750px')};
   justify-content: center;
   z-index: 2;
-
   > div {
-    /* background-color: #cae9ff; */
     background-color: #4e4e43;
+    transform: ${({ isDimensional }) => (isDimensional ? 'rotateX(25deg)' : 'none')};
   }
 
   text {
