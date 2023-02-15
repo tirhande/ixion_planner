@@ -3,6 +3,7 @@ declare module 'types/Ixion' {
     x: number;
     y: number;
   }
+
   interface IDimension {
     width: number;
     height: number;

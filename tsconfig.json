@@ -15,6 +15,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "baseUrl": "./src",
+    "typeRoots": ["node_modules/@types", "src/types"]
   },
   "include": ["src", "**/*.ts", "**/*.tsx", "./src/@types"],
   "exclude": ["node_modules", "tsconfig.json"]

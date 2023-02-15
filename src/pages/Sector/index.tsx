@@ -12,6 +12,7 @@ import Footer from 'components/blocks/Footer';
 import SVGStage from './SVGStage';
 import SVGContainer from './SVGContainer';
 import Button from 'components/atoms/Button';
+import OverlayStage from 'components/overlay/OverlayStage';
 
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 
@@ -38,6 +39,7 @@ const SectorPage = () => {
           <Button className="prev" text="Previous" onClick={onSectionPrev} />
         </StyledSectorMoveButton>
         <StyledSVG width={CANVAS_WIDTH} height={CANVAS_HEIGHT} isPerspective={isPerspective}>
+          <OverlayStage />
           <SVGStage />
           <SVGContainer />
         </StyledSVG>
@@ -110,6 +112,7 @@ const StyledSectorMoveButton = styled.div`
 `;
 const StyledSVG = styled.section<IDimension>`
   display: flex;
+  position: relative;
   perspective: ${({ isPerspective }) => (isPerspective ? '1000px' : 'none')};
   width: ${({ width }) => (width ? `${width}px` : '1400px')};
   height: ${({ height }) => (height ? `${height}px` : '750px')};
