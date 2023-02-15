@@ -1,4 +1,5 @@
 // location = [top, right, bottom, left]
+import BaseQuarter from 'assets/Buildings/Population/BaseQuarter.png';
 export const POPULATION_BUILD = {
   BaseQuarter: {
     width: 3,
@@ -7,7 +8,9 @@ export const POPULATION_BUILD = {
     isWall: false,
     power: 1,
     workers: 0,
-    housing: 15,  
+    housing: 15,
+    image: BaseQuarter,
+    imageHeight: 89,
   },
   AdvancedQuarter: {
     width: 6,

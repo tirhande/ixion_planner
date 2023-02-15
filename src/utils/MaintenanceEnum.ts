@@ -1,5 +1,6 @@
 // location = [top, right, bottom, left]
 // special = [food, Industry, population, space, recycling]
+import Workshop from 'assets/Buildings/Maintenance/Workshop.png';
 export const MAINTENANCE_BUILD = {
   Workshop: {
     width: 4,
@@ -8,7 +9,9 @@ export const MAINTENANCE_BUILD = {
     isWall: false,
     special: [],
     power: 2,
-    workers: 4
+    workers: 4,
+    image: Workshop,
+    imageHeight: 124,
   },
   StockpileSmall: {
     width: 4,
@@ -16,7 +19,7 @@ export const MAINTENANCE_BUILD = {
     location: [0, 0, 4, 0],
     isWall: false,
     power: 3,
-    workers: 5
+    workers: 5,
   },
   StockpileMedium: {
     width: 8,
@@ -24,7 +27,7 @@ export const MAINTENANCE_BUILD = {
     location: [0, 0, 8, 0],
     isWall: false,
     power: 4,
-    workers: 8
+    workers: 8,
   },
   StockpileLarge: {
     width: 8,
@@ -32,7 +35,7 @@ export const MAINTENANCE_BUILD = {
     location: [0, 0, 8, 0],
     isWall: false,
     power: 5,
-    workers: 12
+    workers: 12,
   },
   BatteryT1: {
     width: 3,
@@ -40,7 +43,7 @@ export const MAINTENANCE_BUILD = {
     location: [3, 3, 3, 3],
     isWall: false,
     power: 0,
-    workers: 0
+    workers: 0,
   },
   BatteryT2: {
     width: 5,
@@ -48,8 +51,7 @@ export const MAINTENANCE_BUILD = {
     location: [5, 5, 5, 5],
     isWall: false,
     power: 0,
-    workers: 0
-
+    workers: 0,
   },
   BatteryT3: {
     width: 7,
@@ -57,7 +59,7 @@ export const MAINTENANCE_BUILD = {
     location: [7, 7, 7, 7],
     isWall: false,
     power: 0,
-    workers: 0
+    workers: 0,
   },
   FireStation: {
     width: 6,
@@ -65,7 +67,7 @@ export const MAINTENANCE_BUILD = {
     location: [0, 0, 6, 0],
     isWall: false,
     power: 5,
-    workers: 10
+    workers: 10,
   },
   DroneBay: {
     width: 8,
@@ -73,7 +75,7 @@ export const MAINTENANCE_BUILD = {
     location: [0, 0, 8, 0],
     isWall: false,
     power: 30,
-    workers: 10
+    workers: 10,
   },
 } as const;
 type MAINTENANCE_BUILD = typeof MAINTENANCE_BUILD[keyof typeof MAINTENANCE_BUILD];
