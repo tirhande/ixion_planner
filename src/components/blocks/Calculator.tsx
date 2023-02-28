@@ -37,7 +37,7 @@ const Calculator = () => {
         (acc, cv) => ({
           workers: acc.workers + BUILDINGS[cv.id].workers,
           power: acc.power + BUILDINGS[cv.id].power,
-          housing: BUILDINGS[cv.id].housing ? acc.housing + BUILDINGS[cv.id].housing : 0,
+          housing: acc.housing + (BUILDINGS[cv.id].housing ? BUILDINGS[cv.id].housing : 0),
         }),
         {
           workers: 0,
