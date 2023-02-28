@@ -62,6 +62,7 @@ const SVGContainer = () => {
     });
     setPos({ x: x, y: y });
   };
+
   const demolishRoad = ({ x, y }: IPoint) => {
     if (roadPos.start) {
       const tmpX = (x - roadPos.x) / GRID_WIDTH;

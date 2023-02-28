@@ -6,7 +6,7 @@ import { BUILDING_INFO } from 'utils/GridEnum';
 
 const PopulationDefsSvg = ({ t }: { t: TFunction }) => (
   <>
-    {Object.keys(BUILDING_INFO.Population).map((v) => {
+    {Object.keys(BUILDING_INFO.Population).map(v => {
       const { width, height, location } = BUILDING_INFO.Population[v as keyof typeof BUILDING_INFO.Population];
       return (
         <TemplateBuilding

@@ -6,7 +6,7 @@ import { BUILDING_INFO } from 'utils/GridEnum';
 
 const FoodDefsSvg = ({ t }: { t: TFunction }) => (
   <>
-    {Object.keys(BUILDING_INFO.Food).map((v) => {
+    {Object.keys(BUILDING_INFO.Food).map(v => {
       const { width, height, location } = BUILDING_INFO.Food[v as keyof typeof BUILDING_INFO.Food];
       return (
         <TemplateBuilding
