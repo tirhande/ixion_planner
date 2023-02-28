@@ -1,6 +1,6 @@
 {
   "name": "ixion_planner",
-  "version": "0.70",
+  "version": "0.71",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

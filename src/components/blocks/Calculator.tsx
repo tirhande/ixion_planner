@@ -14,10 +14,15 @@ const Calculator = () => {
   const { t } = useTranslation();
   const buildings = useRecoilValue(buildingState);
   const sector = useRecoilValue(sectionState);
-  const [workers, setWorkers] = useState(0);
-  const [power, setPower] = useState(0);
-  const [housing, setHousing] = useState(0);
+
+  const [currentInfo, setCurrentInfo] = useState({
+    workers: 0,
+    power: 0,
+    housing: 0,
+  });
+
   const BUILDINGS = Object.assign(
+    {},
     FACTORIES_BUILD,
     FOOD_BUILD,
     MAINTENANCE_BUILD,
@@ -27,31 +32,33 @@ const Calculator = () => {
   );
 
   useEffect(() => {
-    const currentWorkers: number = buildings[sector].reduce((acc, cv) => {
-      return acc + BUILDINGS[cv.id].workers;
-    }, 0);
-    setWorkers(currentWorkers);
-    const currentPower: number = buildings[sector].reduce((acc, cv) => {
-      return acc + BUILDINGS[cv.id].power;
-    }, 0);
-    setPower(currentPower);
-    const currentHousing: number = buildings[sector].reduce((acc, cv) => {
-      if (BUILDINGS[cv.id].housing) return acc + BUILDINGS[cv.id].housing;
-      return acc;
-    }, 0);
-    setHousing(currentHousing);
+    setCurrentInfo(
+      buildings[sector].reduce(
+        (acc, cv) => ({
+          workers: acc.workers + BUILDINGS[cv.id].workers,
+          power: acc.power + BUILDINGS[cv.id].power,
+          housing: BUILDINGS[cv.id].housing ? acc.housing + BUILDINGS[cv.id].housing : 0,
+        }),
+        {
+          workers: 0,
+          power: 0,
+          housing: 0,
+        }
+      )
+    );
   }, [buildings, sector]);
+
   return (
     <CalculationBox>
       <InnerBox>
         <Workers>
-          {t('workers')}: {workers}
+          {t('workers')}: {currentInfo.workers}
         </Workers>
         <Power>
-          {t('power')}: {power}
+          {t('power')}: {currentInfo.power}
         </Power>
         <Housing>
-          {t('housing')}: {housing}
+          {t('housing')}: {currentInfo.housing}
         </Housing>
       </InnerBox>
     </CalculationBox>
