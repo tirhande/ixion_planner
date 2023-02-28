@@ -6,7 +6,7 @@ import { BUILDING_INFO } from 'utils/GridEnum';
 
 const FactoriesDefsSvg = ({ t }: { t: TFunction }) => (
   <>
-    {Object.keys(BUILDING_INFO.Factories).map((v) => {
+    {Object.keys(BUILDING_INFO.Factories).map(v => {
       const { width, height, location } = BUILDING_INFO.Factories[v as keyof typeof BUILDING_INFO.Factories];
       return (
         <TemplateBuilding

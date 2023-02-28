@@ -34,6 +34,10 @@
 
 ## **Patch Note**
 
+### v0.71 - 2023-02-28
+
+- Building Color Restore
+
 ### v0.7 - 2023-02-14
 
 - Add Perspective - [Cleanshooter](https://github.com/Cleanshooter)

@@ -6,7 +6,7 @@ import { BUILDING_INFO } from 'utils/GridEnum';
 
 const StabilityDefsSvg = ({ t }: { t: TFunction }) => (
   <>
-    {Object.keys(BUILDING_INFO.Stability).map((v) => {
+    {Object.keys(BUILDING_INFO.Stability).map(v => {
       const { width, height, location } = BUILDING_INFO.Stability[v as keyof typeof BUILDING_INFO.Stability];
       return (
         <TemplateBuilding
