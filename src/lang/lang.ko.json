@@ -6,9 +6,11 @@
   "population": "인구",
   "food": "식량",
   "stability": "안정성",
-  "workers": "Workers",
-  "power": "Power",
-  "housing": "Housing",
+  "workers": "노동자",
+  "power": "힘",
+  "housing": "주택",
+  "battery": "배터리",
+  "cycles": "주기",
   "Workshop": "작업장",
   "StockpileSmall": "저장고 소형",
   "StockpileMedium": "저장고 중형",
@@ -53,5 +55,11 @@
   "LawEnforcement": "법률 강화|센터",
   "HullTemple": "선체 사원",
   "Observatory": "관측소",
-  "ExoFightingDome": "외부 전투용 돔"
+  "ExoFightingDome": "외부 전투용 돔",
+  "level": "수준",
+  "foodSpecialisation": "음식",
+  "spaceSpecialisation": "우주",
+  "populationSpecialisation": "인구",
+  "industrySpecialisation": "산업",
+  "recyclingSpecialisation": "재활용"
 }

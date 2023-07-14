@@ -9,6 +9,8 @@
   "workers": "Workers",
   "power": "Power",
   "housing": "Housing",
+  "battery": "Battery",
+  "cycles": "Cycles",
   "Workshop": "Workshop",
   "StockpileSmall": "Stockpile Small",
   "StockpileMedium": "Stockpile Medium",
@@ -53,5 +55,11 @@
   "LawEnforcement": "Legislative Strengthening Center",
   "HullTemple": "Hull Temple",
   "Observatory": "Observatory",
-  "ExoFightingDome": "Exo-Fighting Dome"
+  "level": "Level",
+  "ExoFightingDome": "Exo-Fighting Dome",
+  "foodSpecialisation": "Food",
+  "spaceSpecialisation": "Space",
+  "populationSpecialisation": "Population",
+  "industrySpecialisation": "Industry",
+  "recyclingSpecialisation": "Recycling"
 }

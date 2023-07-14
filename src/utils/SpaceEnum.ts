@@ -7,6 +7,9 @@ export const SPACE_BUILD = {
     isWall: true,
     power: 14,
     workers: 12,
+    specialisation: {
+      space: 84
+    }
   },
   EVAAirlock: {
     width: 12,
@@ -15,6 +18,9 @@ export const SPACE_BUILD = {
     isWall: true,
     power: 12,
     workers: 9,
+    specialisation: {
+      industry: 108
+    }
   },
   ProbeLauncher: {
     width: 12,
@@ -23,6 +29,9 @@ export const SPACE_BUILD = {
     isWall: true,
     power: 6,
     workers: 9,
+    specialisation: {
+      industry: 108
+    }
   },
   ColonyTrainingCenter: {
     width: 9,

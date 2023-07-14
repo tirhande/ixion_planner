@@ -7,7 +7,10 @@ export const POPULATION_BUILD = {
     isWall: false,
     power: 1,
     workers: 0,
-    housing: 15,  
+    housing: 15,
+    specialisation: {
+      population: 9
+    }
   },
   AdvancedQuarter: {
     width: 6,
@@ -17,6 +20,9 @@ export const POPULATION_BUILD = {
     power: 2,
     workers: 0,
     housing: 40,
+    specialisation: {
+      population: 9
+    }
   },
   DomoticQuarter: {
     width: 6,
@@ -26,6 +32,9 @@ export const POPULATION_BUILD = {
     power: 2,
     workers: 0,
     housing: 60,
+    specialisation: {
+      population: 18
+    }
   },
   CellHousing: {
     width: 8,
@@ -35,6 +44,9 @@ export const POPULATION_BUILD = {
     power: 3,
     workers: 0,
     housing: 125,
+    specialisation: {
+      population: 16
+    }
   },
   CryonicCenter: {
     width: 7,
