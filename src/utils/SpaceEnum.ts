@@ -19,7 +19,7 @@ export const SPACE_BUILD = {
     power: 12,
     workers: 9,
     specialisation: {
-      industry: 108
+      space: 108
     }
   },
   ProbeLauncher: {
@@ -30,7 +30,7 @@ export const SPACE_BUILD = {
     power: 6,
     workers: 9,
     specialisation: {
-      industry: 108
+      space: 108
     }
   },
   ColonyTrainingCenter: {

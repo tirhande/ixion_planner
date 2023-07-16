@@ -19,7 +19,7 @@ export const FACTORIES_BUILD = {
     power: 15,
     workers: 30,
     specialisation: {
-      industry: 16
+      industry: 108
     }
   },
   ElectronicsFactory: {
