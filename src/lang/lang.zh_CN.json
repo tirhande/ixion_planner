@@ -6,9 +6,11 @@
   "population": "人口",
   "food": "食物",
   "stability": "稳定度",
-  "workers": "Workers",
-  "power": "Power",
-  "housing": "Housing",
+  "workers": "工人",
+  "power": "力量",
+  "housing": "住房",
+  "battery": "电池",
+  "cycles": "周期",
   "Workshop": "车间",
   "StockpileSmall": "仓库-小型",
   "StockpileMedium": "仓库-中型",
@@ -53,5 +55,11 @@
   "LawEnforcement": "立法强化中心",
   "HullTemple": "船体庙宇",
   "Observatory": "天文台",
-  "ExoFightingDome": "外骨骼战斗穹顶"
+  "ExoFightingDome": "外骨骼战斗穹顶",
+  "level": "等级",
+  "foodSpecialisation": "食物",
+  "spaceSpecialisation": "太空",
+  "populationSpecialisation": "人口",
+  "industrySpecialisation": "行业",
+  "recyclingSpecialisation": "回收"
 }

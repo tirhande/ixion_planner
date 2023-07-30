@@ -9,6 +9,7 @@ import { MAINTENANCE_BUILD } from 'utils/MaintenanceEnum';
 import { POPULATION_BUILD } from 'utils/PopulationEnum';
 import { SPACE_BUILD } from 'utils/SpaceEnum';
 import { STABILITY_BUILD } from 'utils/StabilityEnum';
+import { calculateSpecialisationLevel } from 'utils/SpecialsationEnum';
 
 const Calculator = () => {
   const { t } = useTranslation();
@@ -19,6 +20,8 @@ const Calculator = () => {
     workers: 0,
     power: 0,
     housing: 0,
+    battery: 0,
+    industrySize: 0,
   });
 
   const BUILDINGS = Object.assign(
@@ -32,21 +35,29 @@ const Calculator = () => {
   );
 
   useEffect(() => {
-    setCurrentInfo(
+    const newInfo =
       buildings[sector].reduce(
         (acc, cv) => ({
           workers: acc.workers + BUILDINGS[cv.id].workers,
           power: acc.power + BUILDINGS[cv.id].power,
           housing: acc.housing + (BUILDINGS[cv.id].housing ? BUILDINGS[cv.id].housing : 0),
+          battery: acc.battery + (BUILDINGS[cv.id].battery ?? 0),
+          industrySize: acc.industrySize + (BUILDINGS[cv.id].specialisation?.industry ?? 0),
         }),
         {
           workers: 0,
           power: 0,
           housing: 0,
+          battery: 0,
+          industrySize: 0,
         }
       )
-    );
+    if (calculateSpecialisationLevel(newInfo.industrySize, 'industry') >= 1) {
+      newInfo.battery = newInfo.battery * 1.2;
+    }
+    setCurrentInfo(newInfo);
   }, [buildings, sector]);
+
 
   return (
     <CalculationBox>
@@ -60,6 +71,9 @@ const Calculator = () => {
         <Housing>
           {t('housing')}: {currentInfo.housing}
         </Housing>
+        <Battery>
+          {t('battery')}: {calculateBattery(currentInfo.battery, currentInfo.power)} {t('cycles')} ({currentInfo.battery})
+        </Battery>
       </InnerBox>
     </CalculationBox>
   );
@@ -67,18 +81,27 @@ const Calculator = () => {
 
 export default Calculator;
 
+function calculateBattery(battery: number, power: number): string {
+  if (power === 0) {
+    return "0";
+  }
+  const cycles = battery / power;
+  return (Math.round(cycles * 10) / 10).toFixed(1);
+}
+
 const CalculationBox = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   margin: 5px;
-  width: 190px;
+  width: 230px;
   height: 90px;
   border: 2px solid #959685;
   border-radius: 3px;
   background-color: #000000;
   color: white;
 `;
+
 const InnerBox = styled.div`
   margin: 2px;
   width: auto;
@@ -97,5 +120,9 @@ const Power = styled.div`
 `;
 
 const Housing = styled.div`
+  position: relative;
+`;
+
+const Battery = styled.div`
   position: relative;
 `;
