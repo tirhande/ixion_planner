@@ -7,6 +7,9 @@ export const FACTORIES_BUILD = {
     isWall: false,
     power: 12,
     workers: 30,
+    specialisation: {
+      space: 81
+    }
   },
   SteelMill: {
     width: 9,
@@ -15,6 +18,9 @@ export const FACTORIES_BUILD = {
     isWall: false,
     power: 15,
     workers: 30,
+    specialisation: {
+      industry: 108
+    }
   },
   ElectronicsFactory: {
     width: 15,
@@ -23,6 +29,9 @@ export const FACTORIES_BUILD = {
     isWall: false,
     power: 30,
     workers: 30,
+    specialisation: {
+      industry: 90
+    }
   },
   PolymerRefinery: {
     width: 9,
@@ -31,6 +40,9 @@ export const FACTORIES_BUILD = {
     isWall: false,
     power: 5,
     workers: 15,
+    specialisation: {
+      industry: 54
+    }
   },
   FusionStation: {
     width: 6,
@@ -39,6 +51,10 @@ export const FACTORIES_BUILD = {
     isWall: false,
     power: 10,
     workers: 10,
+    specialisation: {
+      industry: 72,
+      food: 72,
+    }
   },
   WaterTreatment: {
     width: 5,
@@ -47,6 +63,10 @@ export const FACTORIES_BUILD = {
     isWall: false,
     power: 100,
     workers: 10,
+    specialisation: {
+      industry: 35,
+      recycling: 35
+    }
   },
   WasteTreatment: {
     width: 9,
@@ -55,6 +75,10 @@ export const FACTORIES_BUILD = {
     isWall: false,
     power: 15,
     workers: 20,
+    specialisation: {
+      industry: 81,
+      recycling: 81,
+    }
   },
   NuclearPowerPlant: {
     width: 9,

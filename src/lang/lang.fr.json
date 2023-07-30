@@ -6,9 +6,11 @@
   "population": "POPULATION",
   "food": "NOURRITURE",
   "stability": "STABILITÉ",
-  "workers": "Workers",
-  "power": "Power",
-  "housing": "Housing",
+  "workers": "Ouvriers",
+  "power": "Energy",
+  "housing": "Logement",
+  "battery": "Batterie",
+  "cycles": "Cycles",
   "Workshop": "Atelier",
   "StockpileSmall": "Petit Entrepôt",
   "StockpileMedium": "Entrepôt Moyen",
@@ -53,5 +55,11 @@
   "LawEnforcement": "Centre de Renforcement Législatif",
   "HullTemple": "Temple de la coque",
   "Observatory": "Observatoire",
-  "ExoFightingDome": "Dôme d'Exo-Combat"
+  "ExoFightingDome": "Dôme d'Exo-Combat",
+  "level": "Niveau",
+  "foodSpecialisation": "Nourriture",
+  "spaceSpecialisation": "Espace",
+  "populationSpecialisation": "Population",
+  "industrySpecialisation": "Industrie",
+  "recyclingSpecialisation": "Recyclage"
 }

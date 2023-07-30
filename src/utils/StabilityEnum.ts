@@ -15,6 +15,9 @@ export const STABILITY_BUILD = {
     isWall: false,
     power: 6,
     workers: 10,
+    specialisation: {
+      population: 28
+    }
   },
   GeneticConatusMemorial: {
     width: 7,
@@ -23,6 +26,9 @@ export const STABILITY_BUILD = {
     isWall: false,
     power: 0,
     workers: 0,
+    specialisation: {
+      population: 49
+    }
   },
   LunaclysmMemorial: {
     width: 7,
@@ -31,6 +37,9 @@ export const STABILITY_BUILD = {
     isWall: false,
     power: 0,
     workers: 0,
+    specialisation: {
+      population: 49
+    }
   },
   MardukMemorial: {
     width: 7,
@@ -39,6 +48,9 @@ export const STABILITY_BUILD = {
     isWall: false,
     power: 0,
     workers: 0,
+    specialisation: {
+      population: 49
+    }
   },
   LawEnforcement: {
     width: 6,
@@ -69,6 +81,9 @@ export const STABILITY_BUILD = {
     isWall: false,
     power: 40,
     workers: 20,
+    specialisation: {
+      population: 100
+    }
   },
 } as const;
 type STABILITY_BUILD = typeof STABILITY_BUILD[keyof typeof STABILITY_BUILD];

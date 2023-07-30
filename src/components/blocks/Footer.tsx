@@ -3,12 +3,14 @@ import styled from 'styled-components';
 
 import Menus from 'components/blocks/Menus';
 import Calculator from './Calculator';
+import Specialisation from './Specialisation';
 
 const Footer = () => {
   return (
     <StyledFooter>
       <Calculator />
       <Menus />
+      <Specialisation />
     </StyledFooter>
   );
 };
