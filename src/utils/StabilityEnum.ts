@@ -69,6 +69,7 @@ export const STABILITY_BUILD = {
     workers: 10,
     specialization: {
       population: 32
+    }
   },
   Observatory: {
     width: 12,
