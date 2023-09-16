@@ -35,29 +35,27 @@ const Calculator = () => {
   );
 
   useEffect(() => {
-    const newInfo =
-      buildings[sector].reduce(
-        (acc, cv) => ({
-          workers: acc.workers + BUILDINGS[cv.id].workers,
-          power: acc.power + BUILDINGS[cv.id].power,
-          housing: acc.housing + (BUILDINGS[cv.id].housing ? BUILDINGS[cv.id].housing : 0),
-          battery: acc.battery + (BUILDINGS[cv.id].battery ?? 0),
-          industrySize: acc.industrySize + (BUILDINGS[cv.id].specialisation?.industry ?? 0),
-        }),
-        {
-          workers: 0,
-          power: 0,
-          housing: 0,
-          battery: 0,
-          industrySize: 0,
-        }
-      )
+    const newInfo = buildings[sector].reduce(
+      (acc, cv) => ({
+        workers: acc.workers + (BUILDINGS[cv.id].workers ?? 0),
+        power: acc.power + (BUILDINGS[cv.id].power ?? 0),
+        housing: acc.housing + (BUILDINGS[cv.id].housing ? BUILDINGS[cv.id].housing : 0),
+        battery: acc.battery + (BUILDINGS[cv.id].battery ?? 0),
+        industrySize: acc.industrySize + (BUILDINGS[cv.id].specialisation?.industry ?? 0),
+      }),
+      {
+        workers: 0,
+        power: 0,
+        housing: 0,
+        battery: 0,
+        industrySize: 0,
+      }
+    );
     if (calculateSpecialisationLevel(newInfo.industrySize, 'industry') >= 1) {
       newInfo.battery = newInfo.battery * 1.2;
     }
     setCurrentInfo(newInfo);
   }, [buildings, sector]);
-
 
   return (
     <CalculationBox>
@@ -72,7 +70,8 @@ const Calculator = () => {
           {t('housing')}: {currentInfo.housing}
         </Housing>
         <Battery>
-          {t('battery')}: {calculateBattery(currentInfo.battery, currentInfo.power)} {t('cycles')} ({currentInfo.battery})
+          {t('battery')}: {calculateBattery(currentInfo.battery, currentInfo.power)} {t('cycles')} (
+          {currentInfo.battery})
         </Battery>
       </InnerBox>
     </CalculationBox>
@@ -83,7 +82,7 @@ export default Calculator;
 
 function calculateBattery(battery: number, power: number): string {
   if (power === 0) {
-    return "0";
+    return '0';
   }
   const cycles = battery / power;
   return (Math.round(cycles * 10) / 10).toFixed(1);
