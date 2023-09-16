@@ -67,12 +67,19 @@ export const STABILITY_BUILD = {
     isWall: true,
     power: 7,
     workers: 10,
+    specialization: {
+      population: 32
   },
   Observatory: {
     width: 12,
     height: 3,
     location: [0, 0, 12, 0],
     isWall: true,
+    power: 0,
+    workers: 0,
+    specialization: {
+      population: 36
+    }
   },
   ExoFightingDome: {
     width: 14,
