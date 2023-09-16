@@ -38,8 +38,8 @@ const Calculator = () => {
     const newInfo =
       buildings[sector].reduce(
         (acc, cv) => ({
-          workers: acc.workers + BUILDINGS[cv.id].workers,
-          power: acc.power + BUILDINGS[cv.id].power,
+          workers: acc.workers + (BUILDINGS[cv.id].workers ?? 0),
+          power: acc.power + (BUILDINGS[cv.id].power ?? 0),
           housing: acc.housing + (BUILDINGS[cv.id].housing ? BUILDINGS[cv.id].housing : 0),
           battery: acc.battery + (BUILDINGS[cv.id].battery ?? 0),
           industrySize: acc.industrySize + (BUILDINGS[cv.id].specialisation?.industry ?? 0),
