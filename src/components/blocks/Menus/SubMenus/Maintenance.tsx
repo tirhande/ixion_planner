@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import { MenusDiv } from "./styles";
+import { MenusDiv } from './styles';
 import { ReactComponent as Workshop } from 'assets/Menus/Maintenance/Workshop.svg';
 import { ReactComponent as StockS } from 'assets/Menus/Maintenance/StockpileSmall.svg';
 import { ReactComponent as StockM } from 'assets/Menus/Maintenance/StockpileMedium.svg';
@@ -11,13 +11,13 @@ import { ReactComponent as BatteryL } from 'assets/Menus/Maintenance/BatteryT3.s
 import { ReactComponent as FireStation } from 'assets/Menus/Maintenance/FireStation.svg';
 import { ReactComponent as DroneBay } from 'assets/Menus/Maintenance/DroneLandingBay.svg';
 
-import wrapButton from "components/atoms/WrapMenuButton";
-import { BUILDING_INFO } from "utils/GridEnum";
-import { IMenuClick } from "types/atoms";
+import wrapButton from 'components/atoms/WrapMenuButton';
+import { BUILDING_INFO } from 'utils/GridEnum';
+import { IMenuClick } from 'types/atoms';
 
 const SubMenus = [
   { id: 'Workshop', child: <Workshop /> },
-  { id: 'StockpileSmall',child: <StockS /> },
+  { id: 'StockpileSmall', child: <StockS /> },
   { id: 'StockpileMedium', child: <StockM /> },
   { id: 'StockpileLarge', child: <StockL /> },
   { id: 'BatteryT1', child: <BatteryS /> },
@@ -28,7 +28,6 @@ const SubMenus = [
 ];
 
 const MaintenanceMenu = ({ onMenuClick }: IMenuClick) => {
-  
   return (
     <MenusDiv>
       {SubMenus.map(({ id, child }) => {
