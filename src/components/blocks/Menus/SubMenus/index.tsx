@@ -97,7 +97,7 @@ const SubMenusUl = styled.ul`
   display: flex;
   justify-content: center;
 
-  height: 25px;
+  height: 20px;
 
   li {
     border-top: 1px solid #fff;
@@ -105,8 +105,9 @@ const SubMenusUl = styled.ul`
     border-top-left-radius: 3px;
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
-    padding: 3px 10px;
+    padding: 1px 5px;
     margin: 0 0.3em;
+    font-size: 0.8rem;
 
     cursor: pointer;
     &.active {
