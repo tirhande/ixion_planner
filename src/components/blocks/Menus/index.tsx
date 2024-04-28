@@ -54,19 +54,19 @@ const Menus = () => {
         <ImageButton name="delRoad" width="61px" height="62px" onClick={onMenuClick}>
           <DemolishRoadIcon fill={clickMenu === 'delRoad' ? '#dccaa4' : 'black'} />
         </ImageButton>
-        <ImageButton name="consRoad" width="86px" height="85px" onClick={onMenuClick}>
+        <ImageButton name="consRoad" width="81px" height="80px" onClick={onMenuClick}>
           <RoadIcon fill={clickMenu === 'consRoad' ? '#dccaa4' : 'black'} />
         </ImageButton>
-        <ImageButton name="consBuilding" width="100px" height="100px" onClick={onMenuClick}>
+        <ImageButton name="consBuilding" width="90px" height="90px" onClick={onMenuClick}>
           <ConstructIcon fill={clickMenu === 'consBuilding' ? '#dccaa4' : 'black'} />
         </ImageButton>
         {/* <ImageButton width="86px" height="85px">
           <ResearchIcon />
         </ImageButton> */}
-        <ImageButton name="showHideRoad" width="86px" height="85px" onClick={onShowHide}>
+        <ImageButton name="showHideRoad" width="81px" height="80px" onClick={onShowHide}>
           <ShowHideIcon fill={isVisible ? '#dccaa4' : 'black'} />
         </ImageButton>
-        <ImageButton name="resetLayout" width="86px" height="85px" onClick={onResetLayout}>
+        <ImageButton name="resetLayout" width="81px" height="80px" onClick={onResetLayout}>
           <ResetLayoutIcon fill="black" />
         </ImageButton>
       </MenusSection>

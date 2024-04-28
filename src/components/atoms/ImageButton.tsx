@@ -15,8 +15,8 @@ const StyledButton = styled.button<IStyle>`
   cursor: pointer;
   background-color: transparent;
 
-  width: ${({ width }) => width ? width : '119'};
-  height: ${({ height }) => height ? height : '120px'};
+  width: ${({ width }) => width ? width : '80px'};
+  height: ${({ height }) => height ? height : '80px'};
 
   > svg.active,
   > svg:hover > path,
