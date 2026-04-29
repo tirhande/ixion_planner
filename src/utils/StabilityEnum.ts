@@ -73,6 +73,8 @@ export const STABILITY_BUILD = {
     height: 3,
     location: [0, 0, 12, 0],
     isWall: true,
+    power: 0,
+    workers: 0,
   },
   ExoFightingDome: {
     width: 14,
