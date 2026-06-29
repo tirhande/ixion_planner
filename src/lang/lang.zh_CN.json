@@ -1,5 +1,7 @@
 {
   "resetLayout": "将清空本区域全部建筑，是否确定？.",
+  "deleteAllBuildings": "删除本区域全部建筑，是否确定？",
+  "deleteAllRoads": "删除本区域全部道路，是否确定？",
   "maintenance": "维护",
   "space": "太空",
   "factories": "工厂",

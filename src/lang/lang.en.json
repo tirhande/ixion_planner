@@ -1,5 +1,7 @@
 {
   "resetLayout": "Reset the layout of this sector",
+  "deleteAllBuildings": "Delete all buildings in this sector",
+  "deleteAllRoads": "Delete all roads in this sector",
   "maintenance": "MAINTENANCE",
   "space": "SPACE",
   "factories": "FACTORIES",
