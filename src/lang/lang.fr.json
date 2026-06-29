@@ -1,5 +1,8 @@
 {
   "resetLayout": "Réinitialiser la disposition de ce secteur",
+  "flipHorizontal": "Retourner horizontalement la disposition de ce secteur",
+  "flipVertical": "Retourner verticalement la disposition de ce secteur",
+  "rotate180": "Faire pivoter la disposition de ce secteur de 180 degrés",
   "maintenance": "MAINTENANCE",
   "space": "ESPACE",
   "factories": "USINES",

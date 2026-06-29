@@ -1,5 +1,8 @@
 {
   "resetLayout": "Reset the layout of this sector",
+  "flipHorizontal": "Flip the layout of this sector horizontally",
+  "flipVertical": "Flip the layout of this sector vertically",
+  "rotate180": "Rotate the layout of this sector 180 degrees",
   "maintenance": "MAINTENANCE",
   "space": "SPACE",
   "factories": "FACTORIES",

@@ -10,7 +10,7 @@ const isOverlap = ({ cur, diff }: IDiffRectangle) => {
   return true;
 };
 
-const adjustPoint = (rect: IBounds) => {
+export const adjustPoint = (rect: IBounds) => {
   if (rect.degree !== undefined && rect.degree !== 0) {
     const { x, y, width, height } = rect;
 
@@ -74,6 +74,41 @@ export const isRotateCorrect = ({ width, height }: IDimension) => {
     }
   }
   return true;
+};
+
+// Inverse of adjustPoint; keeps odd-dimension rotated buildings on-grid through flip/rotate.
+export const getOriginFromVisualBox = ({
+  x1,
+  yTop,
+  width,
+  height,
+  degree,
+}: {
+  x1: number;
+  yTop: number;
+  width: number;
+  height: number;
+  degree: number;
+}) => {
+  if (degree % 180 === 0) return { x: x1, y: yTop };
+
+  const G = GRID_WIDTH;
+
+  if (!isRotateCorrect({ width, height })) {
+    if (width > height && width % 2 === 0 && height % 2 !== 0) {
+      const x = degree === 90 ? x1 - (G * (width - height)) / 2 - G / 2 : x1 - (G * (width - height)) / 2 + G / 2;
+      const y = yTop - (G * (height - width)) / 2 - G / 2;
+      return { x, y };
+    }
+    const x = x1 - (G * (width - height)) / 2 - G / 2;
+    const y = degree === 90 ? yTop - (G * (height - width)) / 2 + G / 2 : yTop - (G * (height - width)) / 2 - G / 2;
+    return { x, y };
+  }
+
+  return {
+    x: x1 - (G * (width - height)) / 2,
+    y: yTop - (G * (height - width)) / 2,
+  };
 };
 const getTopLeftPoint = ({ x, y, angle }: { x: number; y: number; angle: number }) => {
   let tmpX = x;
