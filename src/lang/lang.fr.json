@@ -1,5 +1,7 @@
 {
   "resetLayout": "Réinitialiser la disposition de ce secteur",
+  "deleteAllBuildings": "Supprimer tous les bâtiments de ce secteur",
+  "deleteAllRoads": "Supprimer toutes les routes de ce secteur",
   "maintenance": "MAINTENANCE",
   "space": "ESPACE",
   "factories": "USINES",

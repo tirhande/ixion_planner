@@ -1,5 +1,7 @@
 {
   "resetLayout": "이 섹터의 레이아웃을 초기화합니다.",
+  "deleteAllBuildings": "이 섹터의 모든 건물을 삭제합니다.",
+  "deleteAllRoads": "이 섹터의 모든 도로를 삭제합니다.",
   "maintenance": "정비",
   "space": "우주",
   "factories": "공장",
