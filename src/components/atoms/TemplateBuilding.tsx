@@ -100,7 +100,6 @@ const TemplateBuilding = ({ construct_id, width, height, location, fillColor, te
           fill="#fff"
           textAnchor="middle"
           dominantBaseline="middle"
-          fontSizeAdjust={1}
         >
           {label.map((text, i) => (
             <tspan

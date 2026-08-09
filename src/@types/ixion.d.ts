@@ -90,6 +90,7 @@ declare module 'types/Ixion' {
   interface IFindBuilding extends IPoint, IDimension {
     bx: number;
     by: number;
+    degree?: number;
   }
   interface IMinMaxAngle {
     [key: number]: ({ width, height }: IDimension) => {
