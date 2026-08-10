@@ -77,8 +77,8 @@ const Menus = () => {
     }
   };
 
-  const flipDegreeHorizontal = (degree: number) => (degree % 180 === 0 ? (degree + 180) % 360 : degree);
-  const flipDegreeVertical = (degree: number) => (degree % 180 !== 0 ? (degree + 180) % 360 : degree);
+  const flipDegreeHorizontal = (degree: number) => (degree % 180 !== 0 ? (degree + 180) % 360 : degree);
+  const flipDegreeVertical = (degree: number) => (degree % 180 === 0 ? (degree + 180) % 360 : degree);
   const rotateDegree180 = (degree: number) => (degree + 180) % 360;
 
   // Round-trip through the on-screen box: mirroring stored x/y directly drifts off-grid (see adjustPoint).
