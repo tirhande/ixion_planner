@@ -3,6 +3,8 @@
   "flipHorizontal": "Flip the layout of this sector horizontally",
   "flipVertical": "Flip the layout of this sector vertically",
   "rotate180": "Rotate the layout of this sector 180 degrees",
+  "deleteAllBuildings": "Delete all buildings in this sector",
+  "deleteAllRoads": "Delete all roads in this sector",
   "maintenance": "MAINTENANCE",
   "space": "SPACE",
   "factories": "FACTORIES",

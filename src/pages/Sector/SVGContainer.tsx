@@ -42,13 +42,13 @@ const SVGContainer = () => {
     setBuildings(prev => ({
       ...prev,
       [sectionNumber]: prev[sectionNumber].filter(
-        ({ x: bx, y: by, width, height }) => !isInsidePoint({ x, y, bx, by, width, height })
+        ({ x: bx, y: by, width, height, degree }) => !isInsidePoint({ x, y, bx, by, width, height, degree })
       ),
     }));
   };
   const moveBuilding = ({ x, y }: IPoint) => {
-    const target = buildings[sectionNumber].find(({ x: bx, y: by, width, height }) =>
-      isInsidePoint({ x, y, bx, by, width, height })
+    const target = buildings[sectionNumber].find(({ x: bx, y: by, width, height, degree }) =>
+      isInsidePoint({ x, y, bx, by, width, height, degree })
     );
     if (target === undefined) return;
     demolishBuilding({ x, y });
@@ -337,5 +337,6 @@ const SVGContainer = () => {
 const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
+  user-select: none;
 `;
 export default SVGContainer;

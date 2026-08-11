@@ -60,8 +60,18 @@ const Menus = () => {
   const resetConstruct = useResetRecoilState(constructState);
 
   const onMenuClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    resetConstruct();
     const menuName = e.currentTarget.name;
+
+    if (e.shiftKey && (menuName === 'delBuilding' || menuName === 'delRoad')) {
+      const confirmText = t(menuName === 'delBuilding' ? 'deleteAllBuildings' : 'deleteAllRoads');
+      if (confirm(confirmText)) {
+        if (menuName === 'delBuilding') setBuildings(prev => ({ ...prev, [sectionNumber]: [] }));
+        else setRoads(prev => ({ ...prev, [sectionNumber]: [] }));
+      }
+      return;
+    }
+
+    resetConstruct();
     setClickMenu(clickMenu === menuName ? '' : menuName);
 
     if (menuName === 'consRoad') setIsVisible(true);

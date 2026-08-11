@@ -62,8 +62,8 @@ export const isBannerOverlap = ({ x, y, width, height }: IBounds) => {
 
   return isOverlap({ cur: building, diff: banner });
 };
-export const isInsidePoint = ({ x, y, bx, by, width, height }: IFindBuilding) => {
-  const [x1, y1, x2, y2] = [bx, by + height * GRID_HEIGHT, bx + width * GRID_WIDTH, by];
+export const isInsidePoint = ({ x, y, bx, by, width, height, degree }: IFindBuilding) => {
+  const { x1, y1, x2, y2 } = adjustPoint({ x: bx, y: by, width, height, degree });
   if (x > x1 && x < x2 && y < y1 && y > y2) return true;
   return false;
 };

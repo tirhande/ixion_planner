@@ -3,6 +3,8 @@
   "flipHorizontal": "이 섹터의 레이아웃을 좌우로 반전합니다.",
   "flipVertical": "이 섹터의 레이아웃을 상하로 반전합니다.",
   "rotate180": "이 섹터의 레이아웃을 180도 회전합니다.",
+  "deleteAllBuildings": "이 섹터의 모든 건물을 삭제합니다.",
+  "deleteAllRoads": "이 섹터의 모든 도로를 삭제합니다.",
   "maintenance": "정비",
   "space": "우주",
   "factories": "공장",
