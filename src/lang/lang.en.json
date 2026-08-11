@@ -3,6 +3,7 @@
   "flipHorizontal": "Flip the layout of this sector horizontally",
   "flipVertical": "Flip the layout of this sector vertically",
   "rotate180": "Rotate the layout of this sector 180 degrees",
+  "bannerBlocked": "A building that must be placed against a wall would end up under the sector banner.",
   "deleteAllBuildings": "Delete all buildings in this sector",
   "deleteAllRoads": "Delete all roads in this sector",
   "maintenance": "MAINTENANCE",

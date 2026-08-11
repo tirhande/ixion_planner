@@ -1,4 +1,4 @@
-import { IBounds, IDiffBounds, IDiffRectangle, IDimension, IFindBuilding, IMinMaxAngle } from 'types/Ixion';
+import { IBounds, IBuilding, IDiffBounds, IDiffRectangle, IDimension, IFindBuilding, IMinMaxAngle } from 'types/Ixion';
 import { GRID_SIZE, CANVAS_SIZE } from 'utils/GridEnum';
 
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
@@ -62,6 +62,8 @@ export const isBannerOverlap = ({ x, y, width, height }: IBounds) => {
 
   return isOverlap({ cur: building, diff: banner });
 };
+export const isWallOnBanner = (buildings: IBuilding[]) => buildings.some(b => b.isWall && isBannerOverlap(b));
+
 export const isInsidePoint = ({ x, y, bx, by, width, height, degree }: IFindBuilding) => {
   const { x1, y1, x2, y2 } = adjustPoint({ x: bx, y: by, width, height, degree });
   if (x > x1 && x < x2 && y < y1 && y > y2) return true;

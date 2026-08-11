@@ -11,42 +11,17 @@ import { ReactComponent as ConstructIcon } from 'assets/Menus/Default/Construct.
 // import { ReactComponent as ResearchIcon } from 'assets/Menus/Default/Research.svg';
 import { ReactComponent as ShowHideIcon } from 'assets/Menus/Default/ShowHide.svg';
 import { ReactComponent as ResetLayoutIcon } from 'assets/Menus/Default/ResetLayout.svg';
+import { ReactComponent as FlipHorizontalIcon } from 'assets/Menus/Default/FlipHorizontal.svg';
+import { ReactComponent as FlipVerticalIcon } from 'assets/Menus/Default/FlipVertical.svg';
+import { ReactComponent as Rotate180Icon } from 'assets/Menus/Default/Rotate180.svg';
 
 import SubMenus from './SubMenus';
 import { buildingState, constructState, menuState, roadState, sectionState, visibleState } from 'core/states';
 import { CANVAS_SIZE, GRID_SIZE } from 'utils/GridEnum';
-import { adjustPoint, getOriginFromVisualBox } from 'utils/utilFuncs';
+import { adjustPoint, getOriginFromVisualBox, isWallOnBanner } from 'utils/utilFuncs';
 
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
-
-const FlipHorizontalIcon = ({ fill }: { fill: string }) => (
-  <svg viewBox="0 0 100 100" width="100%" height="100%">
-    <path d="M50 10 V90" stroke={fill} strokeWidth="6" strokeDasharray="6 6" />
-    <path d="M20 25 H42 V75 H20 Z" fill={fill} />
-    <path d="M80 25 H58 V75 H80 Z" fill="none" stroke={fill} strokeWidth="4" />
-  </svg>
-);
-
-const FlipVerticalIcon = ({ fill }: { fill: string }) => (
-  <svg viewBox="0 0 100 100" width="100%" height="100%">
-    <path d="M10 50 H90" stroke={fill} strokeWidth="6" strokeDasharray="6 6" />
-    <path d="M25 20 V42 H75 V20 Z" fill={fill} />
-    <path d="M25 80 V58 H75 V80 Z" fill="none" stroke={fill} strokeWidth="4" />
-  </svg>
-);
-
-const Rotate180Icon = ({ fill }: { fill: string }) => (
-  <svg viewBox="0 0 100 100" width="100%" height="100%">
-    <path
-      d="M75 30 A30 30 0 1 0 75 70"
-      fill="none"
-      stroke={fill}
-      strokeWidth="8"
-    />
-    <path d="M75 14 L92 30 L75 46 Z" fill={fill} />
-  </svg>
-);
 
 const Menus = () => {
   const { t } = useTranslation();
@@ -55,7 +30,7 @@ const Menus = () => {
 
   const [isVisible, setIsVisible] = useRecoilState(visibleState);
   const setRoads = useSetRecoilState(roadState);
-  const setBuildings = useSetRecoilState(buildingState);
+  const [buildings, setBuildings] = useRecoilState(buildingState);
 
   const resetConstruct = useResetRecoilState(constructState);
 
@@ -87,10 +62,6 @@ const Menus = () => {
     }
   };
 
-  const flipDegreeHorizontal = (degree: number) => (degree % 180 !== 0 ? (degree + 180) % 360 : degree);
-  const flipDegreeVertical = (degree: number) => (degree % 180 === 0 ? (degree + 180) % 360 : degree);
-  const rotateDegree180 = (degree: number) => (degree + 180) % 360;
-
   // Round-trip through the on-screen box: mirroring stored x/y directly drifts off-grid (see adjustPoint).
   const transformBuilding = <T extends { x: number; y: number; width: number; height: number; degree: number }>(
     b: T,
@@ -104,49 +75,26 @@ const Menus = () => {
     return { ...b, x, y, degree };
   };
 
-  const onFlipHorizontal = () => {
-    setBuildings(prev => ({
-      ...prev,
-      [sectionNumber]: prev[sectionNumber].map(b =>
-        transformBuilding(b, box => ({ x1: CANVAS_WIDTH - box.x2, yTop: box.y2 }), flipDegreeHorizontal)
-      ),
-    }));
-    setRoads(prev => ({
-      ...prev,
-      [sectionNumber]: prev[sectionNumber].map(r => ({ ...r, x: CANVAS_WIDTH - r.x - GRID_WIDTH })),
-    }));
-  };
-
-  const onFlipVertical = () => {
-    setBuildings(prev => ({
-      ...prev,
-      [sectionNumber]: prev[sectionNumber].map(b =>
-        transformBuilding(b, box => ({ x1: box.x1, yTop: CANVAS_HEIGHT - box.y1 }), flipDegreeVertical)
-      ),
-    }));
-    setRoads(prev => ({
-      ...prev,
-      [sectionNumber]: prev[sectionNumber].map(r => ({ ...r, y: CANVAS_HEIGHT - r.y - GRID_HEIGHT })),
-    }));
-  };
-
-  const onRotate180 = () => {
-    setBuildings(prev => ({
-      ...prev,
-      [sectionNumber]: prev[sectionNumber].map(b =>
-        transformBuilding(
-          b,
-          box => ({ x1: CANVAS_WIDTH - box.x2, yTop: CANVAS_HEIGHT - box.y1 }),
-          rotateDegree180
-        )
-      ),
-    }));
+  // Mirroring only swaps the headings perpendicular to the mirror axis; both axes at once is a 180 rotation.
+  const applyTransform = (flipX: boolean, flipY: boolean) => {
+    const next = buildings[sectionNumber].map(b =>
+      transformBuilding(
+        b,
+        box => ({ x1: flipX ? CANVAS_WIDTH - box.x2 : box.x1, yTop: flipY ? CANVAS_HEIGHT - box.y1 : box.y2 }),
+        d => ((flipX && d % 180 !== 0) || (flipY && d % 180 === 0) ? (d + 180) % 360 : d)
+      )
+    );
+    if (isWallOnBanner(next)) {
+      alert(t('bannerBlocked'));
+      return;
+    }
+    setBuildings(prev => ({ ...prev, [sectionNumber]: next }));
     setRoads(prev => ({
       ...prev,
       [sectionNumber]: prev[sectionNumber].map(r => ({
         ...r,
-        x: CANVAS_WIDTH - r.x - GRID_WIDTH,
-        y: CANVAS_HEIGHT - r.y - GRID_HEIGHT,
+        x: flipX ? CANVAS_WIDTH - r.x - GRID_WIDTH : r.x,
+        y: flipY ? CANVAS_HEIGHT - r.y - GRID_HEIGHT : r.y,
       })),
     }));
   };
@@ -176,14 +124,32 @@ const Menus = () => {
         <ImageButton name="resetLayout" width="81px" height="80px" onClick={onResetLayout}>
           <ResetLayoutIcon fill="black" />
         </ImageButton>
-        <ImageButton name="flipHorizontal" width="61px" height="61px" title={t('flipHorizontal') ?? undefined} onClick={onFlipHorizontal}>
-          <FlipHorizontalIcon fill="black" />
+        <ImageButton
+          name="flipHorizontal"
+          width="61px"
+          height="61px"
+          title={t('flipHorizontal') ?? undefined}
+          onClick={() => applyTransform(true, false)}
+        >
+          <FlipHorizontalIcon />
         </ImageButton>
-        <ImageButton name="flipVertical" width="61px" height="61px" title={t('flipVertical') ?? undefined} onClick={onFlipVertical}>
-          <FlipVerticalIcon fill="black" />
+        <ImageButton
+          name="flipVertical"
+          width="61px"
+          height="61px"
+          title={t('flipVertical') ?? undefined}
+          onClick={() => applyTransform(false, true)}
+        >
+          <FlipVerticalIcon />
         </ImageButton>
-        <ImageButton name="rotate180" width="61px" height="61px" title={t('rotate180') ?? undefined} onClick={onRotate180}>
-          <Rotate180Icon fill="black" />
+        <ImageButton
+          name="rotate180"
+          width="61px"
+          height="61px"
+          title={t('rotate180') ?? undefined}
+          onClick={() => applyTransform(true, true)}
+        >
+          <Rotate180Icon />
         </ImageButton>
       </MenusSection>
     </>

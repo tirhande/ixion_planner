@@ -3,6 +3,7 @@
   "flipHorizontal": "Retourner horizontalement la disposition de ce secteur",
   "flipVertical": "Retourner verticalement la disposition de ce secteur",
   "rotate180": "Faire pivoter la disposition de ce secteur de 180 degrés",
+  "bannerBlocked": "Un bâtiment qui doit être adossé à un mur se retrouverait sous la bannière du secteur.",
   "deleteAllBuildings": "Supprimer tous les bâtiments de ce secteur",
   "deleteAllRoads": "Supprimer toutes les routes de ce secteur",
   "maintenance": "MAINTENANCE",
