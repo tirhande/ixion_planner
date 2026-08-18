@@ -50,6 +50,7 @@ declare module 'types/Ixion' {
     id: string;
     degree: number;
     isWall: boolean;
+    resource?: string;
   }
   interface IPreBuilding extends IPoint {
     id: string;

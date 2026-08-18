@@ -11,6 +11,8 @@ import Road from 'components/atoms/Road';
 import { CANVAS_SIZE, GRID_SIZE } from 'utils/GridEnum';
 import { getMinMaxPoint, isBannerOverlap, isBuildingOverlap, isInsidePoint } from 'utils/utilFuncs';
 import { IPoint } from 'types/Ixion';
+import { STOCKPILE_IDS } from 'utils/ResourceEnum';
+import ResourcePicker from 'components/blocks/ResourcePicker';
 
 const { CANVAS_WIDTH, CANVAS_HEIGHT } = CANVAS_SIZE;
 const { GRID_WIDTH, GRID_HEIGHT } = GRID_SIZE;
@@ -37,6 +39,13 @@ const SVGContainer = () => {
     x: 0,
     y: 0,
   });
+  const [resourcePicker, setResourcePicker] = useState<{
+    x: number;
+    y: number;
+    screenX: number;
+    screenY: number;
+    resource?: string;
+  } | null>(null);
 
   const demolishBuilding = ({ x, y }: IPoint) => {
     setBuildings(prev => ({
@@ -246,9 +255,36 @@ const SVGContainer = () => {
       else if (clickMenu === 'consBuilding') {
         if (isConstruct) constructBuilding({ x, y });
         else moveBuilding({ x, y });
+      } else if (clickMenu === '') {
+        const target = buildings[sectionNumber].find(({ x: bx, y: by, width, height }) =>
+          isInsidePoint({ x, y, bx, by, width, height })
+        );
+        if (target && STOCKPILE_IDS.includes(target.id)) {
+          setResourcePicker({
+            x: target.x,
+            y: target.y,
+            screenX: e.clientX,
+            screenY: e.clientY,
+            resource: target.resource,
+          });
+        }
       }
     }
   };
+
+  const onSelectResource = (resourceId?: string) => {
+    if (!resourcePicker) return;
+    const { x: px, y: py } = resourcePicker;
+    setBuildings(prev => ({
+      ...prev,
+      [sectionNumber]: prev[sectionNumber].map(b =>
+        b.x === px && b.y === py ? { ...b, resource: resourceId } : b
+      ),
+    }));
+    setResourcePicker(null);
+  };
+
+  const onCloseResourcePicker = () => setResourcePicker(null);
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const [posX, posY] = [
@@ -313,6 +349,7 @@ const SVGContainer = () => {
                 width={v.width}
                 height={v.height}
                 isWall={v.isWall}
+                resource={v.resource}
               />
             );
           })}
@@ -330,6 +367,15 @@ const SVGContainer = () => {
         {clickMenu === 'consRoad' && <ConstructRoad pos={pos} roadPos={roadPos} fill="white" />}
         {clickMenu === 'delRoad' && <ConstructRoad pos={pos} roadPos={roadPos} fill="red" />}
       </svg>
+      {resourcePicker && (
+        <ResourcePicker
+          screenX={resourcePicker.screenX}
+          screenY={resourcePicker.screenY}
+          selected={resourcePicker.resource}
+          onSelect={onSelectResource}
+          onClose={onCloseResourcePicker}
+        />
+      )}
     </StyledContainer>
   );
 };
